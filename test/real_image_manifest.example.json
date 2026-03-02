@@ -1,0 +1,20 @@
+[
+  {
+    "image_path": "/tmp/sonoma.jpg",
+    "expected_action": "suppress",
+    "stream_id": "real_eval_sonoma",
+    "label": "real-eval-camera-1",
+    "site_id": "real-eval",
+    "zone": "outdoor-view",
+    "note": "Natural outdoor scene; should not trigger security alert."
+  },
+  {
+    "image_path": "/tmp/radial.jpg",
+    "expected_action": "suppress",
+    "stream_id": "real_eval_radial",
+    "label": "real-eval-camera-2",
+    "site_id": "real-eval",
+    "zone": "sky-view",
+    "note": "Non-security wallpaper scene; expected benign suppression."
+  }
+]
