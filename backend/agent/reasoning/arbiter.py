@@ -77,13 +77,13 @@ def _compute_verdict(
 
     if should_alert:
         alert_reason = (
-            f"Consensus confidence {final_confidence:.0%}. "
+            f"Home security consensus {final_confidence:.0%}. "
             + (alert_agent.rationale[:200] if alert_agent else "")
         )
         suppress_reason = None
     else:
         suppress_reason = (
-            f"Confidence {final_confidence:.0%} below threshold or no credible threat. "
+            f"Confidence {final_confidence:.0%} below threshold or benign (pet, delivery, resident). "
             + (challenger.rationale[:200] if challenger else "")
         )
         alert_reason = None

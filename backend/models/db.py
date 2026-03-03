@@ -25,8 +25,8 @@ class Stream(Base):
     id = Column(String, primary_key=True, default=_uuid)
     uri = Column(String, nullable=False)
     label = Column(String, nullable=False)
-    site_id = Column(String, nullable=False, default="default")
-    zone = Column(String, nullable=False, default="general")
+    site_id = Column(String, nullable=False, default="home")
+    zone = Column(String, nullable=False, default="front_door")
     created_at = Column(DateTime, default=_now)
     active = Column(Boolean, default=False)
 

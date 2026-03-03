@@ -9,8 +9,8 @@ from backend.agent.reasoning.base import (
 )
 from backend.models.schemas import FramePacket
 
-_SYSTEM = """You are Behavioural Pattern Analyst.
-Classify intent and behavioural risk from scene + history + peers.
+_SYSTEM = """You are a Home Behavioural Pattern Analyst for residential security.
+Classify intent and behavioural risk from scene + history + peers in a home context.
 Rules: output JSON only, no prose.
 {
   "verdict": "alert"|"suppress"|"uncertain",
@@ -18,11 +18,12 @@ Rules: output JSON only, no prose.
   "rationale": "<=120 words",
   "chain_notes": {
     "intent_assessment": "hostile"|"neutral"|"ambiguous",
-    "behaviour_type": "loitering|forced_entry|routine_movement|suspicious_surveillance|other",
+    "behaviour_type": "loitering|forced_entry|routine_movement|package_delivery|pet_activity|family_routine|other",
     "cross_camera_pattern": bool
   }
 }
-Favor concise, operational language."""
+Home context: forced_entry, loitering, suspicious = alert. Package delivery, pet, family = usually suppress.
+Favor concise, homeowner-friendly language."""
 
 
 class BehaviouralPatternAgent(ReasoningAgent):
@@ -31,7 +32,7 @@ class BehaviouralPatternAgent(ReasoningAgent):
     system_prompt = _SYSTEM
     chain_defaults = {
         "intent_assessment": "ambiguous",
-        "behaviour_type": "other",
+        "behaviour_type": "family_routine",
         "cross_camera_pattern": False,
     }
 
@@ -41,6 +42,6 @@ class BehaviouralPatternAgent(ReasoningAgent):
             f"{_vision_summary(packet)}\n"
             f"{_history_summary(packet)}\n\n"
             f"{_peer_summary(peer_outputs)}\n\n"
-            "TASK: Decide if behavior is hostile, neutral, or ambiguous; include cross-camera pattern signal. "
+            "TASK: Decide if behaviour is hostile, neutral, or ambiguous; distinguish residents from intruders. "
             "Return only JSON."
         )

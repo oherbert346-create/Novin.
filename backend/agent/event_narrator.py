@@ -10,13 +10,15 @@ logger = logging.getLogger(__name__)
 
 
 class SecurityEventNarrator:
-    """Builds concise, operator-friendly summaries grounded in observed facts."""
+    """Builds concise, homeowner-friendly summaries grounded in observed facts."""
 
     _CATEGORY_LABELS = {
-        "intrusion": "restricted-area intrusion",
-        "crowd": "unusual crowding",
-        "object": "suspicious object",
-        "behaviour": "abnormal behaviour",
+        "person": "person detected",
+        "pet": "pet or animal",
+        "package": "package or delivery",
+        "vehicle": "vehicle",
+        "intrusion": "possible intrusion",
+        "motion": "motion detected",
     }
 
     def generate_headline(
@@ -43,8 +45,8 @@ class SecurityEventNarrator:
             )
 
         return (
-            f"No actionable security threat detected in {packet.stream_meta.zone}; "
-            f"event suppressed at {confidence:.0%} confidence."
+            f"No home security concern in {packet.stream_meta.zone}; "
+            f"routine activity at {confidence:.0%} confidence."
         )
 
     def generate_narrative(
@@ -80,10 +82,10 @@ class SecurityEventNarrator:
 
     def _threat_bullet(self, vision: VisionResult) -> str:
         if not vision.threat:
-            return f"• Threat: no actionable security threat detected (severity: {vision.severity})"
+            return f"• Activity: no home security concern detected (severity: {vision.severity})"
         label = self._event_label(vision)
         desc = (vision.description or "No additional scene details provided").strip().rstrip(".")
-        return f"• Threat: {label} detected ({vision.severity} severity). Observed: {desc}."
+        return f"• Activity: {label} ({vision.severity} severity). Observed: {desc}."
 
     def _location_time_bullet(self, timestamp: datetime, packet: FramePacket) -> str:
         zone = packet.stream_meta.zone or "zone not specified"
@@ -93,14 +95,14 @@ class SecurityEventNarrator:
         severity = packet.vision.severity.lower()
         if action == "alert":
             if severity in {"high", "critical"}:
-                text = "Dispatch on-site verification now and preserve footage for incident review"
+                text = "Check the app and consider calling emergency services; save footage"
             else:
-                text = "Notify site team to verify the scene and keep active monitoring"
+                text = "Check the app to verify the scene; consider notifying household members"
             return f"• Recommended action: {text}."
 
         if packet.vision.threat and severity in {"medium", "high", "critical"}:
-            return "• Recommended action: Keep this camera under observation for near-term escalation."
-        return "• Recommended action: No immediate response required; continue standard monitoring."
+            return "• Recommended action: Keep an eye on this camera for any escalation."
+        return "• Recommended action: No immediate action needed; routine monitoring continues."
 
     def _history_bullet(self, packet: FramePacket) -> str:
         recent_count = len(packet.history.recent_events)
@@ -127,5 +129,5 @@ class SecurityEventNarrator:
     def _event_label(self, vision: VisionResult) -> str:
         categories = [cat for cat in vision.categories if cat and cat != "clear"]
         if not categories:
-            return "security anomaly"
+            return "home activity"
         return self._CATEGORY_LABELS.get(categories[0], categories[0].replace("_", " "))

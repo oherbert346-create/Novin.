@@ -18,8 +18,8 @@ class FrameIngestRequest(BaseModel):
     b64_frame: str
     stream_id: str
     label: str = "direct"
-    site_id: str = "default"
-    zone: str = "general"
+    site_id: str = "home"
+    zone: str = "front_door"  # front_door, porch, driveway, backyard, garage, living_room, kitchen
 
 
 @router.post("/frame", response_model=dict)

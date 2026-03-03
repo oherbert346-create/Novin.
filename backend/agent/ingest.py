@@ -103,6 +103,8 @@ class Base64FrameSource(FrameSource):
 
 
 def make_source(uri: str) -> FrameSource:
+    """Create frame source from URI. Supports RTSP, RTMP, HLS, HTTP(S) streams, local files, base64.
+    Home security cameras: Wyze Bridge (HLS/RTSP), Ring/Nest (via RTSP bridges), ONVIF-compatible IP cams."""
     lower = uri.lower()
     if lower.startswith("rtsp://"):
         return RTSPSource(uri)
@@ -110,7 +112,7 @@ def make_source(uri: str) -> FrameSource:
         return RTSPSource(uri)
     if lower.startswith("http://") or lower.startswith("https://"):
         if any(ext in lower for ext in [".m3u8", ".m3u"]):
-            return HLSSource(uri)
+            return HLSSource(uri)  # HLS: Wyze Bridge, many home cams
         return RTSPSource(uri)
     if lower.startswith("data:image") or (len(uri) > 100 and "/" not in uri[:20]):
         b64 = uri.split(",", 1)[-1] if "," in uri else uri

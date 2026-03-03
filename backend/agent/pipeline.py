@@ -43,7 +43,7 @@ async def process_frame(
             db=db,
             stream_id=stream_meta.stream_id,
             site_id=stream_meta.site_id,
-            event_types=["intrusion", "crowd", "object", "behaviour"],
+            event_types=["person", "pet", "package", "vehicle", "intrusion", "motion"],
         ),
     )
 

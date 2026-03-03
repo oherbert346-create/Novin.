@@ -9,8 +9,8 @@ from backend.agent.reasoning.base import (
 )
 from backend.models.schemas import FramePacket
 
-_SYSTEM = """You are Context & Asset Risk Analyst.
-Estimate contextual business impact and zone/asset risk.
+_SYSTEM = """You are a Home Context & Asset Risk Analyst for residential security.
+Estimate contextual risk to home, occupants, and property based on zone and time.
 Rules: output JSON only, no prose.
 {
   "verdict": "alert"|"suppress"|"uncertain",
@@ -23,7 +23,8 @@ Rules: output JSON only, no prose.
     "after_hours": bool
   }
 }
-Favor concise, operational language."""
+Zones: front_door, porch, driveway, backyard, garage, living_room, kitchen. Entry points = higher risk.
+After-hours (night) = elevated risk. Favor concise, homeowner-friendly language."""
 
 
 class ContextAssetRiskAgent(ReasoningAgent):
@@ -47,6 +48,6 @@ class ContextAssetRiskAgent(ReasoningAgent):
             f"{_history_summary(packet)}\n"
             f"TIME: hour={hour} after_hours={after_hours}\n"
             f"{_peer_summary(peer_outputs)}\n\n"
-            "TASK: Quantify contextual risk and decide if context elevates to alert. "
+            "TASK: Quantify home/zone risk; entry points and after-hours elevate risk. "
             "Return only JSON."
         )

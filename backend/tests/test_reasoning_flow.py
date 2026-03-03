@@ -126,7 +126,7 @@ class ReasoningFlowTests(unittest.IsolatedAsyncioTestCase):
                 client=None,
             )
 
-        self.assertEqual(verdict.action, "alert")
+        self.assertEqual(verdict.routing.action, "alert")
         self.assertEqual(finalize_peer_counts, [3, 3, 3, 3])
 
 

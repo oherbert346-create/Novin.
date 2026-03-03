@@ -15,21 +15,31 @@ from backend.models.schemas import BoundingBox, StreamMeta, VisionResult
 
 logger = logging.getLogger(__name__)
 
-_SYSTEM_PROMPT = """You are a physical security vision AI monitoring CCTV feeds for an enterprise security operations centre.
+_SYSTEM_PROMPT = """You are a home security vision AI monitoring residential camera feeds for homeowners.
 Analyse the scene and output ONLY valid JSON — no prose, no markdown, no explanation outside the JSON object.
 
 Required schema:
 {
   "threat": <bool>,
   "severity": <"none"|"low"|"medium"|"high"|"critical">,
-  "categories": [<"intrusion"|"crowd"|"object"|"behaviour"|"clear">],
+  "categories": [<"person"|"pet"|"package"|"vehicle"|"intrusion"|"motion"|"clear">],
   "description": "<max 30 words summarising what you see>",
   "bbox": [[x1, y1, x2, y2], ...],
   "confidence": <0.0-1.0>
 }
 
+Categories (home security market standard):
+- person: human detected (distinguish from pet)
+- pet: animal/pet (dog, cat, etc.) — typically non-threatening
+- package: package or delivery at door
+- vehicle: car, truck, or vehicle in driveway/street
+- intrusion: unauthorised entry, forced entry, trespassing
+- motion: general motion without clear classification
+- clear: no activity or routine scene
+
 Rules:
-- threat=true only if you observe a credible security concern
+- threat=true only for credible home security concerns (intrusion, suspicious person, forced entry)
+- Pets and routine deliveries are usually threat=false unless context suggests otherwise
 - severity "none" means clear scene, no concern
 - bbox coordinates are normalised 0.0-1.0 relative to image width/height
 - If no threat, return threat=false, severity="none", categories=["clear"], bbox=[]
@@ -61,8 +71,8 @@ async def analyse_frame(
     t0 = time.monotonic()
 
     prompt_user = (
-        f"Camera: {stream_meta.label} | Zone: {stream_meta.zone} | Site: {stream_meta.site_id}\n"
-        "Analyse this security camera frame."
+        f"Camera: {stream_meta.label} | Zone: {stream_meta.zone} | Home: {stream_meta.site_id}\n"
+        "Analyse this home security camera frame for residential monitoring."
     )
 
     try:

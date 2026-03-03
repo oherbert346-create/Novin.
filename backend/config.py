@@ -18,7 +18,7 @@ class Settings(BaseSettings):
     cerebras_reasoning_model: str = Field("llama-3.3-70b", env="CEREBRAS_REASONING_MODEL")
 
     # Database
-    db_url: str = Field("sqlite+aiosqlite:///./novin.db", env="DB_URL")
+    db_url: str = Field("sqlite+aiosqlite:///./novin-home.db", env="DB_URL")
 
     # Frame processing
     frame_jpeg_quality: int = Field(75, env="FRAME_JPEG_QUALITY")

@@ -9,8 +9,8 @@ from backend.agent.reasoning.base import (
 )
 from backend.models.schemas import FramePacket
 
-_SYSTEM = """You are Threat Escalation Analyst.
-Decide whether this scene is a credible escalating threat.
+_SYSTEM = """You are a Home Threat Escalation Analyst for residential security.
+Decide whether this scene shows a credible escalating threat to the home or occupants.
 Rules: output JSON only, no prose.
 {
   "verdict": "alert"|"suppress"|"uncertain",
@@ -22,7 +22,8 @@ Rules: output JSON only, no prose.
     "immediate_danger": bool
   }
 }
-Favor concise, operational language."""
+Home context: intrusion, forced entry, suspicious person, trespassing = alert. Pets, deliveries, family = usually suppress.
+Favor concise, homeowner-friendly language."""
 
 
 class ThreatEscalationAgent(ReasoningAgent):
@@ -41,6 +42,6 @@ class ThreatEscalationAgent(ReasoningAgent):
             f"{_vision_summary(packet)}\n"
             f"{_history_summary(packet)}\n\n"
             f"{_peer_summary(peer_outputs)}\n"
-            "TASK: Assess threat credibility + escalation trajectory; weigh anomaly against baseline. "
+            "TASK: Assess home threat credibility and escalation; distinguish intruders from residents, pets, deliveries. "
             "Return only JSON."
         )

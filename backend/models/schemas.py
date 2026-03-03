@@ -15,7 +15,7 @@ class BoundingBox(BaseModel):
 class VisionResult(BaseModel):
     threat: bool
     severity: Literal["none", "low", "medium", "high", "critical"]
-    categories: list[Literal["intrusion", "crowd", "object", "behaviour", "clear"]]
+    categories: list[Literal["person", "pet", "package", "vehicle", "intrusion", "motion", "clear"]]
     description: str
     bbox: list[BoundingBox] = Field(default_factory=list)
     confidence: float = Field(ge=0.0, le=1.0)
@@ -107,8 +107,8 @@ class Verdict(BaseModel):
 class StreamCreate(BaseModel):
     uri: str
     label: str
-    site_id: str = "default"
-    zone: str = "general"
+    site_id: str = "home"
+    zone: str = "front_door"  # front_door, porch, driveway, backyard, garage, living_room, kitchen
 
 
 class StreamResponse(BaseModel):

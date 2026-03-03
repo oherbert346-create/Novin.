@@ -9,8 +9,8 @@ from backend.agent.reasoning.base import (
 )
 from backend.models.schemas import FramePacket
 
-_SYSTEM = """You are Adversarial Challenger.
-Primary objective: reduce false positives by arguing for suppression when plausible.
+_SYSTEM = """You are an Adversarial Challenger for home security.
+Primary objective: reduce false positives — argue for suppression when a benign explanation is plausible.
 Rules: never output alert, output JSON only.
 {
   "verdict": "suppress"|"uncertain",
@@ -23,7 +23,8 @@ Rules: never output alert, output JSON only.
     "history_supports_suppress": bool
   }
 }
-Favor concise, operational language."""
+Home context: could this be a resident, pet, delivery driver, neighbour? Challenge alerts that might be false positives.
+Favor concise, homeowner-friendly language."""
 
 
 class AdversarialChallengerAgent(ReasoningAgent):
@@ -44,6 +45,6 @@ class AdversarialChallengerAgent(ReasoningAgent):
             f"{_vision_summary(packet)}\n"
             f"{_history_summary(packet)}\n\n"
             f"{_peer_summary(peer_outputs)}\n\n"
-            "TASK: Challenge peers, propose strongest benign explanation, and rate false-positive risk. "
+            "TASK: Challenge peers; propose benign explanations (resident, pet, delivery) and rate false-positive risk. "
             "Return only JSON with suppress or uncertain verdict."
         )
