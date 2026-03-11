@@ -1,0 +1,4479 @@
+{
+  "overall_pass": false,
+  "release_verdict": "block",
+  "pilot_readiness_verdict": "not pilot-ready; staged real benchmark dataset missing",
+  "thresholds": {
+    "base_url": "http://127.0.0.1:8000",
+    "api_key": "test-ingest-key",
+    "manifest": "test/fixtures/eval/home_security/home_security_validation_manifest.json",
+    "repeats": 2,
+    "report_json": "test/reports/deployment_benchmark_report.json",
+    "min_total_cases": 12,
+    "min_benign_cases": 3,
+    "min_threat_cases": 2,
+    "min_ambiguous_cases": 2,
+    "min_temporal_cases": 1,
+    "min_context_cases": 2,
+    "min_ops_cases": 2,
+    "min_action_accuracy": 0.7,
+    "min_alert_recall": 0.5,
+    "min_risk_level_accuracy": 0.7,
+    "min_medium_or_higher_recall": 0.7,
+    "max_none_rate_on_true_threats": 0.1,
+    "min_show_policy_accuracy": 0.8,
+    "min_notification_policy_accuracy": 0.8,
+    "min_case_fields_completeness_rate": 1.0,
+    "min_consumer_summary_rate": 0.95,
+    "min_operator_summary_rate": 0.95,
+    "min_evidence_digest_rate": 0.95,
+    "min_intelligence_quality_rate": 0.95,
+    "min_entry_zone_threat_recall": 0.7,
+    "min_tamper_recall": 0.7,
+    "max_queued_response_rate": 0.0,
+    "max_false_alert_rate_benign": 0.35,
+    "max_missed_alert_rate_threat": 0.5,
+    "max_reasoning_degraded_rate": 0.1,
+    "max_fallback_agent_rate": 0.05,
+    "max_http_error_rate": 0.0,
+    "min_context_propagation_rate": 0.95,
+    "min_idempotency_correctness_rate": 1.0,
+    "max_flip_rate": 0.2,
+    "max_p95_latency_s": 2.5,
+    "max_memory_accuracy_regression": 0.0,
+    "max_memory_false_alert_regression": 0.0,
+    "max_memory_missed_alert_regression": 0.0,
+    "max_memory_reasoning_degraded_regression": 0.0,
+    "max_memory_flip_regression": 0.0
+  },
+  "run_id": "e80e30e2",
+  "suite_counts": {
+    "public_surveillance": 2,
+    "smoke_pipeline": 2,
+    "staged_real_home": 0,
+    "synthetic_home": 0
+  },
+  "evidence_tier_summary": {
+    "staged_real_home": "Primary pilot gate. This suite alone can justify outreach readiness.",
+    "synthetic_home": "Secondary coverage suite. Use for scenario expansion and regression detection, not pilot authority.",
+    "public_surveillance": "Secondary stress suite. Use for anomaly/crime robustness only, not home-security truth claims.",
+    "smoke_pipeline": "Smoke suite. Use for pipeline sanity and contract checks only."
+  },
+  "metrics": {
+    "off": {
+      "attempts_total": 8,
+      "attempts_passed": 0,
+      "attempts_failed": 8,
+      "accuracy_action": 0.0,
+      "risk_level_accuracy": 0.75,
+      "alert_precision": 0.0,
+      "alert_recall": 0.0,
+      "high_risk_recall": 0.0,
+      "medium_or_higher_recall": 0.0,
+      "none_rate_on_true_threats": 1.0,
+      "false_alert_rate_benign": 0.0,
+      "missed_alert_rate_threat": 0.0,
+      "show_policy_accuracy": 0.75,
+      "notification_policy_accuracy": 0.75,
+      "queued_response_rate": 0.0,
+      "entry_zone_threat_recall": 0.0,
+      "tamper_recall": 0.0,
+      "reasoning_degraded_rate": 0.0,
+      "fallback_agent_rate": 0.0,
+      "case_fields_completeness_rate": 0.0,
+      "consumer_summary_rate": 0.0,
+      "operator_summary_rate": 0.0,
+      "evidence_digest_rate": 0.0,
+      "intelligence_quality_rate": 0.0,
+      "http_error_rate": 1.0,
+      "context_propagation_rate": 0.0,
+      "idempotency_correctness_rate": 0.0,
+      "memory_presence_rate": 0.0,
+      "flip_rate": 0.0,
+      "p50_latency_s": 0.0047,
+      "p95_latency_s": 0.0276,
+      "mean_latency_s": 0.0081,
+      "run_accuracy": [
+        0.0,
+        0.0
+      ],
+      "cohort_metrics": {
+        "ambiguous": {
+          "accuracy_action": 0.0,
+          "reasoning_degraded_rate": 0.0
+        },
+        "benign": {
+          "accuracy_action": 0.0,
+          "reasoning_degraded_rate": 0.0
+        },
+        "ops": {
+          "accuracy_action": 0.0,
+          "reasoning_degraded_rate": 0.0
+        },
+        "threat": {
+          "accuracy_action": 0.0,
+          "reasoning_degraded_rate": 0.0
+        }
+      },
+      "unstable_case_ids": [],
+      "degraded_case_ids": [],
+      "fallback_case_ids": [],
+      "top_latency_cases": [
+        {
+          "case_id": "public_wildlife_entry_alert_285",
+          "suite": "public_surveillance",
+          "max_latency_s": 0.0389,
+          "mean_latency_s": 0.0202,
+          "samples": 2
+        },
+        {
+          "case_id": "smoke_backyard_person_139",
+          "suite": "smoke_pipeline",
+          "max_latency_s": 0.0066,
+          "mean_latency_s": 0.0041,
+          "samples": 2
+        },
+        {
+          "case_id": "smoke_driveway_activity_632",
+          "suite": "smoke_pipeline",
+          "max_latency_s": 0.0052,
+          "mean_latency_s": 0.0048,
+          "samples": 2
+        },
+        {
+          "case_id": "public_garage_approach_1000",
+          "suite": "public_surveillance",
+          "max_latency_s": 0.0049,
+          "mean_latency_s": 0.0033,
+          "samples": 2
+        }
+      ],
+      "stage_latency_summary": {
+        "stage_p50_ms": {
+          "vision_latency_ms": 0.0,
+          "history_latency_ms": 0.0,
+          "reasoning_latency_ms": 0.0,
+          "pipeline_latency_ms": 0.0
+        },
+        "stage_p95_ms": {
+          "vision_latency_ms": 0.0,
+          "history_latency_ms": 0.0,
+          "reasoning_latency_ms": 0.0,
+          "pipeline_latency_ms": 0.0
+        },
+        "repair_retry_count": 0,
+        "skipped_agent_count": 0
+      },
+      "failure_buckets": {
+        "case_fields_missing": 8,
+        "consumer_summary_missing": 8,
+        "evidence_digest_missing": 8,
+        "http_error": 8,
+        "operator_summary_missing": 8
+      },
+      "context_cases": [],
+      "idempotency_cases": [],
+      "suite_case_ids": [
+        "public_garage_approach_1000",
+        "public_wildlife_entry_alert_285",
+        "smoke_backyard_person_139",
+        "smoke_driveway_activity_632"
+      ]
+    },
+    "on": {
+      "attempts_total": 8,
+      "attempts_passed": 0,
+      "attempts_failed": 8,
+      "accuracy_action": 0.0,
+      "risk_level_accuracy": 0.75,
+      "alert_precision": 0.0,
+      "alert_recall": 0.0,
+      "high_risk_recall": 0.0,
+      "medium_or_higher_recall": 0.0,
+      "none_rate_on_true_threats": 1.0,
+      "false_alert_rate_benign": 0.0,
+      "missed_alert_rate_threat": 0.0,
+      "show_policy_accuracy": 0.75,
+      "notification_policy_accuracy": 0.75,
+      "queued_response_rate": 0.0,
+      "entry_zone_threat_recall": 0.0,
+      "tamper_recall": 0.0,
+      "reasoning_degraded_rate": 0.0,
+      "fallback_agent_rate": 0.0,
+      "case_fields_completeness_rate": 0.0,
+      "consumer_summary_rate": 0.0,
+      "operator_summary_rate": 0.0,
+      "evidence_digest_rate": 0.0,
+      "intelligence_quality_rate": 0.0,
+      "http_error_rate": 1.0,
+      "context_propagation_rate": 0.0,
+      "idempotency_correctness_rate": 0.0,
+      "memory_presence_rate": 0.0,
+      "flip_rate": 0.0,
+      "p50_latency_s": 0.003,
+      "p95_latency_s": 0.0042,
+      "mean_latency_s": 0.0029,
+      "run_accuracy": [
+        0.0,
+        0.0
+      ],
+      "cohort_metrics": {
+        "ambiguous": {
+          "accuracy_action": 0.0,
+          "reasoning_degraded_rate": 0.0
+        },
+        "benign": {
+          "accuracy_action": 0.0,
+          "reasoning_degraded_rate": 0.0
+        },
+        "ops": {
+          "accuracy_action": 0.0,
+          "reasoning_degraded_rate": 0.0
+        },
+        "threat": {
+          "accuracy_action": 0.0,
+          "reasoning_degraded_rate": 0.0
+        }
+      },
+      "unstable_case_ids": [],
+      "degraded_case_ids": [],
+      "fallback_case_ids": [],
+      "top_latency_cases": [
+        {
+          "case_id": "public_wildlife_entry_alert_285",
+          "suite": "public_surveillance",
+          "max_latency_s": 0.0046,
+          "mean_latency_s": 0.0038,
+          "samples": 2
+        },
+        {
+          "case_id": "smoke_backyard_person_139",
+          "suite": "smoke_pipeline",
+          "max_latency_s": 0.0034,
+          "mean_latency_s": 0.0028,
+          "samples": 2
+        },
+        {
+          "case_id": "public_garage_approach_1000",
+          "suite": "public_surveillance",
+          "max_latency_s": 0.0031,
+          "mean_latency_s": 0.0031,
+          "samples": 2
+        },
+        {
+          "case_id": "smoke_driveway_activity_632",
+          "suite": "smoke_pipeline",
+          "max_latency_s": 0.002,
+          "mean_latency_s": 0.0019,
+          "samples": 2
+        }
+      ],
+      "stage_latency_summary": {
+        "stage_p50_ms": {
+          "vision_latency_ms": 0.0,
+          "history_latency_ms": 0.0,
+          "reasoning_latency_ms": 0.0,
+          "pipeline_latency_ms": 0.0
+        },
+        "stage_p95_ms": {
+          "vision_latency_ms": 0.0,
+          "history_latency_ms": 0.0,
+          "reasoning_latency_ms": 0.0,
+          "pipeline_latency_ms": 0.0
+        },
+        "repair_retry_count": 0,
+        "skipped_agent_count": 0
+      },
+      "failure_buckets": {
+        "case_fields_missing": 8,
+        "consumer_summary_missing": 8,
+        "evidence_digest_missing": 8,
+        "http_error": 8,
+        "operator_summary_missing": 8
+      },
+      "context_cases": [],
+      "idempotency_cases": [],
+      "suite_case_ids": [
+        "public_garage_approach_1000",
+        "public_wildlife_entry_alert_285",
+        "smoke_backyard_person_139",
+        "smoke_driveway_activity_632"
+      ]
+    }
+  },
+  "suite_metrics": {
+    "off": {
+      "public_surveillance": {
+        "all_cases": {
+          "attempts_total": 4,
+          "attempts_passed": 0,
+          "attempts_failed": 4,
+          "accuracy_action": 0.0,
+          "risk_level_accuracy": 0.5,
+          "alert_precision": 0.0,
+          "alert_recall": 0.0,
+          "high_risk_recall": 0.0,
+          "medium_or_higher_recall": 0.0,
+          "none_rate_on_true_threats": 1.0,
+          "false_alert_rate_benign": 0.0,
+          "missed_alert_rate_threat": 0.0,
+          "show_policy_accuracy": 0.5,
+          "notification_policy_accuracy": 0.5,
+          "queued_response_rate": 0.0,
+          "entry_zone_threat_recall": 0.0,
+          "tamper_recall": 0.0,
+          "reasoning_degraded_rate": 0.0,
+          "fallback_agent_rate": 0.0,
+          "case_fields_completeness_rate": 0.0,
+          "consumer_summary_rate": 0.0,
+          "operator_summary_rate": 0.0,
+          "evidence_digest_rate": 0.0,
+          "intelligence_quality_rate": 0.0,
+          "http_error_rate": 1.0,
+          "context_propagation_rate": 0.0,
+          "idempotency_correctness_rate": 0.0,
+          "memory_presence_rate": 0.0,
+          "flip_rate": 0.0,
+          "p50_latency_s": 0.0033,
+          "p95_latency_s": 0.0338,
+          "mean_latency_s": 0.0118,
+          "run_accuracy": [
+            0.0,
+            0.0
+          ],
+          "cohort_metrics": {
+            "ambiguous": {
+              "accuracy_action": 0.0,
+              "reasoning_degraded_rate": 0.0
+            },
+            "threat": {
+              "accuracy_action": 0.0,
+              "reasoning_degraded_rate": 0.0
+            }
+          },
+          "unstable_case_ids": [],
+          "degraded_case_ids": [],
+          "fallback_case_ids": [],
+          "top_latency_cases": [
+            {
+              "case_id": "public_wildlife_entry_alert_285",
+              "suite": "public_surveillance",
+              "max_latency_s": 0.0389,
+              "mean_latency_s": 0.0202,
+              "samples": 2
+            },
+            {
+              "case_id": "public_garage_approach_1000",
+              "suite": "public_surveillance",
+              "max_latency_s": 0.0049,
+              "mean_latency_s": 0.0033,
+              "samples": 2
+            }
+          ],
+          "stage_latency_summary": {
+            "stage_p50_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "stage_p95_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "repair_retry_count": 0,
+            "skipped_agent_count": 0
+          },
+          "failure_buckets": {
+            "case_fields_missing": 4,
+            "consumer_summary_missing": 4,
+            "evidence_digest_missing": 4,
+            "http_error": 4,
+            "operator_summary_missing": 4
+          },
+          "context_cases": [],
+          "idempotency_cases": [],
+          "suite_case_ids": [
+            "public_garage_approach_1000",
+            "public_wildlife_entry_alert_285"
+          ]
+        },
+        "gating_cases": {
+          "attempts_total": 0,
+          "attempts_passed": 0,
+          "attempts_failed": 0,
+          "accuracy_action": 0.0,
+          "risk_level_accuracy": 0.0,
+          "alert_precision": 0.0,
+          "alert_recall": 0.0,
+          "high_risk_recall": 0.0,
+          "medium_or_higher_recall": 0.0,
+          "none_rate_on_true_threats": 0.0,
+          "false_alert_rate_benign": 0.0,
+          "missed_alert_rate_threat": 0.0,
+          "show_policy_accuracy": 0.0,
+          "notification_policy_accuracy": 0.0,
+          "queued_response_rate": 0.0,
+          "entry_zone_threat_recall": 0.0,
+          "tamper_recall": 0.0,
+          "reasoning_degraded_rate": 0.0,
+          "fallback_agent_rate": 0.0,
+          "case_fields_completeness_rate": 0.0,
+          "consumer_summary_rate": 0.0,
+          "operator_summary_rate": 0.0,
+          "evidence_digest_rate": 0.0,
+          "intelligence_quality_rate": 0.0,
+          "http_error_rate": 0.0,
+          "context_propagation_rate": 0.0,
+          "idempotency_correctness_rate": 0.0,
+          "memory_presence_rate": 0.0,
+          "flip_rate": 0.0,
+          "p50_latency_s": 0.0,
+          "p95_latency_s": 0.0,
+          "mean_latency_s": 0.0,
+          "run_accuracy": [
+            0.0,
+            0.0
+          ],
+          "cohort_metrics": {},
+          "unstable_case_ids": [],
+          "degraded_case_ids": [],
+          "fallback_case_ids": [],
+          "top_latency_cases": [],
+          "stage_latency_summary": {
+            "stage_p50_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "stage_p95_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "repair_retry_count": 0,
+            "skipped_agent_count": 0
+          },
+          "failure_buckets": {},
+          "context_cases": [],
+          "idempotency_cases": [],
+          "suite_case_ids": []
+        },
+        "quality_review_cases": {
+          "attempts_total": 4,
+          "attempts_passed": 0,
+          "attempts_failed": 4,
+          "accuracy_action": 0.0,
+          "risk_level_accuracy": 0.5,
+          "alert_precision": 0.0,
+          "alert_recall": 0.0,
+          "high_risk_recall": 0.0,
+          "medium_or_higher_recall": 0.0,
+          "none_rate_on_true_threats": 1.0,
+          "false_alert_rate_benign": 0.0,
+          "missed_alert_rate_threat": 0.0,
+          "show_policy_accuracy": 0.5,
+          "notification_policy_accuracy": 0.5,
+          "queued_response_rate": 0.0,
+          "entry_zone_threat_recall": 0.0,
+          "tamper_recall": 0.0,
+          "reasoning_degraded_rate": 0.0,
+          "fallback_agent_rate": 0.0,
+          "case_fields_completeness_rate": 0.0,
+          "consumer_summary_rate": 0.0,
+          "operator_summary_rate": 0.0,
+          "evidence_digest_rate": 0.0,
+          "intelligence_quality_rate": 0.0,
+          "http_error_rate": 1.0,
+          "context_propagation_rate": 0.0,
+          "idempotency_correctness_rate": 0.0,
+          "memory_presence_rate": 0.0,
+          "flip_rate": 0.0,
+          "p50_latency_s": 0.0033,
+          "p95_latency_s": 0.0338,
+          "mean_latency_s": 0.0118,
+          "run_accuracy": [
+            0.0,
+            0.0
+          ],
+          "cohort_metrics": {
+            "ambiguous": {
+              "accuracy_action": 0.0,
+              "reasoning_degraded_rate": 0.0
+            },
+            "threat": {
+              "accuracy_action": 0.0,
+              "reasoning_degraded_rate": 0.0
+            }
+          },
+          "unstable_case_ids": [],
+          "degraded_case_ids": [],
+          "fallback_case_ids": [],
+          "top_latency_cases": [
+            {
+              "case_id": "public_wildlife_entry_alert_285",
+              "suite": "public_surveillance",
+              "max_latency_s": 0.0389,
+              "mean_latency_s": 0.0202,
+              "samples": 2
+            },
+            {
+              "case_id": "public_garage_approach_1000",
+              "suite": "public_surveillance",
+              "max_latency_s": 0.0049,
+              "mean_latency_s": 0.0033,
+              "samples": 2
+            }
+          ],
+          "stage_latency_summary": {
+            "stage_p50_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "stage_p95_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "repair_retry_count": 0,
+            "skipped_agent_count": 0
+          },
+          "failure_buckets": {
+            "case_fields_missing": 4,
+            "consumer_summary_missing": 4,
+            "evidence_digest_missing": 4,
+            "http_error": 4,
+            "operator_summary_missing": 4
+          },
+          "context_cases": [],
+          "idempotency_cases": [],
+          "suite_case_ids": [
+            "public_garage_approach_1000",
+            "public_wildlife_entry_alert_285"
+          ]
+        }
+      },
+      "smoke_pipeline": {
+        "all_cases": {
+          "attempts_total": 4,
+          "attempts_passed": 0,
+          "attempts_failed": 4,
+          "accuracy_action": 0.0,
+          "risk_level_accuracy": 1.0,
+          "alert_precision": 0.0,
+          "alert_recall": 0.0,
+          "high_risk_recall": 0.0,
+          "medium_or_higher_recall": 0.0,
+          "none_rate_on_true_threats": 0.0,
+          "false_alert_rate_benign": 0.0,
+          "missed_alert_rate_threat": 0.0,
+          "show_policy_accuracy": 1.0,
+          "notification_policy_accuracy": 1.0,
+          "queued_response_rate": 0.0,
+          "entry_zone_threat_recall": 0.0,
+          "tamper_recall": 0.0,
+          "reasoning_degraded_rate": 0.0,
+          "fallback_agent_rate": 0.0,
+          "case_fields_completeness_rate": 0.0,
+          "consumer_summary_rate": 0.0,
+          "operator_summary_rate": 0.0,
+          "evidence_digest_rate": 0.0,
+          "intelligence_quality_rate": 0.0,
+          "http_error_rate": 1.0,
+          "context_propagation_rate": 0.0,
+          "idempotency_correctness_rate": 0.0,
+          "memory_presence_rate": 0.0,
+          "flip_rate": 0.0,
+          "p50_latency_s": 0.0048,
+          "p95_latency_s": 0.0064,
+          "mean_latency_s": 0.0045,
+          "run_accuracy": [
+            0.0,
+            0.0
+          ],
+          "cohort_metrics": {
+            "benign": {
+              "accuracy_action": 0.0,
+              "reasoning_degraded_rate": 0.0
+            },
+            "ops": {
+              "accuracy_action": 0.0,
+              "reasoning_degraded_rate": 0.0
+            }
+          },
+          "unstable_case_ids": [],
+          "degraded_case_ids": [],
+          "fallback_case_ids": [],
+          "top_latency_cases": [
+            {
+              "case_id": "smoke_backyard_person_139",
+              "suite": "smoke_pipeline",
+              "max_latency_s": 0.0066,
+              "mean_latency_s": 0.0041,
+              "samples": 2
+            },
+            {
+              "case_id": "smoke_driveway_activity_632",
+              "suite": "smoke_pipeline",
+              "max_latency_s": 0.0052,
+              "mean_latency_s": 0.0048,
+              "samples": 2
+            }
+          ],
+          "stage_latency_summary": {
+            "stage_p50_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "stage_p95_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "repair_retry_count": 0,
+            "skipped_agent_count": 0
+          },
+          "failure_buckets": {
+            "case_fields_missing": 4,
+            "consumer_summary_missing": 4,
+            "evidence_digest_missing": 4,
+            "http_error": 4,
+            "operator_summary_missing": 4
+          },
+          "context_cases": [],
+          "idempotency_cases": [],
+          "suite_case_ids": [
+            "smoke_backyard_person_139",
+            "smoke_driveway_activity_632"
+          ]
+        },
+        "gating_cases": {
+          "attempts_total": 0,
+          "attempts_passed": 0,
+          "attempts_failed": 0,
+          "accuracy_action": 0.0,
+          "risk_level_accuracy": 0.0,
+          "alert_precision": 0.0,
+          "alert_recall": 0.0,
+          "high_risk_recall": 0.0,
+          "medium_or_higher_recall": 0.0,
+          "none_rate_on_true_threats": 0.0,
+          "false_alert_rate_benign": 0.0,
+          "missed_alert_rate_threat": 0.0,
+          "show_policy_accuracy": 0.0,
+          "notification_policy_accuracy": 0.0,
+          "queued_response_rate": 0.0,
+          "entry_zone_threat_recall": 0.0,
+          "tamper_recall": 0.0,
+          "reasoning_degraded_rate": 0.0,
+          "fallback_agent_rate": 0.0,
+          "case_fields_completeness_rate": 0.0,
+          "consumer_summary_rate": 0.0,
+          "operator_summary_rate": 0.0,
+          "evidence_digest_rate": 0.0,
+          "intelligence_quality_rate": 0.0,
+          "http_error_rate": 0.0,
+          "context_propagation_rate": 0.0,
+          "idempotency_correctness_rate": 0.0,
+          "memory_presence_rate": 0.0,
+          "flip_rate": 0.0,
+          "p50_latency_s": 0.0,
+          "p95_latency_s": 0.0,
+          "mean_latency_s": 0.0,
+          "run_accuracy": [
+            0.0,
+            0.0
+          ],
+          "cohort_metrics": {},
+          "unstable_case_ids": [],
+          "degraded_case_ids": [],
+          "fallback_case_ids": [],
+          "top_latency_cases": [],
+          "stage_latency_summary": {
+            "stage_p50_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "stage_p95_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "repair_retry_count": 0,
+            "skipped_agent_count": 0
+          },
+          "failure_buckets": {},
+          "context_cases": [],
+          "idempotency_cases": [],
+          "suite_case_ids": []
+        },
+        "quality_review_cases": {
+          "attempts_total": 4,
+          "attempts_passed": 0,
+          "attempts_failed": 4,
+          "accuracy_action": 0.0,
+          "risk_level_accuracy": 1.0,
+          "alert_precision": 0.0,
+          "alert_recall": 0.0,
+          "high_risk_recall": 0.0,
+          "medium_or_higher_recall": 0.0,
+          "none_rate_on_true_threats": 0.0,
+          "false_alert_rate_benign": 0.0,
+          "missed_alert_rate_threat": 0.0,
+          "show_policy_accuracy": 1.0,
+          "notification_policy_accuracy": 1.0,
+          "queued_response_rate": 0.0,
+          "entry_zone_threat_recall": 0.0,
+          "tamper_recall": 0.0,
+          "reasoning_degraded_rate": 0.0,
+          "fallback_agent_rate": 0.0,
+          "case_fields_completeness_rate": 0.0,
+          "consumer_summary_rate": 0.0,
+          "operator_summary_rate": 0.0,
+          "evidence_digest_rate": 0.0,
+          "intelligence_quality_rate": 0.0,
+          "http_error_rate": 1.0,
+          "context_propagation_rate": 0.0,
+          "idempotency_correctness_rate": 0.0,
+          "memory_presence_rate": 0.0,
+          "flip_rate": 0.0,
+          "p50_latency_s": 0.0048,
+          "p95_latency_s": 0.0064,
+          "mean_latency_s": 0.0045,
+          "run_accuracy": [
+            0.0,
+            0.0
+          ],
+          "cohort_metrics": {
+            "benign": {
+              "accuracy_action": 0.0,
+              "reasoning_degraded_rate": 0.0
+            },
+            "ops": {
+              "accuracy_action": 0.0,
+              "reasoning_degraded_rate": 0.0
+            }
+          },
+          "unstable_case_ids": [],
+          "degraded_case_ids": [],
+          "fallback_case_ids": [],
+          "top_latency_cases": [
+            {
+              "case_id": "smoke_backyard_person_139",
+              "suite": "smoke_pipeline",
+              "max_latency_s": 0.0066,
+              "mean_latency_s": 0.0041,
+              "samples": 2
+            },
+            {
+              "case_id": "smoke_driveway_activity_632",
+              "suite": "smoke_pipeline",
+              "max_latency_s": 0.0052,
+              "mean_latency_s": 0.0048,
+              "samples": 2
+            }
+          ],
+          "stage_latency_summary": {
+            "stage_p50_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "stage_p95_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "repair_retry_count": 0,
+            "skipped_agent_count": 0
+          },
+          "failure_buckets": {
+            "case_fields_missing": 4,
+            "consumer_summary_missing": 4,
+            "evidence_digest_missing": 4,
+            "http_error": 4,
+            "operator_summary_missing": 4
+          },
+          "context_cases": [],
+          "idempotency_cases": [],
+          "suite_case_ids": [
+            "smoke_backyard_person_139",
+            "smoke_driveway_activity_632"
+          ]
+        }
+      },
+      "staged_real_home": {
+        "all_cases": {
+          "attempts_total": 0,
+          "attempts_passed": 0,
+          "attempts_failed": 0,
+          "accuracy_action": 0.0,
+          "risk_level_accuracy": 0.0,
+          "alert_precision": 0.0,
+          "alert_recall": 0.0,
+          "high_risk_recall": 0.0,
+          "medium_or_higher_recall": 0.0,
+          "none_rate_on_true_threats": 0.0,
+          "false_alert_rate_benign": 0.0,
+          "missed_alert_rate_threat": 0.0,
+          "show_policy_accuracy": 0.0,
+          "notification_policy_accuracy": 0.0,
+          "queued_response_rate": 0.0,
+          "entry_zone_threat_recall": 0.0,
+          "tamper_recall": 0.0,
+          "reasoning_degraded_rate": 0.0,
+          "fallback_agent_rate": 0.0,
+          "case_fields_completeness_rate": 0.0,
+          "consumer_summary_rate": 0.0,
+          "operator_summary_rate": 0.0,
+          "evidence_digest_rate": 0.0,
+          "intelligence_quality_rate": 0.0,
+          "http_error_rate": 0.0,
+          "context_propagation_rate": 0.0,
+          "idempotency_correctness_rate": 0.0,
+          "memory_presence_rate": 0.0,
+          "flip_rate": 0.0,
+          "p50_latency_s": 0.0,
+          "p95_latency_s": 0.0,
+          "mean_latency_s": 0.0,
+          "run_accuracy": [
+            0.0,
+            0.0
+          ],
+          "cohort_metrics": {},
+          "unstable_case_ids": [],
+          "degraded_case_ids": [],
+          "fallback_case_ids": [],
+          "top_latency_cases": [],
+          "stage_latency_summary": {
+            "stage_p50_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "stage_p95_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "repair_retry_count": 0,
+            "skipped_agent_count": 0
+          },
+          "failure_buckets": {},
+          "context_cases": [],
+          "idempotency_cases": [],
+          "suite_case_ids": []
+        },
+        "gating_cases": {
+          "attempts_total": 0,
+          "attempts_passed": 0,
+          "attempts_failed": 0,
+          "accuracy_action": 0.0,
+          "risk_level_accuracy": 0.0,
+          "alert_precision": 0.0,
+          "alert_recall": 0.0,
+          "high_risk_recall": 0.0,
+          "medium_or_higher_recall": 0.0,
+          "none_rate_on_true_threats": 0.0,
+          "false_alert_rate_benign": 0.0,
+          "missed_alert_rate_threat": 0.0,
+          "show_policy_accuracy": 0.0,
+          "notification_policy_accuracy": 0.0,
+          "queued_response_rate": 0.0,
+          "entry_zone_threat_recall": 0.0,
+          "tamper_recall": 0.0,
+          "reasoning_degraded_rate": 0.0,
+          "fallback_agent_rate": 0.0,
+          "case_fields_completeness_rate": 0.0,
+          "consumer_summary_rate": 0.0,
+          "operator_summary_rate": 0.0,
+          "evidence_digest_rate": 0.0,
+          "intelligence_quality_rate": 0.0,
+          "http_error_rate": 0.0,
+          "context_propagation_rate": 0.0,
+          "idempotency_correctness_rate": 0.0,
+          "memory_presence_rate": 0.0,
+          "flip_rate": 0.0,
+          "p50_latency_s": 0.0,
+          "p95_latency_s": 0.0,
+          "mean_latency_s": 0.0,
+          "run_accuracy": [
+            0.0,
+            0.0
+          ],
+          "cohort_metrics": {},
+          "unstable_case_ids": [],
+          "degraded_case_ids": [],
+          "fallback_case_ids": [],
+          "top_latency_cases": [],
+          "stage_latency_summary": {
+            "stage_p50_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "stage_p95_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "repair_retry_count": 0,
+            "skipped_agent_count": 0
+          },
+          "failure_buckets": {},
+          "context_cases": [],
+          "idempotency_cases": [],
+          "suite_case_ids": []
+        },
+        "quality_review_cases": {
+          "attempts_total": 0,
+          "attempts_passed": 0,
+          "attempts_failed": 0,
+          "accuracy_action": 0.0,
+          "risk_level_accuracy": 0.0,
+          "alert_precision": 0.0,
+          "alert_recall": 0.0,
+          "high_risk_recall": 0.0,
+          "medium_or_higher_recall": 0.0,
+          "none_rate_on_true_threats": 0.0,
+          "false_alert_rate_benign": 0.0,
+          "missed_alert_rate_threat": 0.0,
+          "show_policy_accuracy": 0.0,
+          "notification_policy_accuracy": 0.0,
+          "queued_response_rate": 0.0,
+          "entry_zone_threat_recall": 0.0,
+          "tamper_recall": 0.0,
+          "reasoning_degraded_rate": 0.0,
+          "fallback_agent_rate": 0.0,
+          "case_fields_completeness_rate": 0.0,
+          "consumer_summary_rate": 0.0,
+          "operator_summary_rate": 0.0,
+          "evidence_digest_rate": 0.0,
+          "intelligence_quality_rate": 0.0,
+          "http_error_rate": 0.0,
+          "context_propagation_rate": 0.0,
+          "idempotency_correctness_rate": 0.0,
+          "memory_presence_rate": 0.0,
+          "flip_rate": 0.0,
+          "p50_latency_s": 0.0,
+          "p95_latency_s": 0.0,
+          "mean_latency_s": 0.0,
+          "run_accuracy": [
+            0.0,
+            0.0
+          ],
+          "cohort_metrics": {},
+          "unstable_case_ids": [],
+          "degraded_case_ids": [],
+          "fallback_case_ids": [],
+          "top_latency_cases": [],
+          "stage_latency_summary": {
+            "stage_p50_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "stage_p95_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "repair_retry_count": 0,
+            "skipped_agent_count": 0
+          },
+          "failure_buckets": {},
+          "context_cases": [],
+          "idempotency_cases": [],
+          "suite_case_ids": []
+        }
+      },
+      "synthetic_home": {
+        "all_cases": {
+          "attempts_total": 0,
+          "attempts_passed": 0,
+          "attempts_failed": 0,
+          "accuracy_action": 0.0,
+          "risk_level_accuracy": 0.0,
+          "alert_precision": 0.0,
+          "alert_recall": 0.0,
+          "high_risk_recall": 0.0,
+          "medium_or_higher_recall": 0.0,
+          "none_rate_on_true_threats": 0.0,
+          "false_alert_rate_benign": 0.0,
+          "missed_alert_rate_threat": 0.0,
+          "show_policy_accuracy": 0.0,
+          "notification_policy_accuracy": 0.0,
+          "queued_response_rate": 0.0,
+          "entry_zone_threat_recall": 0.0,
+          "tamper_recall": 0.0,
+          "reasoning_degraded_rate": 0.0,
+          "fallback_agent_rate": 0.0,
+          "case_fields_completeness_rate": 0.0,
+          "consumer_summary_rate": 0.0,
+          "operator_summary_rate": 0.0,
+          "evidence_digest_rate": 0.0,
+          "intelligence_quality_rate": 0.0,
+          "http_error_rate": 0.0,
+          "context_propagation_rate": 0.0,
+          "idempotency_correctness_rate": 0.0,
+          "memory_presence_rate": 0.0,
+          "flip_rate": 0.0,
+          "p50_latency_s": 0.0,
+          "p95_latency_s": 0.0,
+          "mean_latency_s": 0.0,
+          "run_accuracy": [
+            0.0,
+            0.0
+          ],
+          "cohort_metrics": {},
+          "unstable_case_ids": [],
+          "degraded_case_ids": [],
+          "fallback_case_ids": [],
+          "top_latency_cases": [],
+          "stage_latency_summary": {
+            "stage_p50_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "stage_p95_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "repair_retry_count": 0,
+            "skipped_agent_count": 0
+          },
+          "failure_buckets": {},
+          "context_cases": [],
+          "idempotency_cases": [],
+          "suite_case_ids": []
+        },
+        "gating_cases": {
+          "attempts_total": 0,
+          "attempts_passed": 0,
+          "attempts_failed": 0,
+          "accuracy_action": 0.0,
+          "risk_level_accuracy": 0.0,
+          "alert_precision": 0.0,
+          "alert_recall": 0.0,
+          "high_risk_recall": 0.0,
+          "medium_or_higher_recall": 0.0,
+          "none_rate_on_true_threats": 0.0,
+          "false_alert_rate_benign": 0.0,
+          "missed_alert_rate_threat": 0.0,
+          "show_policy_accuracy": 0.0,
+          "notification_policy_accuracy": 0.0,
+          "queued_response_rate": 0.0,
+          "entry_zone_threat_recall": 0.0,
+          "tamper_recall": 0.0,
+          "reasoning_degraded_rate": 0.0,
+          "fallback_agent_rate": 0.0,
+          "case_fields_completeness_rate": 0.0,
+          "consumer_summary_rate": 0.0,
+          "operator_summary_rate": 0.0,
+          "evidence_digest_rate": 0.0,
+          "intelligence_quality_rate": 0.0,
+          "http_error_rate": 0.0,
+          "context_propagation_rate": 0.0,
+          "idempotency_correctness_rate": 0.0,
+          "memory_presence_rate": 0.0,
+          "flip_rate": 0.0,
+          "p50_latency_s": 0.0,
+          "p95_latency_s": 0.0,
+          "mean_latency_s": 0.0,
+          "run_accuracy": [
+            0.0,
+            0.0
+          ],
+          "cohort_metrics": {},
+          "unstable_case_ids": [],
+          "degraded_case_ids": [],
+          "fallback_case_ids": [],
+          "top_latency_cases": [],
+          "stage_latency_summary": {
+            "stage_p50_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "stage_p95_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "repair_retry_count": 0,
+            "skipped_agent_count": 0
+          },
+          "failure_buckets": {},
+          "context_cases": [],
+          "idempotency_cases": [],
+          "suite_case_ids": []
+        },
+        "quality_review_cases": {
+          "attempts_total": 0,
+          "attempts_passed": 0,
+          "attempts_failed": 0,
+          "accuracy_action": 0.0,
+          "risk_level_accuracy": 0.0,
+          "alert_precision": 0.0,
+          "alert_recall": 0.0,
+          "high_risk_recall": 0.0,
+          "medium_or_higher_recall": 0.0,
+          "none_rate_on_true_threats": 0.0,
+          "false_alert_rate_benign": 0.0,
+          "missed_alert_rate_threat": 0.0,
+          "show_policy_accuracy": 0.0,
+          "notification_policy_accuracy": 0.0,
+          "queued_response_rate": 0.0,
+          "entry_zone_threat_recall": 0.0,
+          "tamper_recall": 0.0,
+          "reasoning_degraded_rate": 0.0,
+          "fallback_agent_rate": 0.0,
+          "case_fields_completeness_rate": 0.0,
+          "consumer_summary_rate": 0.0,
+          "operator_summary_rate": 0.0,
+          "evidence_digest_rate": 0.0,
+          "intelligence_quality_rate": 0.0,
+          "http_error_rate": 0.0,
+          "context_propagation_rate": 0.0,
+          "idempotency_correctness_rate": 0.0,
+          "memory_presence_rate": 0.0,
+          "flip_rate": 0.0,
+          "p50_latency_s": 0.0,
+          "p95_latency_s": 0.0,
+          "mean_latency_s": 0.0,
+          "run_accuracy": [
+            0.0,
+            0.0
+          ],
+          "cohort_metrics": {},
+          "unstable_case_ids": [],
+          "degraded_case_ids": [],
+          "fallback_case_ids": [],
+          "top_latency_cases": [],
+          "stage_latency_summary": {
+            "stage_p50_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "stage_p95_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "repair_retry_count": 0,
+            "skipped_agent_count": 0
+          },
+          "failure_buckets": {},
+          "context_cases": [],
+          "idempotency_cases": [],
+          "suite_case_ids": []
+        }
+      }
+    },
+    "on": {
+      "public_surveillance": {
+        "all_cases": {
+          "attempts_total": 4,
+          "attempts_passed": 0,
+          "attempts_failed": 4,
+          "accuracy_action": 0.0,
+          "risk_level_accuracy": 0.5,
+          "alert_precision": 0.0,
+          "alert_recall": 0.0,
+          "high_risk_recall": 0.0,
+          "medium_or_higher_recall": 0.0,
+          "none_rate_on_true_threats": 1.0,
+          "false_alert_rate_benign": 0.0,
+          "missed_alert_rate_threat": 0.0,
+          "show_policy_accuracy": 0.5,
+          "notification_policy_accuracy": 0.5,
+          "queued_response_rate": 0.0,
+          "entry_zone_threat_recall": 0.0,
+          "tamper_recall": 0.0,
+          "reasoning_degraded_rate": 0.0,
+          "fallback_agent_rate": 0.0,
+          "case_fields_completeness_rate": 0.0,
+          "consumer_summary_rate": 0.0,
+          "operator_summary_rate": 0.0,
+          "evidence_digest_rate": 0.0,
+          "intelligence_quality_rate": 0.0,
+          "http_error_rate": 1.0,
+          "context_propagation_rate": 0.0,
+          "idempotency_correctness_rate": 0.0,
+          "memory_presence_rate": 0.0,
+          "flip_rate": 0.0,
+          "p50_latency_s": 0.0031,
+          "p95_latency_s": 0.0044,
+          "mean_latency_s": 0.0034,
+          "run_accuracy": [
+            0.0,
+            0.0
+          ],
+          "cohort_metrics": {
+            "ambiguous": {
+              "accuracy_action": 0.0,
+              "reasoning_degraded_rate": 0.0
+            },
+            "threat": {
+              "accuracy_action": 0.0,
+              "reasoning_degraded_rate": 0.0
+            }
+          },
+          "unstable_case_ids": [],
+          "degraded_case_ids": [],
+          "fallback_case_ids": [],
+          "top_latency_cases": [
+            {
+              "case_id": "public_wildlife_entry_alert_285",
+              "suite": "public_surveillance",
+              "max_latency_s": 0.0046,
+              "mean_latency_s": 0.0038,
+              "samples": 2
+            },
+            {
+              "case_id": "public_garage_approach_1000",
+              "suite": "public_surveillance",
+              "max_latency_s": 0.0031,
+              "mean_latency_s": 0.0031,
+              "samples": 2
+            }
+          ],
+          "stage_latency_summary": {
+            "stage_p50_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "stage_p95_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "repair_retry_count": 0,
+            "skipped_agent_count": 0
+          },
+          "failure_buckets": {
+            "case_fields_missing": 4,
+            "consumer_summary_missing": 4,
+            "evidence_digest_missing": 4,
+            "http_error": 4,
+            "operator_summary_missing": 4
+          },
+          "context_cases": [],
+          "idempotency_cases": [],
+          "suite_case_ids": [
+            "public_garage_approach_1000",
+            "public_wildlife_entry_alert_285"
+          ]
+        },
+        "gating_cases": {
+          "attempts_total": 0,
+          "attempts_passed": 0,
+          "attempts_failed": 0,
+          "accuracy_action": 0.0,
+          "risk_level_accuracy": 0.0,
+          "alert_precision": 0.0,
+          "alert_recall": 0.0,
+          "high_risk_recall": 0.0,
+          "medium_or_higher_recall": 0.0,
+          "none_rate_on_true_threats": 0.0,
+          "false_alert_rate_benign": 0.0,
+          "missed_alert_rate_threat": 0.0,
+          "show_policy_accuracy": 0.0,
+          "notification_policy_accuracy": 0.0,
+          "queued_response_rate": 0.0,
+          "entry_zone_threat_recall": 0.0,
+          "tamper_recall": 0.0,
+          "reasoning_degraded_rate": 0.0,
+          "fallback_agent_rate": 0.0,
+          "case_fields_completeness_rate": 0.0,
+          "consumer_summary_rate": 0.0,
+          "operator_summary_rate": 0.0,
+          "evidence_digest_rate": 0.0,
+          "intelligence_quality_rate": 0.0,
+          "http_error_rate": 0.0,
+          "context_propagation_rate": 0.0,
+          "idempotency_correctness_rate": 0.0,
+          "memory_presence_rate": 0.0,
+          "flip_rate": 0.0,
+          "p50_latency_s": 0.0,
+          "p95_latency_s": 0.0,
+          "mean_latency_s": 0.0,
+          "run_accuracy": [
+            0.0,
+            0.0
+          ],
+          "cohort_metrics": {},
+          "unstable_case_ids": [],
+          "degraded_case_ids": [],
+          "fallback_case_ids": [],
+          "top_latency_cases": [],
+          "stage_latency_summary": {
+            "stage_p50_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "stage_p95_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "repair_retry_count": 0,
+            "skipped_agent_count": 0
+          },
+          "failure_buckets": {},
+          "context_cases": [],
+          "idempotency_cases": [],
+          "suite_case_ids": []
+        },
+        "quality_review_cases": {
+          "attempts_total": 4,
+          "attempts_passed": 0,
+          "attempts_failed": 4,
+          "accuracy_action": 0.0,
+          "risk_level_accuracy": 0.5,
+          "alert_precision": 0.0,
+          "alert_recall": 0.0,
+          "high_risk_recall": 0.0,
+          "medium_or_higher_recall": 0.0,
+          "none_rate_on_true_threats": 1.0,
+          "false_alert_rate_benign": 0.0,
+          "missed_alert_rate_threat": 0.0,
+          "show_policy_accuracy": 0.5,
+          "notification_policy_accuracy": 0.5,
+          "queued_response_rate": 0.0,
+          "entry_zone_threat_recall": 0.0,
+          "tamper_recall": 0.0,
+          "reasoning_degraded_rate": 0.0,
+          "fallback_agent_rate": 0.0,
+          "case_fields_completeness_rate": 0.0,
+          "consumer_summary_rate": 0.0,
+          "operator_summary_rate": 0.0,
+          "evidence_digest_rate": 0.0,
+          "intelligence_quality_rate": 0.0,
+          "http_error_rate": 1.0,
+          "context_propagation_rate": 0.0,
+          "idempotency_correctness_rate": 0.0,
+          "memory_presence_rate": 0.0,
+          "flip_rate": 0.0,
+          "p50_latency_s": 0.0031,
+          "p95_latency_s": 0.0044,
+          "mean_latency_s": 0.0034,
+          "run_accuracy": [
+            0.0,
+            0.0
+          ],
+          "cohort_metrics": {
+            "ambiguous": {
+              "accuracy_action": 0.0,
+              "reasoning_degraded_rate": 0.0
+            },
+            "threat": {
+              "accuracy_action": 0.0,
+              "reasoning_degraded_rate": 0.0
+            }
+          },
+          "unstable_case_ids": [],
+          "degraded_case_ids": [],
+          "fallback_case_ids": [],
+          "top_latency_cases": [
+            {
+              "case_id": "public_wildlife_entry_alert_285",
+              "suite": "public_surveillance",
+              "max_latency_s": 0.0046,
+              "mean_latency_s": 0.0038,
+              "samples": 2
+            },
+            {
+              "case_id": "public_garage_approach_1000",
+              "suite": "public_surveillance",
+              "max_latency_s": 0.0031,
+              "mean_latency_s": 0.0031,
+              "samples": 2
+            }
+          ],
+          "stage_latency_summary": {
+            "stage_p50_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "stage_p95_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "repair_retry_count": 0,
+            "skipped_agent_count": 0
+          },
+          "failure_buckets": {
+            "case_fields_missing": 4,
+            "consumer_summary_missing": 4,
+            "evidence_digest_missing": 4,
+            "http_error": 4,
+            "operator_summary_missing": 4
+          },
+          "context_cases": [],
+          "idempotency_cases": [],
+          "suite_case_ids": [
+            "public_garage_approach_1000",
+            "public_wildlife_entry_alert_285"
+          ]
+        }
+      },
+      "smoke_pipeline": {
+        "all_cases": {
+          "attempts_total": 4,
+          "attempts_passed": 0,
+          "attempts_failed": 4,
+          "accuracy_action": 0.0,
+          "risk_level_accuracy": 1.0,
+          "alert_precision": 0.0,
+          "alert_recall": 0.0,
+          "high_risk_recall": 0.0,
+          "medium_or_higher_recall": 0.0,
+          "none_rate_on_true_threats": 0.0,
+          "false_alert_rate_benign": 0.0,
+          "missed_alert_rate_threat": 0.0,
+          "show_policy_accuracy": 1.0,
+          "notification_policy_accuracy": 1.0,
+          "queued_response_rate": 0.0,
+          "entry_zone_threat_recall": 0.0,
+          "tamper_recall": 0.0,
+          "reasoning_degraded_rate": 0.0,
+          "fallback_agent_rate": 0.0,
+          "case_fields_completeness_rate": 0.0,
+          "consumer_summary_rate": 0.0,
+          "operator_summary_rate": 0.0,
+          "evidence_digest_rate": 0.0,
+          "intelligence_quality_rate": 0.0,
+          "http_error_rate": 1.0,
+          "context_propagation_rate": 0.0,
+          "idempotency_correctness_rate": 0.0,
+          "memory_presence_rate": 0.0,
+          "flip_rate": 0.0,
+          "p50_latency_s": 0.0022,
+          "p95_latency_s": 0.0032,
+          "mean_latency_s": 0.0024,
+          "run_accuracy": [
+            0.0,
+            0.0
+          ],
+          "cohort_metrics": {
+            "benign": {
+              "accuracy_action": 0.0,
+              "reasoning_degraded_rate": 0.0
+            },
+            "ops": {
+              "accuracy_action": 0.0,
+              "reasoning_degraded_rate": 0.0
+            }
+          },
+          "unstable_case_ids": [],
+          "degraded_case_ids": [],
+          "fallback_case_ids": [],
+          "top_latency_cases": [
+            {
+              "case_id": "smoke_backyard_person_139",
+              "suite": "smoke_pipeline",
+              "max_latency_s": 0.0034,
+              "mean_latency_s": 0.0028,
+              "samples": 2
+            },
+            {
+              "case_id": "smoke_driveway_activity_632",
+              "suite": "smoke_pipeline",
+              "max_latency_s": 0.002,
+              "mean_latency_s": 0.0019,
+              "samples": 2
+            }
+          ],
+          "stage_latency_summary": {
+            "stage_p50_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "stage_p95_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "repair_retry_count": 0,
+            "skipped_agent_count": 0
+          },
+          "failure_buckets": {
+            "case_fields_missing": 4,
+            "consumer_summary_missing": 4,
+            "evidence_digest_missing": 4,
+            "http_error": 4,
+            "operator_summary_missing": 4
+          },
+          "context_cases": [],
+          "idempotency_cases": [],
+          "suite_case_ids": [
+            "smoke_backyard_person_139",
+            "smoke_driveway_activity_632"
+          ]
+        },
+        "gating_cases": {
+          "attempts_total": 0,
+          "attempts_passed": 0,
+          "attempts_failed": 0,
+          "accuracy_action": 0.0,
+          "risk_level_accuracy": 0.0,
+          "alert_precision": 0.0,
+          "alert_recall": 0.0,
+          "high_risk_recall": 0.0,
+          "medium_or_higher_recall": 0.0,
+          "none_rate_on_true_threats": 0.0,
+          "false_alert_rate_benign": 0.0,
+          "missed_alert_rate_threat": 0.0,
+          "show_policy_accuracy": 0.0,
+          "notification_policy_accuracy": 0.0,
+          "queued_response_rate": 0.0,
+          "entry_zone_threat_recall": 0.0,
+          "tamper_recall": 0.0,
+          "reasoning_degraded_rate": 0.0,
+          "fallback_agent_rate": 0.0,
+          "case_fields_completeness_rate": 0.0,
+          "consumer_summary_rate": 0.0,
+          "operator_summary_rate": 0.0,
+          "evidence_digest_rate": 0.0,
+          "intelligence_quality_rate": 0.0,
+          "http_error_rate": 0.0,
+          "context_propagation_rate": 0.0,
+          "idempotency_correctness_rate": 0.0,
+          "memory_presence_rate": 0.0,
+          "flip_rate": 0.0,
+          "p50_latency_s": 0.0,
+          "p95_latency_s": 0.0,
+          "mean_latency_s": 0.0,
+          "run_accuracy": [
+            0.0,
+            0.0
+          ],
+          "cohort_metrics": {},
+          "unstable_case_ids": [],
+          "degraded_case_ids": [],
+          "fallback_case_ids": [],
+          "top_latency_cases": [],
+          "stage_latency_summary": {
+            "stage_p50_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "stage_p95_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "repair_retry_count": 0,
+            "skipped_agent_count": 0
+          },
+          "failure_buckets": {},
+          "context_cases": [],
+          "idempotency_cases": [],
+          "suite_case_ids": []
+        },
+        "quality_review_cases": {
+          "attempts_total": 4,
+          "attempts_passed": 0,
+          "attempts_failed": 4,
+          "accuracy_action": 0.0,
+          "risk_level_accuracy": 1.0,
+          "alert_precision": 0.0,
+          "alert_recall": 0.0,
+          "high_risk_recall": 0.0,
+          "medium_or_higher_recall": 0.0,
+          "none_rate_on_true_threats": 0.0,
+          "false_alert_rate_benign": 0.0,
+          "missed_alert_rate_threat": 0.0,
+          "show_policy_accuracy": 1.0,
+          "notification_policy_accuracy": 1.0,
+          "queued_response_rate": 0.0,
+          "entry_zone_threat_recall": 0.0,
+          "tamper_recall": 0.0,
+          "reasoning_degraded_rate": 0.0,
+          "fallback_agent_rate": 0.0,
+          "case_fields_completeness_rate": 0.0,
+          "consumer_summary_rate": 0.0,
+          "operator_summary_rate": 0.0,
+          "evidence_digest_rate": 0.0,
+          "intelligence_quality_rate": 0.0,
+          "http_error_rate": 1.0,
+          "context_propagation_rate": 0.0,
+          "idempotency_correctness_rate": 0.0,
+          "memory_presence_rate": 0.0,
+          "flip_rate": 0.0,
+          "p50_latency_s": 0.0022,
+          "p95_latency_s": 0.0032,
+          "mean_latency_s": 0.0024,
+          "run_accuracy": [
+            0.0,
+            0.0
+          ],
+          "cohort_metrics": {
+            "benign": {
+              "accuracy_action": 0.0,
+              "reasoning_degraded_rate": 0.0
+            },
+            "ops": {
+              "accuracy_action": 0.0,
+              "reasoning_degraded_rate": 0.0
+            }
+          },
+          "unstable_case_ids": [],
+          "degraded_case_ids": [],
+          "fallback_case_ids": [],
+          "top_latency_cases": [
+            {
+              "case_id": "smoke_backyard_person_139",
+              "suite": "smoke_pipeline",
+              "max_latency_s": 0.0034,
+              "mean_latency_s": 0.0028,
+              "samples": 2
+            },
+            {
+              "case_id": "smoke_driveway_activity_632",
+              "suite": "smoke_pipeline",
+              "max_latency_s": 0.002,
+              "mean_latency_s": 0.0019,
+              "samples": 2
+            }
+          ],
+          "stage_latency_summary": {
+            "stage_p50_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "stage_p95_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "repair_retry_count": 0,
+            "skipped_agent_count": 0
+          },
+          "failure_buckets": {
+            "case_fields_missing": 4,
+            "consumer_summary_missing": 4,
+            "evidence_digest_missing": 4,
+            "http_error": 4,
+            "operator_summary_missing": 4
+          },
+          "context_cases": [],
+          "idempotency_cases": [],
+          "suite_case_ids": [
+            "smoke_backyard_person_139",
+            "smoke_driveway_activity_632"
+          ]
+        }
+      },
+      "staged_real_home": {
+        "all_cases": {
+          "attempts_total": 0,
+          "attempts_passed": 0,
+          "attempts_failed": 0,
+          "accuracy_action": 0.0,
+          "risk_level_accuracy": 0.0,
+          "alert_precision": 0.0,
+          "alert_recall": 0.0,
+          "high_risk_recall": 0.0,
+          "medium_or_higher_recall": 0.0,
+          "none_rate_on_true_threats": 0.0,
+          "false_alert_rate_benign": 0.0,
+          "missed_alert_rate_threat": 0.0,
+          "show_policy_accuracy": 0.0,
+          "notification_policy_accuracy": 0.0,
+          "queued_response_rate": 0.0,
+          "entry_zone_threat_recall": 0.0,
+          "tamper_recall": 0.0,
+          "reasoning_degraded_rate": 0.0,
+          "fallback_agent_rate": 0.0,
+          "case_fields_completeness_rate": 0.0,
+          "consumer_summary_rate": 0.0,
+          "operator_summary_rate": 0.0,
+          "evidence_digest_rate": 0.0,
+          "intelligence_quality_rate": 0.0,
+          "http_error_rate": 0.0,
+          "context_propagation_rate": 0.0,
+          "idempotency_correctness_rate": 0.0,
+          "memory_presence_rate": 0.0,
+          "flip_rate": 0.0,
+          "p50_latency_s": 0.0,
+          "p95_latency_s": 0.0,
+          "mean_latency_s": 0.0,
+          "run_accuracy": [
+            0.0,
+            0.0
+          ],
+          "cohort_metrics": {},
+          "unstable_case_ids": [],
+          "degraded_case_ids": [],
+          "fallback_case_ids": [],
+          "top_latency_cases": [],
+          "stage_latency_summary": {
+            "stage_p50_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "stage_p95_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "repair_retry_count": 0,
+            "skipped_agent_count": 0
+          },
+          "failure_buckets": {},
+          "context_cases": [],
+          "idempotency_cases": [],
+          "suite_case_ids": []
+        },
+        "gating_cases": {
+          "attempts_total": 0,
+          "attempts_passed": 0,
+          "attempts_failed": 0,
+          "accuracy_action": 0.0,
+          "risk_level_accuracy": 0.0,
+          "alert_precision": 0.0,
+          "alert_recall": 0.0,
+          "high_risk_recall": 0.0,
+          "medium_or_higher_recall": 0.0,
+          "none_rate_on_true_threats": 0.0,
+          "false_alert_rate_benign": 0.0,
+          "missed_alert_rate_threat": 0.0,
+          "show_policy_accuracy": 0.0,
+          "notification_policy_accuracy": 0.0,
+          "queued_response_rate": 0.0,
+          "entry_zone_threat_recall": 0.0,
+          "tamper_recall": 0.0,
+          "reasoning_degraded_rate": 0.0,
+          "fallback_agent_rate": 0.0,
+          "case_fields_completeness_rate": 0.0,
+          "consumer_summary_rate": 0.0,
+          "operator_summary_rate": 0.0,
+          "evidence_digest_rate": 0.0,
+          "intelligence_quality_rate": 0.0,
+          "http_error_rate": 0.0,
+          "context_propagation_rate": 0.0,
+          "idempotency_correctness_rate": 0.0,
+          "memory_presence_rate": 0.0,
+          "flip_rate": 0.0,
+          "p50_latency_s": 0.0,
+          "p95_latency_s": 0.0,
+          "mean_latency_s": 0.0,
+          "run_accuracy": [
+            0.0,
+            0.0
+          ],
+          "cohort_metrics": {},
+          "unstable_case_ids": [],
+          "degraded_case_ids": [],
+          "fallback_case_ids": [],
+          "top_latency_cases": [],
+          "stage_latency_summary": {
+            "stage_p50_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "stage_p95_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "repair_retry_count": 0,
+            "skipped_agent_count": 0
+          },
+          "failure_buckets": {},
+          "context_cases": [],
+          "idempotency_cases": [],
+          "suite_case_ids": []
+        },
+        "quality_review_cases": {
+          "attempts_total": 0,
+          "attempts_passed": 0,
+          "attempts_failed": 0,
+          "accuracy_action": 0.0,
+          "risk_level_accuracy": 0.0,
+          "alert_precision": 0.0,
+          "alert_recall": 0.0,
+          "high_risk_recall": 0.0,
+          "medium_or_higher_recall": 0.0,
+          "none_rate_on_true_threats": 0.0,
+          "false_alert_rate_benign": 0.0,
+          "missed_alert_rate_threat": 0.0,
+          "show_policy_accuracy": 0.0,
+          "notification_policy_accuracy": 0.0,
+          "queued_response_rate": 0.0,
+          "entry_zone_threat_recall": 0.0,
+          "tamper_recall": 0.0,
+          "reasoning_degraded_rate": 0.0,
+          "fallback_agent_rate": 0.0,
+          "case_fields_completeness_rate": 0.0,
+          "consumer_summary_rate": 0.0,
+          "operator_summary_rate": 0.0,
+          "evidence_digest_rate": 0.0,
+          "intelligence_quality_rate": 0.0,
+          "http_error_rate": 0.0,
+          "context_propagation_rate": 0.0,
+          "idempotency_correctness_rate": 0.0,
+          "memory_presence_rate": 0.0,
+          "flip_rate": 0.0,
+          "p50_latency_s": 0.0,
+          "p95_latency_s": 0.0,
+          "mean_latency_s": 0.0,
+          "run_accuracy": [
+            0.0,
+            0.0
+          ],
+          "cohort_metrics": {},
+          "unstable_case_ids": [],
+          "degraded_case_ids": [],
+          "fallback_case_ids": [],
+          "top_latency_cases": [],
+          "stage_latency_summary": {
+            "stage_p50_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "stage_p95_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "repair_retry_count": 0,
+            "skipped_agent_count": 0
+          },
+          "failure_buckets": {},
+          "context_cases": [],
+          "idempotency_cases": [],
+          "suite_case_ids": []
+        }
+      },
+      "synthetic_home": {
+        "all_cases": {
+          "attempts_total": 0,
+          "attempts_passed": 0,
+          "attempts_failed": 0,
+          "accuracy_action": 0.0,
+          "risk_level_accuracy": 0.0,
+          "alert_precision": 0.0,
+          "alert_recall": 0.0,
+          "high_risk_recall": 0.0,
+          "medium_or_higher_recall": 0.0,
+          "none_rate_on_true_threats": 0.0,
+          "false_alert_rate_benign": 0.0,
+          "missed_alert_rate_threat": 0.0,
+          "show_policy_accuracy": 0.0,
+          "notification_policy_accuracy": 0.0,
+          "queued_response_rate": 0.0,
+          "entry_zone_threat_recall": 0.0,
+          "tamper_recall": 0.0,
+          "reasoning_degraded_rate": 0.0,
+          "fallback_agent_rate": 0.0,
+          "case_fields_completeness_rate": 0.0,
+          "consumer_summary_rate": 0.0,
+          "operator_summary_rate": 0.0,
+          "evidence_digest_rate": 0.0,
+          "intelligence_quality_rate": 0.0,
+          "http_error_rate": 0.0,
+          "context_propagation_rate": 0.0,
+          "idempotency_correctness_rate": 0.0,
+          "memory_presence_rate": 0.0,
+          "flip_rate": 0.0,
+          "p50_latency_s": 0.0,
+          "p95_latency_s": 0.0,
+          "mean_latency_s": 0.0,
+          "run_accuracy": [
+            0.0,
+            0.0
+          ],
+          "cohort_metrics": {},
+          "unstable_case_ids": [],
+          "degraded_case_ids": [],
+          "fallback_case_ids": [],
+          "top_latency_cases": [],
+          "stage_latency_summary": {
+            "stage_p50_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "stage_p95_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "repair_retry_count": 0,
+            "skipped_agent_count": 0
+          },
+          "failure_buckets": {},
+          "context_cases": [],
+          "idempotency_cases": [],
+          "suite_case_ids": []
+        },
+        "gating_cases": {
+          "attempts_total": 0,
+          "attempts_passed": 0,
+          "attempts_failed": 0,
+          "accuracy_action": 0.0,
+          "risk_level_accuracy": 0.0,
+          "alert_precision": 0.0,
+          "alert_recall": 0.0,
+          "high_risk_recall": 0.0,
+          "medium_or_higher_recall": 0.0,
+          "none_rate_on_true_threats": 0.0,
+          "false_alert_rate_benign": 0.0,
+          "missed_alert_rate_threat": 0.0,
+          "show_policy_accuracy": 0.0,
+          "notification_policy_accuracy": 0.0,
+          "queued_response_rate": 0.0,
+          "entry_zone_threat_recall": 0.0,
+          "tamper_recall": 0.0,
+          "reasoning_degraded_rate": 0.0,
+          "fallback_agent_rate": 0.0,
+          "case_fields_completeness_rate": 0.0,
+          "consumer_summary_rate": 0.0,
+          "operator_summary_rate": 0.0,
+          "evidence_digest_rate": 0.0,
+          "intelligence_quality_rate": 0.0,
+          "http_error_rate": 0.0,
+          "context_propagation_rate": 0.0,
+          "idempotency_correctness_rate": 0.0,
+          "memory_presence_rate": 0.0,
+          "flip_rate": 0.0,
+          "p50_latency_s": 0.0,
+          "p95_latency_s": 0.0,
+          "mean_latency_s": 0.0,
+          "run_accuracy": [
+            0.0,
+            0.0
+          ],
+          "cohort_metrics": {},
+          "unstable_case_ids": [],
+          "degraded_case_ids": [],
+          "fallback_case_ids": [],
+          "top_latency_cases": [],
+          "stage_latency_summary": {
+            "stage_p50_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "stage_p95_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "repair_retry_count": 0,
+            "skipped_agent_count": 0
+          },
+          "failure_buckets": {},
+          "context_cases": [],
+          "idempotency_cases": [],
+          "suite_case_ids": []
+        },
+        "quality_review_cases": {
+          "attempts_total": 0,
+          "attempts_passed": 0,
+          "attempts_failed": 0,
+          "accuracy_action": 0.0,
+          "risk_level_accuracy": 0.0,
+          "alert_precision": 0.0,
+          "alert_recall": 0.0,
+          "high_risk_recall": 0.0,
+          "medium_or_higher_recall": 0.0,
+          "none_rate_on_true_threats": 0.0,
+          "false_alert_rate_benign": 0.0,
+          "missed_alert_rate_threat": 0.0,
+          "show_policy_accuracy": 0.0,
+          "notification_policy_accuracy": 0.0,
+          "queued_response_rate": 0.0,
+          "entry_zone_threat_recall": 0.0,
+          "tamper_recall": 0.0,
+          "reasoning_degraded_rate": 0.0,
+          "fallback_agent_rate": 0.0,
+          "case_fields_completeness_rate": 0.0,
+          "consumer_summary_rate": 0.0,
+          "operator_summary_rate": 0.0,
+          "evidence_digest_rate": 0.0,
+          "intelligence_quality_rate": 0.0,
+          "http_error_rate": 0.0,
+          "context_propagation_rate": 0.0,
+          "idempotency_correctness_rate": 0.0,
+          "memory_presence_rate": 0.0,
+          "flip_rate": 0.0,
+          "p50_latency_s": 0.0,
+          "p95_latency_s": 0.0,
+          "mean_latency_s": 0.0,
+          "run_accuracy": [
+            0.0,
+            0.0
+          ],
+          "cohort_metrics": {},
+          "unstable_case_ids": [],
+          "degraded_case_ids": [],
+          "fallback_case_ids": [],
+          "top_latency_cases": [],
+          "stage_latency_summary": {
+            "stage_p50_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "stage_p95_ms": {
+              "vision_latency_ms": 0.0,
+              "history_latency_ms": 0.0,
+              "reasoning_latency_ms": 0.0,
+              "pipeline_latency_ms": 0.0
+            },
+            "repair_retry_count": 0,
+            "skipped_agent_count": 0
+          },
+          "failure_buckets": {},
+          "context_cases": [],
+          "idempotency_cases": [],
+          "suite_case_ids": []
+        }
+      }
+    }
+  },
+  "source_mode_metrics": {
+    "off": {
+      "cloud_alert": {
+        "attempts_total": 0,
+        "attempts_passed": 0,
+        "attempts_failed": 0,
+        "accuracy_action": 0.0,
+        "risk_level_accuracy": 0.0,
+        "alert_precision": 0.0,
+        "alert_recall": 0.0,
+        "high_risk_recall": 0.0,
+        "medium_or_higher_recall": 0.0,
+        "none_rate_on_true_threats": 0.0,
+        "false_alert_rate_benign": 0.0,
+        "missed_alert_rate_threat": 0.0,
+        "show_policy_accuracy": 0.0,
+        "notification_policy_accuracy": 0.0,
+        "queued_response_rate": 0.0,
+        "entry_zone_threat_recall": 0.0,
+        "tamper_recall": 0.0,
+        "reasoning_degraded_rate": 0.0,
+        "fallback_agent_rate": 0.0,
+        "case_fields_completeness_rate": 0.0,
+        "consumer_summary_rate": 0.0,
+        "operator_summary_rate": 0.0,
+        "evidence_digest_rate": 0.0,
+        "intelligence_quality_rate": 0.0,
+        "http_error_rate": 0.0,
+        "context_propagation_rate": 0.0,
+        "idempotency_correctness_rate": 0.0,
+        "memory_presence_rate": 0.0,
+        "flip_rate": 0.0,
+        "p50_latency_s": 0.0,
+        "p95_latency_s": 0.0,
+        "mean_latency_s": 0.0,
+        "run_accuracy": [
+          0.0,
+          0.0
+        ],
+        "cohort_metrics": {},
+        "unstable_case_ids": [],
+        "degraded_case_ids": [],
+        "fallback_case_ids": [],
+        "top_latency_cases": [],
+        "stage_latency_summary": {
+          "stage_p50_ms": {
+            "vision_latency_ms": 0.0,
+            "history_latency_ms": 0.0,
+            "reasoning_latency_ms": 0.0,
+            "pipeline_latency_ms": 0.0
+          },
+          "stage_p95_ms": {
+            "vision_latency_ms": 0.0,
+            "history_latency_ms": 0.0,
+            "reasoning_latency_ms": 0.0,
+            "pipeline_latency_ms": 0.0
+          },
+          "repair_retry_count": 0,
+          "skipped_agent_count": 0
+        },
+        "failure_buckets": {},
+        "context_cases": [],
+        "idempotency_cases": [],
+        "suite_case_ids": [],
+        "normalization_correctness": 0.0
+      },
+      "nvr_webhook": {
+        "attempts_total": 8,
+        "attempts_passed": 0,
+        "attempts_failed": 8,
+        "accuracy_action": 0.0,
+        "risk_level_accuracy": 0.75,
+        "alert_precision": 0.0,
+        "alert_recall": 0.0,
+        "high_risk_recall": 0.0,
+        "medium_or_higher_recall": 0.0,
+        "none_rate_on_true_threats": 1.0,
+        "false_alert_rate_benign": 0.0,
+        "missed_alert_rate_threat": 0.0,
+        "show_policy_accuracy": 0.75,
+        "notification_policy_accuracy": 0.75,
+        "queued_response_rate": 0.0,
+        "entry_zone_threat_recall": 0.0,
+        "tamper_recall": 0.0,
+        "reasoning_degraded_rate": 0.0,
+        "fallback_agent_rate": 0.0,
+        "case_fields_completeness_rate": 0.0,
+        "consumer_summary_rate": 0.0,
+        "operator_summary_rate": 0.0,
+        "evidence_digest_rate": 0.0,
+        "intelligence_quality_rate": 0.0,
+        "http_error_rate": 1.0,
+        "context_propagation_rate": 0.0,
+        "idempotency_correctness_rate": 0.0,
+        "memory_presence_rate": 0.0,
+        "flip_rate": 0.0,
+        "p50_latency_s": 0.0047,
+        "p95_latency_s": 0.0276,
+        "mean_latency_s": 0.0081,
+        "run_accuracy": [
+          0.0,
+          0.0
+        ],
+        "cohort_metrics": {
+          "ambiguous": {
+            "accuracy_action": 0.0,
+            "reasoning_degraded_rate": 0.0
+          },
+          "benign": {
+            "accuracy_action": 0.0,
+            "reasoning_degraded_rate": 0.0
+          },
+          "ops": {
+            "accuracy_action": 0.0,
+            "reasoning_degraded_rate": 0.0
+          },
+          "threat": {
+            "accuracy_action": 0.0,
+            "reasoning_degraded_rate": 0.0
+          }
+        },
+        "unstable_case_ids": [],
+        "degraded_case_ids": [],
+        "fallback_case_ids": [],
+        "top_latency_cases": [
+          {
+            "case_id": "public_wildlife_entry_alert_285",
+            "suite": "public_surveillance",
+            "max_latency_s": 0.0389,
+            "mean_latency_s": 0.0202,
+            "samples": 2
+          },
+          {
+            "case_id": "smoke_backyard_person_139",
+            "suite": "smoke_pipeline",
+            "max_latency_s": 0.0066,
+            "mean_latency_s": 0.0041,
+            "samples": 2
+          },
+          {
+            "case_id": "smoke_driveway_activity_632",
+            "suite": "smoke_pipeline",
+            "max_latency_s": 0.0052,
+            "mean_latency_s": 0.0048,
+            "samples": 2
+          },
+          {
+            "case_id": "public_garage_approach_1000",
+            "suite": "public_surveillance",
+            "max_latency_s": 0.0049,
+            "mean_latency_s": 0.0033,
+            "samples": 2
+          }
+        ],
+        "stage_latency_summary": {
+          "stage_p50_ms": {
+            "vision_latency_ms": 0.0,
+            "history_latency_ms": 0.0,
+            "reasoning_latency_ms": 0.0,
+            "pipeline_latency_ms": 0.0
+          },
+          "stage_p95_ms": {
+            "vision_latency_ms": 0.0,
+            "history_latency_ms": 0.0,
+            "reasoning_latency_ms": 0.0,
+            "pipeline_latency_ms": 0.0
+          },
+          "repair_retry_count": 0,
+          "skipped_agent_count": 0
+        },
+        "failure_buckets": {
+          "case_fields_missing": 8,
+          "consumer_summary_missing": 8,
+          "evidence_digest_missing": 8,
+          "http_error": 8,
+          "operator_summary_missing": 8
+        },
+        "context_cases": [],
+        "idempotency_cases": [],
+        "suite_case_ids": [
+          "public_garage_approach_1000",
+          "public_wildlife_entry_alert_285",
+          "smoke_backyard_person_139",
+          "smoke_driveway_activity_632"
+        ],
+        "normalization_correctness": 0.0
+      },
+      "stream_sampled": {
+        "attempts_total": 0,
+        "attempts_passed": 0,
+        "attempts_failed": 0,
+        "accuracy_action": 0.0,
+        "risk_level_accuracy": 0.0,
+        "alert_precision": 0.0,
+        "alert_recall": 0.0,
+        "high_risk_recall": 0.0,
+        "medium_or_higher_recall": 0.0,
+        "none_rate_on_true_threats": 0.0,
+        "false_alert_rate_benign": 0.0,
+        "missed_alert_rate_threat": 0.0,
+        "show_policy_accuracy": 0.0,
+        "notification_policy_accuracy": 0.0,
+        "queued_response_rate": 0.0,
+        "entry_zone_threat_recall": 0.0,
+        "tamper_recall": 0.0,
+        "reasoning_degraded_rate": 0.0,
+        "fallback_agent_rate": 0.0,
+        "case_fields_completeness_rate": 0.0,
+        "consumer_summary_rate": 0.0,
+        "operator_summary_rate": 0.0,
+        "evidence_digest_rate": 0.0,
+        "intelligence_quality_rate": 0.0,
+        "http_error_rate": 0.0,
+        "context_propagation_rate": 0.0,
+        "idempotency_correctness_rate": 0.0,
+        "memory_presence_rate": 0.0,
+        "flip_rate": 0.0,
+        "p50_latency_s": 0.0,
+        "p95_latency_s": 0.0,
+        "mean_latency_s": 0.0,
+        "run_accuracy": [
+          0.0,
+          0.0
+        ],
+        "cohort_metrics": {},
+        "unstable_case_ids": [],
+        "degraded_case_ids": [],
+        "fallback_case_ids": [],
+        "top_latency_cases": [],
+        "stage_latency_summary": {
+          "stage_p50_ms": {
+            "vision_latency_ms": 0.0,
+            "history_latency_ms": 0.0,
+            "reasoning_latency_ms": 0.0,
+            "pipeline_latency_ms": 0.0
+          },
+          "stage_p95_ms": {
+            "vision_latency_ms": 0.0,
+            "history_latency_ms": 0.0,
+            "reasoning_latency_ms": 0.0,
+            "pipeline_latency_ms": 0.0
+          },
+          "repair_retry_count": 0,
+          "skipped_agent_count": 0
+        },
+        "failure_buckets": {},
+        "context_cases": [],
+        "idempotency_cases": [],
+        "suite_case_ids": [],
+        "normalization_correctness": 0.0
+      }
+    },
+    "on": {
+      "cloud_alert": {
+        "attempts_total": 0,
+        "attempts_passed": 0,
+        "attempts_failed": 0,
+        "accuracy_action": 0.0,
+        "risk_level_accuracy": 0.0,
+        "alert_precision": 0.0,
+        "alert_recall": 0.0,
+        "high_risk_recall": 0.0,
+        "medium_or_higher_recall": 0.0,
+        "none_rate_on_true_threats": 0.0,
+        "false_alert_rate_benign": 0.0,
+        "missed_alert_rate_threat": 0.0,
+        "show_policy_accuracy": 0.0,
+        "notification_policy_accuracy": 0.0,
+        "queued_response_rate": 0.0,
+        "entry_zone_threat_recall": 0.0,
+        "tamper_recall": 0.0,
+        "reasoning_degraded_rate": 0.0,
+        "fallback_agent_rate": 0.0,
+        "case_fields_completeness_rate": 0.0,
+        "consumer_summary_rate": 0.0,
+        "operator_summary_rate": 0.0,
+        "evidence_digest_rate": 0.0,
+        "intelligence_quality_rate": 0.0,
+        "http_error_rate": 0.0,
+        "context_propagation_rate": 0.0,
+        "idempotency_correctness_rate": 0.0,
+        "memory_presence_rate": 0.0,
+        "flip_rate": 0.0,
+        "p50_latency_s": 0.0,
+        "p95_latency_s": 0.0,
+        "mean_latency_s": 0.0,
+        "run_accuracy": [
+          0.0,
+          0.0
+        ],
+        "cohort_metrics": {},
+        "unstable_case_ids": [],
+        "degraded_case_ids": [],
+        "fallback_case_ids": [],
+        "top_latency_cases": [],
+        "stage_latency_summary": {
+          "stage_p50_ms": {
+            "vision_latency_ms": 0.0,
+            "history_latency_ms": 0.0,
+            "reasoning_latency_ms": 0.0,
+            "pipeline_latency_ms": 0.0
+          },
+          "stage_p95_ms": {
+            "vision_latency_ms": 0.0,
+            "history_latency_ms": 0.0,
+            "reasoning_latency_ms": 0.0,
+            "pipeline_latency_ms": 0.0
+          },
+          "repair_retry_count": 0,
+          "skipped_agent_count": 0
+        },
+        "failure_buckets": {},
+        "context_cases": [],
+        "idempotency_cases": [],
+        "suite_case_ids": [],
+        "normalization_correctness": 0.0
+      },
+      "nvr_webhook": {
+        "attempts_total": 8,
+        "attempts_passed": 0,
+        "attempts_failed": 8,
+        "accuracy_action": 0.0,
+        "risk_level_accuracy": 0.75,
+        "alert_precision": 0.0,
+        "alert_recall": 0.0,
+        "high_risk_recall": 0.0,
+        "medium_or_higher_recall": 0.0,
+        "none_rate_on_true_threats": 1.0,
+        "false_alert_rate_benign": 0.0,
+        "missed_alert_rate_threat": 0.0,
+        "show_policy_accuracy": 0.75,
+        "notification_policy_accuracy": 0.75,
+        "queued_response_rate": 0.0,
+        "entry_zone_threat_recall": 0.0,
+        "tamper_recall": 0.0,
+        "reasoning_degraded_rate": 0.0,
+        "fallback_agent_rate": 0.0,
+        "case_fields_completeness_rate": 0.0,
+        "consumer_summary_rate": 0.0,
+        "operator_summary_rate": 0.0,
+        "evidence_digest_rate": 0.0,
+        "intelligence_quality_rate": 0.0,
+        "http_error_rate": 1.0,
+        "context_propagation_rate": 0.0,
+        "idempotency_correctness_rate": 0.0,
+        "memory_presence_rate": 0.0,
+        "flip_rate": 0.0,
+        "p50_latency_s": 0.003,
+        "p95_latency_s": 0.0042,
+        "mean_latency_s": 0.0029,
+        "run_accuracy": [
+          0.0,
+          0.0
+        ],
+        "cohort_metrics": {
+          "ambiguous": {
+            "accuracy_action": 0.0,
+            "reasoning_degraded_rate": 0.0
+          },
+          "benign": {
+            "accuracy_action": 0.0,
+            "reasoning_degraded_rate": 0.0
+          },
+          "ops": {
+            "accuracy_action": 0.0,
+            "reasoning_degraded_rate": 0.0
+          },
+          "threat": {
+            "accuracy_action": 0.0,
+            "reasoning_degraded_rate": 0.0
+          }
+        },
+        "unstable_case_ids": [],
+        "degraded_case_ids": [],
+        "fallback_case_ids": [],
+        "top_latency_cases": [
+          {
+            "case_id": "public_wildlife_entry_alert_285",
+            "suite": "public_surveillance",
+            "max_latency_s": 0.0046,
+            "mean_latency_s": 0.0038,
+            "samples": 2
+          },
+          {
+            "case_id": "smoke_backyard_person_139",
+            "suite": "smoke_pipeline",
+            "max_latency_s": 0.0034,
+            "mean_latency_s": 0.0028,
+            "samples": 2
+          },
+          {
+            "case_id": "public_garage_approach_1000",
+            "suite": "public_surveillance",
+            "max_latency_s": 0.0031,
+            "mean_latency_s": 0.0031,
+            "samples": 2
+          },
+          {
+            "case_id": "smoke_driveway_activity_632",
+            "suite": "smoke_pipeline",
+            "max_latency_s": 0.002,
+            "mean_latency_s": 0.0019,
+            "samples": 2
+          }
+        ],
+        "stage_latency_summary": {
+          "stage_p50_ms": {
+            "vision_latency_ms": 0.0,
+            "history_latency_ms": 0.0,
+            "reasoning_latency_ms": 0.0,
+            "pipeline_latency_ms": 0.0
+          },
+          "stage_p95_ms": {
+            "vision_latency_ms": 0.0,
+            "history_latency_ms": 0.0,
+            "reasoning_latency_ms": 0.0,
+            "pipeline_latency_ms": 0.0
+          },
+          "repair_retry_count": 0,
+          "skipped_agent_count": 0
+        },
+        "failure_buckets": {
+          "case_fields_missing": 8,
+          "consumer_summary_missing": 8,
+          "evidence_digest_missing": 8,
+          "http_error": 8,
+          "operator_summary_missing": 8
+        },
+        "context_cases": [],
+        "idempotency_cases": [],
+        "suite_case_ids": [
+          "public_garage_approach_1000",
+          "public_wildlife_entry_alert_285",
+          "smoke_backyard_person_139",
+          "smoke_driveway_activity_632"
+        ],
+        "normalization_correctness": 0.0
+      },
+      "stream_sampled": {
+        "attempts_total": 0,
+        "attempts_passed": 0,
+        "attempts_failed": 0,
+        "accuracy_action": 0.0,
+        "risk_level_accuracy": 0.0,
+        "alert_precision": 0.0,
+        "alert_recall": 0.0,
+        "high_risk_recall": 0.0,
+        "medium_or_higher_recall": 0.0,
+        "none_rate_on_true_threats": 0.0,
+        "false_alert_rate_benign": 0.0,
+        "missed_alert_rate_threat": 0.0,
+        "show_policy_accuracy": 0.0,
+        "notification_policy_accuracy": 0.0,
+        "queued_response_rate": 0.0,
+        "entry_zone_threat_recall": 0.0,
+        "tamper_recall": 0.0,
+        "reasoning_degraded_rate": 0.0,
+        "fallback_agent_rate": 0.0,
+        "case_fields_completeness_rate": 0.0,
+        "consumer_summary_rate": 0.0,
+        "operator_summary_rate": 0.0,
+        "evidence_digest_rate": 0.0,
+        "intelligence_quality_rate": 0.0,
+        "http_error_rate": 0.0,
+        "context_propagation_rate": 0.0,
+        "idempotency_correctness_rate": 0.0,
+        "memory_presence_rate": 0.0,
+        "flip_rate": 0.0,
+        "p50_latency_s": 0.0,
+        "p95_latency_s": 0.0,
+        "mean_latency_s": 0.0,
+        "run_accuracy": [
+          0.0,
+          0.0
+        ],
+        "cohort_metrics": {},
+        "unstable_case_ids": [],
+        "degraded_case_ids": [],
+        "fallback_case_ids": [],
+        "top_latency_cases": [],
+        "stage_latency_summary": {
+          "stage_p50_ms": {
+            "vision_latency_ms": 0.0,
+            "history_latency_ms": 0.0,
+            "reasoning_latency_ms": 0.0,
+            "pipeline_latency_ms": 0.0
+          },
+          "stage_p95_ms": {
+            "vision_latency_ms": 0.0,
+            "history_latency_ms": 0.0,
+            "reasoning_latency_ms": 0.0,
+            "pipeline_latency_ms": 0.0
+          },
+          "repair_retry_count": 0,
+          "skipped_agent_count": 0
+        },
+        "failure_buckets": {},
+        "context_cases": [],
+        "idempotency_cases": [],
+        "suite_case_ids": [],
+        "normalization_correctness": 0.0
+      }
+    }
+  },
+  "normalization_correctness_by_source_mode": {
+    "off": {
+      "cloud_alert": 0.0,
+      "nvr_webhook": 0.0,
+      "stream_sampled": 0.0
+    },
+    "on": {
+      "cloud_alert": 0.0,
+      "nvr_webhook": 0.0,
+      "stream_sampled": 0.0
+    }
+  },
+  "scenario_family_metrics": {
+    "off": {
+      "garage_activity": {
+        "attempts_total": 2,
+        "attempts_passed": 0,
+        "attempts_failed": 2,
+        "accuracy_action": 0.0,
+        "risk_level_accuracy": 1.0,
+        "alert_precision": 0.0,
+        "alert_recall": 0.0,
+        "high_risk_recall": 0.0,
+        "medium_or_higher_recall": 0.0,
+        "none_rate_on_true_threats": 0.0,
+        "false_alert_rate_benign": 0.0,
+        "missed_alert_rate_threat": 0.0,
+        "show_policy_accuracy": 1.0,
+        "notification_policy_accuracy": 1.0,
+        "queued_response_rate": 0.0,
+        "entry_zone_threat_recall": 0.0,
+        "tamper_recall": 0.0,
+        "reasoning_degraded_rate": 0.0,
+        "fallback_agent_rate": 0.0,
+        "case_fields_completeness_rate": 0.0,
+        "consumer_summary_rate": 0.0,
+        "operator_summary_rate": 0.0,
+        "evidence_digest_rate": 0.0,
+        "intelligence_quality_rate": 0.0,
+        "http_error_rate": 1.0,
+        "context_propagation_rate": 0.0,
+        "idempotency_correctness_rate": 0.0,
+        "memory_presence_rate": 0.0,
+        "flip_rate": 0.0,
+        "p50_latency_s": 0.0033,
+        "p95_latency_s": 0.0048,
+        "mean_latency_s": 0.0033,
+        "run_accuracy": [
+          0.0,
+          0.0
+        ],
+        "cohort_metrics": {
+          "ambiguous": {
+            "accuracy_action": 0.0,
+            "reasoning_degraded_rate": 0.0
+          }
+        },
+        "unstable_case_ids": [],
+        "degraded_case_ids": [],
+        "fallback_case_ids": [],
+        "top_latency_cases": [
+          {
+            "case_id": "public_garage_approach_1000",
+            "suite": "public_surveillance",
+            "max_latency_s": 0.0049,
+            "mean_latency_s": 0.0033,
+            "samples": 2
+          }
+        ],
+        "stage_latency_summary": {
+          "stage_p50_ms": {
+            "vision_latency_ms": 0.0,
+            "history_latency_ms": 0.0,
+            "reasoning_latency_ms": 0.0,
+            "pipeline_latency_ms": 0.0
+          },
+          "stage_p95_ms": {
+            "vision_latency_ms": 0.0,
+            "history_latency_ms": 0.0,
+            "reasoning_latency_ms": 0.0,
+            "pipeline_latency_ms": 0.0
+          },
+          "repair_retry_count": 0,
+          "skipped_agent_count": 0
+        },
+        "failure_buckets": {
+          "case_fields_missing": 2,
+          "consumer_summary_missing": 2,
+          "evidence_digest_missing": 2,
+          "http_error": 2,
+          "operator_summary_missing": 2
+        },
+        "context_cases": [],
+        "idempotency_cases": [],
+        "suite_case_ids": [
+          "public_garage_approach_1000"
+        ]
+      },
+      "pipeline_smoke": {
+        "attempts_total": 4,
+        "attempts_passed": 0,
+        "attempts_failed": 4,
+        "accuracy_action": 0.0,
+        "risk_level_accuracy": 1.0,
+        "alert_precision": 0.0,
+        "alert_recall": 0.0,
+        "high_risk_recall": 0.0,
+        "medium_or_higher_recall": 0.0,
+        "none_rate_on_true_threats": 0.0,
+        "false_alert_rate_benign": 0.0,
+        "missed_alert_rate_threat": 0.0,
+        "show_policy_accuracy": 1.0,
+        "notification_policy_accuracy": 1.0,
+        "queued_response_rate": 0.0,
+        "entry_zone_threat_recall": 0.0,
+        "tamper_recall": 0.0,
+        "reasoning_degraded_rate": 0.0,
+        "fallback_agent_rate": 0.0,
+        "case_fields_completeness_rate": 0.0,
+        "consumer_summary_rate": 0.0,
+        "operator_summary_rate": 0.0,
+        "evidence_digest_rate": 0.0,
+        "intelligence_quality_rate": 0.0,
+        "http_error_rate": 1.0,
+        "context_propagation_rate": 0.0,
+        "idempotency_correctness_rate": 0.0,
+        "memory_presence_rate": 0.0,
+        "flip_rate": 0.0,
+        "p50_latency_s": 0.0048,
+        "p95_latency_s": 0.0064,
+        "mean_latency_s": 0.0045,
+        "run_accuracy": [
+          0.0,
+          0.0
+        ],
+        "cohort_metrics": {
+          "benign": {
+            "accuracy_action": 0.0,
+            "reasoning_degraded_rate": 0.0
+          },
+          "ops": {
+            "accuracy_action": 0.0,
+            "reasoning_degraded_rate": 0.0
+          }
+        },
+        "unstable_case_ids": [],
+        "degraded_case_ids": [],
+        "fallback_case_ids": [],
+        "top_latency_cases": [
+          {
+            "case_id": "smoke_backyard_person_139",
+            "suite": "smoke_pipeline",
+            "max_latency_s": 0.0066,
+            "mean_latency_s": 0.0041,
+            "samples": 2
+          },
+          {
+            "case_id": "smoke_driveway_activity_632",
+            "suite": "smoke_pipeline",
+            "max_latency_s": 0.0052,
+            "mean_latency_s": 0.0048,
+            "samples": 2
+          }
+        ],
+        "stage_latency_summary": {
+          "stage_p50_ms": {
+            "vision_latency_ms": 0.0,
+            "history_latency_ms": 0.0,
+            "reasoning_latency_ms": 0.0,
+            "pipeline_latency_ms": 0.0
+          },
+          "stage_p95_ms": {
+            "vision_latency_ms": 0.0,
+            "history_latency_ms": 0.0,
+            "reasoning_latency_ms": 0.0,
+            "pipeline_latency_ms": 0.0
+          },
+          "repair_retry_count": 0,
+          "skipped_agent_count": 0
+        },
+        "failure_buckets": {
+          "case_fields_missing": 4,
+          "consumer_summary_missing": 4,
+          "evidence_digest_missing": 4,
+          "http_error": 4,
+          "operator_summary_missing": 4
+        },
+        "context_cases": [],
+        "idempotency_cases": [],
+        "suite_case_ids": [
+          "smoke_backyard_person_139",
+          "smoke_driveway_activity_632"
+        ]
+      },
+      "wildlife_near_entry": {
+        "attempts_total": 2,
+        "attempts_passed": 0,
+        "attempts_failed": 2,
+        "accuracy_action": 0.0,
+        "risk_level_accuracy": 0.0,
+        "alert_precision": 0.0,
+        "alert_recall": 0.0,
+        "high_risk_recall": 0.0,
+        "medium_or_higher_recall": 0.0,
+        "none_rate_on_true_threats": 1.0,
+        "false_alert_rate_benign": 0.0,
+        "missed_alert_rate_threat": 0.0,
+        "show_policy_accuracy": 0.0,
+        "notification_policy_accuracy": 0.0,
+        "queued_response_rate": 0.0,
+        "entry_zone_threat_recall": 0.0,
+        "tamper_recall": 0.0,
+        "reasoning_degraded_rate": 0.0,
+        "fallback_agent_rate": 0.0,
+        "case_fields_completeness_rate": 0.0,
+        "consumer_summary_rate": 0.0,
+        "operator_summary_rate": 0.0,
+        "evidence_digest_rate": 0.0,
+        "intelligence_quality_rate": 0.0,
+        "http_error_rate": 1.0,
+        "context_propagation_rate": 0.0,
+        "idempotency_correctness_rate": 0.0,
+        "memory_presence_rate": 0.0,
+        "flip_rate": 0.0,
+        "p50_latency_s": 0.0202,
+        "p95_latency_s": 0.037,
+        "mean_latency_s": 0.0202,
+        "run_accuracy": [
+          0.0,
+          0.0
+        ],
+        "cohort_metrics": {
+          "threat": {
+            "accuracy_action": 0.0,
+            "reasoning_degraded_rate": 0.0
+          }
+        },
+        "unstable_case_ids": [],
+        "degraded_case_ids": [],
+        "fallback_case_ids": [],
+        "top_latency_cases": [
+          {
+            "case_id": "public_wildlife_entry_alert_285",
+            "suite": "public_surveillance",
+            "max_latency_s": 0.0389,
+            "mean_latency_s": 0.0202,
+            "samples": 2
+          }
+        ],
+        "stage_latency_summary": {
+          "stage_p50_ms": {
+            "vision_latency_ms": 0.0,
+            "history_latency_ms": 0.0,
+            "reasoning_latency_ms": 0.0,
+            "pipeline_latency_ms": 0.0
+          },
+          "stage_p95_ms": {
+            "vision_latency_ms": 0.0,
+            "history_latency_ms": 0.0,
+            "reasoning_latency_ms": 0.0,
+            "pipeline_latency_ms": 0.0
+          },
+          "repair_retry_count": 0,
+          "skipped_agent_count": 0
+        },
+        "failure_buckets": {
+          "case_fields_missing": 2,
+          "consumer_summary_missing": 2,
+          "evidence_digest_missing": 2,
+          "http_error": 2,
+          "operator_summary_missing": 2
+        },
+        "context_cases": [],
+        "idempotency_cases": [],
+        "suite_case_ids": [
+          "public_wildlife_entry_alert_285"
+        ]
+      }
+    },
+    "on": {
+      "garage_activity": {
+        "attempts_total": 2,
+        "attempts_passed": 0,
+        "attempts_failed": 2,
+        "accuracy_action": 0.0,
+        "risk_level_accuracy": 1.0,
+        "alert_precision": 0.0,
+        "alert_recall": 0.0,
+        "high_risk_recall": 0.0,
+        "medium_or_higher_recall": 0.0,
+        "none_rate_on_true_threats": 0.0,
+        "false_alert_rate_benign": 0.0,
+        "missed_alert_rate_threat": 0.0,
+        "show_policy_accuracy": 1.0,
+        "notification_policy_accuracy": 1.0,
+        "queued_response_rate": 0.0,
+        "entry_zone_threat_recall": 0.0,
+        "tamper_recall": 0.0,
+        "reasoning_degraded_rate": 0.0,
+        "fallback_agent_rate": 0.0,
+        "case_fields_completeness_rate": 0.0,
+        "consumer_summary_rate": 0.0,
+        "operator_summary_rate": 0.0,
+        "evidence_digest_rate": 0.0,
+        "intelligence_quality_rate": 0.0,
+        "http_error_rate": 1.0,
+        "context_propagation_rate": 0.0,
+        "idempotency_correctness_rate": 0.0,
+        "memory_presence_rate": 0.0,
+        "flip_rate": 0.0,
+        "p50_latency_s": 0.0031,
+        "p95_latency_s": 0.0031,
+        "mean_latency_s": 0.0031,
+        "run_accuracy": [
+          0.0,
+          0.0
+        ],
+        "cohort_metrics": {
+          "ambiguous": {
+            "accuracy_action": 0.0,
+            "reasoning_degraded_rate": 0.0
+          }
+        },
+        "unstable_case_ids": [],
+        "degraded_case_ids": [],
+        "fallback_case_ids": [],
+        "top_latency_cases": [
+          {
+            "case_id": "public_garage_approach_1000",
+            "suite": "public_surveillance",
+            "max_latency_s": 0.0031,
+            "mean_latency_s": 0.0031,
+            "samples": 2
+          }
+        ],
+        "stage_latency_summary": {
+          "stage_p50_ms": {
+            "vision_latency_ms": 0.0,
+            "history_latency_ms": 0.0,
+            "reasoning_latency_ms": 0.0,
+            "pipeline_latency_ms": 0.0
+          },
+          "stage_p95_ms": {
+            "vision_latency_ms": 0.0,
+            "history_latency_ms": 0.0,
+            "reasoning_latency_ms": 0.0,
+            "pipeline_latency_ms": 0.0
+          },
+          "repair_retry_count": 0,
+          "skipped_agent_count": 0
+        },
+        "failure_buckets": {
+          "case_fields_missing": 2,
+          "consumer_summary_missing": 2,
+          "evidence_digest_missing": 2,
+          "http_error": 2,
+          "operator_summary_missing": 2
+        },
+        "context_cases": [],
+        "idempotency_cases": [],
+        "suite_case_ids": [
+          "public_garage_approach_1000"
+        ]
+      },
+      "pipeline_smoke": {
+        "attempts_total": 4,
+        "attempts_passed": 0,
+        "attempts_failed": 4,
+        "accuracy_action": 0.0,
+        "risk_level_accuracy": 1.0,
+        "alert_precision": 0.0,
+        "alert_recall": 0.0,
+        "high_risk_recall": 0.0,
+        "medium_or_higher_recall": 0.0,
+        "none_rate_on_true_threats": 0.0,
+        "false_alert_rate_benign": 0.0,
+        "missed_alert_rate_threat": 0.0,
+        "show_policy_accuracy": 1.0,
+        "notification_policy_accuracy": 1.0,
+        "queued_response_rate": 0.0,
+        "entry_zone_threat_recall": 0.0,
+        "tamper_recall": 0.0,
+        "reasoning_degraded_rate": 0.0,
+        "fallback_agent_rate": 0.0,
+        "case_fields_completeness_rate": 0.0,
+        "consumer_summary_rate": 0.0,
+        "operator_summary_rate": 0.0,
+        "evidence_digest_rate": 0.0,
+        "intelligence_quality_rate": 0.0,
+        "http_error_rate": 1.0,
+        "context_propagation_rate": 0.0,
+        "idempotency_correctness_rate": 0.0,
+        "memory_presence_rate": 0.0,
+        "flip_rate": 0.0,
+        "p50_latency_s": 0.0022,
+        "p95_latency_s": 0.0032,
+        "mean_latency_s": 0.0024,
+        "run_accuracy": [
+          0.0,
+          0.0
+        ],
+        "cohort_metrics": {
+          "benign": {
+            "accuracy_action": 0.0,
+            "reasoning_degraded_rate": 0.0
+          },
+          "ops": {
+            "accuracy_action": 0.0,
+            "reasoning_degraded_rate": 0.0
+          }
+        },
+        "unstable_case_ids": [],
+        "degraded_case_ids": [],
+        "fallback_case_ids": [],
+        "top_latency_cases": [
+          {
+            "case_id": "smoke_backyard_person_139",
+            "suite": "smoke_pipeline",
+            "max_latency_s": 0.0034,
+            "mean_latency_s": 0.0028,
+            "samples": 2
+          },
+          {
+            "case_id": "smoke_driveway_activity_632",
+            "suite": "smoke_pipeline",
+            "max_latency_s": 0.002,
+            "mean_latency_s": 0.0019,
+            "samples": 2
+          }
+        ],
+        "stage_latency_summary": {
+          "stage_p50_ms": {
+            "vision_latency_ms": 0.0,
+            "history_latency_ms": 0.0,
+            "reasoning_latency_ms": 0.0,
+            "pipeline_latency_ms": 0.0
+          },
+          "stage_p95_ms": {
+            "vision_latency_ms": 0.0,
+            "history_latency_ms": 0.0,
+            "reasoning_latency_ms": 0.0,
+            "pipeline_latency_ms": 0.0
+          },
+          "repair_retry_count": 0,
+          "skipped_agent_count": 0
+        },
+        "failure_buckets": {
+          "case_fields_missing": 4,
+          "consumer_summary_missing": 4,
+          "evidence_digest_missing": 4,
+          "http_error": 4,
+          "operator_summary_missing": 4
+        },
+        "context_cases": [],
+        "idempotency_cases": [],
+        "suite_case_ids": [
+          "smoke_backyard_person_139",
+          "smoke_driveway_activity_632"
+        ]
+      },
+      "wildlife_near_entry": {
+        "attempts_total": 2,
+        "attempts_passed": 0,
+        "attempts_failed": 2,
+        "accuracy_action": 0.0,
+        "risk_level_accuracy": 0.0,
+        "alert_precision": 0.0,
+        "alert_recall": 0.0,
+        "high_risk_recall": 0.0,
+        "medium_or_higher_recall": 0.0,
+        "none_rate_on_true_threats": 1.0,
+        "false_alert_rate_benign": 0.0,
+        "missed_alert_rate_threat": 0.0,
+        "show_policy_accuracy": 0.0,
+        "notification_policy_accuracy": 0.0,
+        "queued_response_rate": 0.0,
+        "entry_zone_threat_recall": 0.0,
+        "tamper_recall": 0.0,
+        "reasoning_degraded_rate": 0.0,
+        "fallback_agent_rate": 0.0,
+        "case_fields_completeness_rate": 0.0,
+        "consumer_summary_rate": 0.0,
+        "operator_summary_rate": 0.0,
+        "evidence_digest_rate": 0.0,
+        "intelligence_quality_rate": 0.0,
+        "http_error_rate": 1.0,
+        "context_propagation_rate": 0.0,
+        "idempotency_correctness_rate": 0.0,
+        "memory_presence_rate": 0.0,
+        "flip_rate": 0.0,
+        "p50_latency_s": 0.0038,
+        "p95_latency_s": 0.0045,
+        "mean_latency_s": 0.0038,
+        "run_accuracy": [
+          0.0,
+          0.0
+        ],
+        "cohort_metrics": {
+          "threat": {
+            "accuracy_action": 0.0,
+            "reasoning_degraded_rate": 0.0
+          }
+        },
+        "unstable_case_ids": [],
+        "degraded_case_ids": [],
+        "fallback_case_ids": [],
+        "top_latency_cases": [
+          {
+            "case_id": "public_wildlife_entry_alert_285",
+            "suite": "public_surveillance",
+            "max_latency_s": 0.0046,
+            "mean_latency_s": 0.0038,
+            "samples": 2
+          }
+        ],
+        "stage_latency_summary": {
+          "stage_p50_ms": {
+            "vision_latency_ms": 0.0,
+            "history_latency_ms": 0.0,
+            "reasoning_latency_ms": 0.0,
+            "pipeline_latency_ms": 0.0
+          },
+          "stage_p95_ms": {
+            "vision_latency_ms": 0.0,
+            "history_latency_ms": 0.0,
+            "reasoning_latency_ms": 0.0,
+            "pipeline_latency_ms": 0.0
+          },
+          "repair_retry_count": 0,
+          "skipped_agent_count": 0
+        },
+        "failure_buckets": {
+          "case_fields_missing": 2,
+          "consumer_summary_missing": 2,
+          "evidence_digest_missing": 2,
+          "http_error": 2,
+          "operator_summary_missing": 2
+        },
+        "context_cases": [],
+        "idempotency_cases": [],
+        "suite_case_ids": [
+          "public_wildlife_entry_alert_285"
+        ]
+      }
+    }
+  },
+  "incident_metrics": {
+    "off": {
+      "incident_count": 4,
+      "incident_final_action_accuracy": 0.0,
+      "event_thread_accuracy": 0.0,
+      "cross_cam_correlation_rate": 0.0,
+      "incident_escalation_accuracy": 0.0,
+      "duplicate_redelivery_correctness": 0.0,
+      "threading_failures": [
+        "public_garage_approach_1000",
+        "public_wildlife_entry_alert_285",
+        "smoke_backyard_person_139",
+        "smoke_driveway_activity_632"
+      ],
+      "cross_cam_failures": [],
+      "escalation_failures": []
+    },
+    "on": {
+      "incident_count": 4,
+      "incident_final_action_accuracy": 0.0,
+      "event_thread_accuracy": 0.0,
+      "cross_cam_correlation_rate": 0.0,
+      "incident_escalation_accuracy": 0.0,
+      "duplicate_redelivery_correctness": 0.0,
+      "threading_failures": [
+        "public_garage_approach_1000",
+        "public_wildlife_entry_alert_285",
+        "smoke_backyard_person_139",
+        "smoke_driveway_activity_632"
+      ],
+      "cross_cam_failures": [],
+      "escalation_failures": []
+    }
+  },
+  "cohort_metrics": {
+    "off": {
+      "ambiguous": {
+        "accuracy_action": 0.0,
+        "reasoning_degraded_rate": 0.0
+      },
+      "benign": {
+        "accuracy_action": 0.0,
+        "reasoning_degraded_rate": 0.0
+      },
+      "ops": {
+        "accuracy_action": 0.0,
+        "reasoning_degraded_rate": 0.0
+      },
+      "threat": {
+        "accuracy_action": 0.0,
+        "reasoning_degraded_rate": 0.0
+      }
+    },
+    "on": {
+      "ambiguous": {
+        "accuracy_action": 0.0,
+        "reasoning_degraded_rate": 0.0
+      },
+      "benign": {
+        "accuracy_action": 0.0,
+        "reasoning_degraded_rate": 0.0
+      },
+      "ops": {
+        "accuracy_action": 0.0,
+        "reasoning_degraded_rate": 0.0
+      },
+      "threat": {
+        "accuracy_action": 0.0,
+        "reasoning_degraded_rate": 0.0
+      }
+    }
+  },
+  "suite_gate_results": {
+    "public_surveillance": {
+      "off": {
+        "hard_gate": false,
+        "pass": true,
+        "failures": [],
+        "gating_case_count": 0
+      },
+      "on": {
+        "hard_gate": false,
+        "pass": true,
+        "failures": [],
+        "gating_case_count": 0
+      }
+    },
+    "smoke_pipeline": {
+      "off": {
+        "hard_gate": false,
+        "pass": true,
+        "failures": [],
+        "gating_case_count": 0
+      },
+      "on": {
+        "hard_gate": false,
+        "pass": true,
+        "failures": [],
+        "gating_case_count": 0
+      }
+    },
+    "staged_real_home": {
+      "off": {
+        "hard_gate": true,
+        "pass": false,
+        "failures": [
+          "min_risk_level_accuracy",
+          "min_medium_or_higher_recall",
+          "min_show_policy_accuracy",
+          "min_notification_policy_accuracy",
+          "min_case_fields_completeness_rate",
+          "min_consumer_summary_rate",
+          "min_operator_summary_rate",
+          "min_evidence_digest_rate",
+          "min_intelligence_quality_rate",
+          "min_entry_zone_threat_recall",
+          "min_tamper_recall",
+          "min_action_accuracy",
+          "min_alert_recall",
+          "min_context_propagation_rate",
+          "min_idempotency_correctness_rate"
+        ],
+        "gating_case_count": 0
+      },
+      "on": {
+        "hard_gate": true,
+        "pass": false,
+        "failures": [
+          "min_risk_level_accuracy",
+          "min_medium_or_higher_recall",
+          "min_show_policy_accuracy",
+          "min_notification_policy_accuracy",
+          "min_case_fields_completeness_rate",
+          "min_consumer_summary_rate",
+          "min_operator_summary_rate",
+          "min_evidence_digest_rate",
+          "min_intelligence_quality_rate",
+          "min_entry_zone_threat_recall",
+          "min_tamper_recall",
+          "min_action_accuracy",
+          "min_alert_recall",
+          "min_context_propagation_rate",
+          "min_idempotency_correctness_rate"
+        ],
+        "gating_case_count": 0
+      }
+    },
+    "synthetic_home": {
+      "off": {
+        "hard_gate": false,
+        "pass": true,
+        "failures": [],
+        "gating_case_count": 0
+      },
+      "on": {
+        "hard_gate": false,
+        "pass": true,
+        "failures": [],
+        "gating_case_count": 0
+      }
+    }
+  },
+  "memory_comparison": {
+    "off": {
+      "accuracy_action": 0.0,
+      "false_alert_rate_benign": 0.0,
+      "missed_alert_rate_threat": 0.0,
+      "reasoning_degraded_rate": 0.0,
+      "flip_rate": 0.0
+    },
+    "on": {
+      "accuracy_action": 0.0,
+      "false_alert_rate_benign": 0.0,
+      "missed_alert_rate_threat": 0.0,
+      "reasoning_degraded_rate": 0.0,
+      "flip_rate": 0.0
+    },
+    "delta": {
+      "accuracy_action": 0.0,
+      "false_alert_rate_benign": 0.0,
+      "missed_alert_rate_threat": 0.0,
+      "reasoning_degraded_rate": 0.0,
+      "flip_rate": 0.0
+    }
+  },
+  "memory_help_rate": 0.0,
+  "cross_cam_failures": {
+    "off": [],
+    "on": []
+  },
+  "threading_failures": {
+    "off": [
+      "public_garage_approach_1000",
+      "public_wildlife_entry_alert_285",
+      "smoke_backyard_person_139",
+      "smoke_driveway_activity_632"
+    ],
+    "on": [
+      "public_garage_approach_1000",
+      "public_wildlife_entry_alert_285",
+      "smoke_backyard_person_139",
+      "smoke_driveway_activity_632"
+    ]
+  },
+  "escalation_failures": {
+    "off": [],
+    "on": []
+  },
+  "case_failures": [
+    {
+      "memory_mode": "off",
+      "suite": "public_surveillance",
+      "source_mode": "nvr_webhook",
+      "scenario_id": "public_wildlife_entry_alert_285",
+      "scenario_family": "wildlife_near_entry",
+      "case_id": "public_wildlife_entry_alert_285",
+      "benchmark_kind": "action",
+      "repeat": 1,
+      "status_code": 404,
+      "expected_action": "alert",
+      "expected_risk_level": "high",
+      "expected_visibility_policy": "prominent",
+      "expected_notification_policy": "immediate",
+      "action": "",
+      "risk_level": "none",
+      "visibility_policy": "hidden",
+      "notification_policy": "none",
+      "reasoning_degraded": false,
+      "fallback_agent_count": 0,
+      "case_fields_ok": false,
+      "consumer_summary_ok": false,
+      "operator_summary_ok": false,
+      "evidence_digest_ok": false,
+      "intelligence_quality_ok": false,
+      "latency_s": 0.0389,
+      "error": "",
+      "failure_buckets": {
+        "case_fields_missing": 1,
+        "consumer_summary_missing": 1,
+        "evidence_digest_missing": 1,
+        "http_error": 1,
+        "operator_summary_missing": 1
+      }
+    },
+    {
+      "memory_mode": "off",
+      "suite": "public_surveillance",
+      "source_mode": "nvr_webhook",
+      "scenario_id": "public_garage_approach_1000",
+      "scenario_family": "garage_activity",
+      "case_id": "public_garage_approach_1000",
+      "benchmark_kind": "action",
+      "repeat": 1,
+      "status_code": 404,
+      "expected_action": "suppress",
+      "expected_risk_level": "none",
+      "expected_visibility_policy": "hidden",
+      "expected_notification_policy": "none",
+      "action": "",
+      "risk_level": "none",
+      "visibility_policy": "hidden",
+      "notification_policy": "none",
+      "reasoning_degraded": false,
+      "fallback_agent_count": 0,
+      "case_fields_ok": false,
+      "consumer_summary_ok": false,
+      "operator_summary_ok": false,
+      "evidence_digest_ok": false,
+      "intelligence_quality_ok": false,
+      "latency_s": 0.0049,
+      "error": "",
+      "failure_buckets": {
+        "case_fields_missing": 1,
+        "consumer_summary_missing": 1,
+        "evidence_digest_missing": 1,
+        "http_error": 1,
+        "operator_summary_missing": 1
+      }
+    },
+    {
+      "memory_mode": "off",
+      "suite": "smoke_pipeline",
+      "source_mode": "nvr_webhook",
+      "scenario_id": "smoke_backyard_person_139",
+      "scenario_family": "pipeline_smoke",
+      "case_id": "smoke_backyard_person_139",
+      "benchmark_kind": "action",
+      "repeat": 1,
+      "status_code": 404,
+      "expected_action": "suppress",
+      "expected_risk_level": "none",
+      "expected_visibility_policy": "hidden",
+      "expected_notification_policy": "none",
+      "action": "",
+      "risk_level": "none",
+      "visibility_policy": "hidden",
+      "notification_policy": "none",
+      "reasoning_degraded": false,
+      "fallback_agent_count": 0,
+      "case_fields_ok": false,
+      "consumer_summary_ok": false,
+      "operator_summary_ok": false,
+      "evidence_digest_ok": false,
+      "intelligence_quality_ok": false,
+      "latency_s": 0.0017,
+      "error": "",
+      "failure_buckets": {
+        "case_fields_missing": 1,
+        "consumer_summary_missing": 1,
+        "evidence_digest_missing": 1,
+        "http_error": 1,
+        "operator_summary_missing": 1
+      }
+    },
+    {
+      "memory_mode": "off",
+      "suite": "smoke_pipeline",
+      "source_mode": "nvr_webhook",
+      "scenario_id": "smoke_driveway_activity_632",
+      "scenario_family": "pipeline_smoke",
+      "case_id": "smoke_driveway_activity_632",
+      "benchmark_kind": "action",
+      "repeat": 1,
+      "status_code": 404,
+      "expected_action": "suppress",
+      "expected_risk_level": "none",
+      "expected_visibility_policy": "hidden",
+      "expected_notification_policy": "none",
+      "action": "",
+      "risk_level": "none",
+      "visibility_policy": "hidden",
+      "notification_policy": "none",
+      "reasoning_degraded": false,
+      "fallback_agent_count": 0,
+      "case_fields_ok": false,
+      "consumer_summary_ok": false,
+      "operator_summary_ok": false,
+      "evidence_digest_ok": false,
+      "intelligence_quality_ok": false,
+      "latency_s": 0.0045,
+      "error": "",
+      "failure_buckets": {
+        "case_fields_missing": 1,
+        "consumer_summary_missing": 1,
+        "evidence_digest_missing": 1,
+        "http_error": 1,
+        "operator_summary_missing": 1
+      }
+    },
+    {
+      "memory_mode": "off",
+      "suite": "public_surveillance",
+      "source_mode": "nvr_webhook",
+      "scenario_id": "public_wildlife_entry_alert_285",
+      "scenario_family": "wildlife_near_entry",
+      "case_id": "public_wildlife_entry_alert_285",
+      "benchmark_kind": "action",
+      "repeat": 2,
+      "status_code": 404,
+      "expected_action": "alert",
+      "expected_risk_level": "high",
+      "expected_visibility_policy": "prominent",
+      "expected_notification_policy": "immediate",
+      "action": "",
+      "risk_level": "none",
+      "visibility_policy": "hidden",
+      "notification_policy": "none",
+      "reasoning_degraded": false,
+      "fallback_agent_count": 0,
+      "case_fields_ok": false,
+      "consumer_summary_ok": false,
+      "operator_summary_ok": false,
+      "evidence_digest_ok": false,
+      "intelligence_quality_ok": false,
+      "latency_s": 0.0016,
+      "error": "",
+      "failure_buckets": {
+        "case_fields_missing": 1,
+        "consumer_summary_missing": 1,
+        "evidence_digest_missing": 1,
+        "http_error": 1,
+        "operator_summary_missing": 1
+      }
+    },
+    {
+      "memory_mode": "off",
+      "suite": "public_surveillance",
+      "source_mode": "nvr_webhook",
+      "scenario_id": "public_garage_approach_1000",
+      "scenario_family": "garage_activity",
+      "case_id": "public_garage_approach_1000",
+      "benchmark_kind": "action",
+      "repeat": 2,
+      "status_code": 404,
+      "expected_action": "suppress",
+      "expected_risk_level": "none",
+      "expected_visibility_policy": "hidden",
+      "expected_notification_policy": "none",
+      "action": "",
+      "risk_level": "none",
+      "visibility_policy": "hidden",
+      "notification_policy": "none",
+      "reasoning_degraded": false,
+      "fallback_agent_count": 0,
+      "case_fields_ok": false,
+      "consumer_summary_ok": false,
+      "operator_summary_ok": false,
+      "evidence_digest_ok": false,
+      "intelligence_quality_ok": false,
+      "latency_s": 0.0016,
+      "error": "",
+      "failure_buckets": {
+        "case_fields_missing": 1,
+        "consumer_summary_missing": 1,
+        "evidence_digest_missing": 1,
+        "http_error": 1,
+        "operator_summary_missing": 1
+      }
+    },
+    {
+      "memory_mode": "off",
+      "suite": "smoke_pipeline",
+      "source_mode": "nvr_webhook",
+      "scenario_id": "smoke_backyard_person_139",
+      "scenario_family": "pipeline_smoke",
+      "case_id": "smoke_backyard_person_139",
+      "benchmark_kind": "action",
+      "repeat": 2,
+      "status_code": 404,
+      "expected_action": "suppress",
+      "expected_risk_level": "none",
+      "expected_visibility_policy": "hidden",
+      "expected_notification_policy": "none",
+      "action": "",
+      "risk_level": "none",
+      "visibility_policy": "hidden",
+      "notification_policy": "none",
+      "reasoning_degraded": false,
+      "fallback_agent_count": 0,
+      "case_fields_ok": false,
+      "consumer_summary_ok": false,
+      "operator_summary_ok": false,
+      "evidence_digest_ok": false,
+      "intelligence_quality_ok": false,
+      "latency_s": 0.0066,
+      "error": "",
+      "failure_buckets": {
+        "case_fields_missing": 1,
+        "consumer_summary_missing": 1,
+        "evidence_digest_missing": 1,
+        "http_error": 1,
+        "operator_summary_missing": 1
+      }
+    },
+    {
+      "memory_mode": "off",
+      "suite": "smoke_pipeline",
+      "source_mode": "nvr_webhook",
+      "scenario_id": "smoke_driveway_activity_632",
+      "scenario_family": "pipeline_smoke",
+      "case_id": "smoke_driveway_activity_632",
+      "benchmark_kind": "action",
+      "repeat": 2,
+      "status_code": 404,
+      "expected_action": "suppress",
+      "expected_risk_level": "none",
+      "expected_visibility_policy": "hidden",
+      "expected_notification_policy": "none",
+      "action": "",
+      "risk_level": "none",
+      "visibility_policy": "hidden",
+      "notification_policy": "none",
+      "reasoning_degraded": false,
+      "fallback_agent_count": 0,
+      "case_fields_ok": false,
+      "consumer_summary_ok": false,
+      "operator_summary_ok": false,
+      "evidence_digest_ok": false,
+      "intelligence_quality_ok": false,
+      "latency_s": 0.0052,
+      "error": "",
+      "failure_buckets": {
+        "case_fields_missing": 1,
+        "consumer_summary_missing": 1,
+        "evidence_digest_missing": 1,
+        "http_error": 1,
+        "operator_summary_missing": 1
+      }
+    },
+    {
+      "memory_mode": "on",
+      "suite": "public_surveillance",
+      "source_mode": "nvr_webhook",
+      "scenario_id": "public_wildlife_entry_alert_285",
+      "scenario_family": "wildlife_near_entry",
+      "case_id": "public_wildlife_entry_alert_285",
+      "benchmark_kind": "action",
+      "repeat": 1,
+      "status_code": 404,
+      "expected_action": "alert",
+      "expected_risk_level": "high",
+      "expected_visibility_policy": "prominent",
+      "expected_notification_policy": "immediate",
+      "action": "",
+      "risk_level": "none",
+      "visibility_policy": "hidden",
+      "notification_policy": "none",
+      "reasoning_degraded": false,
+      "fallback_agent_count": 0,
+      "case_fields_ok": false,
+      "consumer_summary_ok": false,
+      "operator_summary_ok": false,
+      "evidence_digest_ok": false,
+      "intelligence_quality_ok": false,
+      "latency_s": 0.0046,
+      "error": "",
+      "failure_buckets": {
+        "case_fields_missing": 1,
+        "consumer_summary_missing": 1,
+        "evidence_digest_missing": 1,
+        "http_error": 1,
+        "operator_summary_missing": 1
+      }
+    },
+    {
+      "memory_mode": "on",
+      "suite": "public_surveillance",
+      "source_mode": "nvr_webhook",
+      "scenario_id": "public_garage_approach_1000",
+      "scenario_family": "garage_activity",
+      "case_id": "public_garage_approach_1000",
+      "benchmark_kind": "action",
+      "repeat": 1,
+      "status_code": 404,
+      "expected_action": "suppress",
+      "expected_risk_level": "none",
+      "expected_visibility_policy": "hidden",
+      "expected_notification_policy": "none",
+      "action": "",
+      "risk_level": "none",
+      "visibility_policy": "hidden",
+      "notification_policy": "none",
+      "reasoning_degraded": false,
+      "fallback_agent_count": 0,
+      "case_fields_ok": false,
+      "consumer_summary_ok": false,
+      "operator_summary_ok": false,
+      "evidence_digest_ok": false,
+      "intelligence_quality_ok": false,
+      "latency_s": 0.003,
+      "error": "",
+      "failure_buckets": {
+        "case_fields_missing": 1,
+        "consumer_summary_missing": 1,
+        "evidence_digest_missing": 1,
+        "http_error": 1,
+        "operator_summary_missing": 1
+      }
+    },
+    {
+      "memory_mode": "on",
+      "suite": "smoke_pipeline",
+      "source_mode": "nvr_webhook",
+      "scenario_id": "smoke_backyard_person_139",
+      "scenario_family": "pipeline_smoke",
+      "case_id": "smoke_backyard_person_139",
+      "benchmark_kind": "action",
+      "repeat": 1,
+      "status_code": 404,
+      "expected_action": "suppress",
+      "expected_risk_level": "none",
+      "expected_visibility_policy": "hidden",
+      "expected_notification_policy": "none",
+      "action": "",
+      "risk_level": "none",
+      "visibility_policy": "hidden",
+      "notification_policy": "none",
+      "reasoning_degraded": false,
+      "fallback_agent_count": 0,
+      "case_fields_ok": false,
+      "consumer_summary_ok": false,
+      "operator_summary_ok": false,
+      "evidence_digest_ok": false,
+      "intelligence_quality_ok": false,
+      "latency_s": 0.0034,
+      "error": "",
+      "failure_buckets": {
+        "case_fields_missing": 1,
+        "consumer_summary_missing": 1,
+        "evidence_digest_missing": 1,
+        "http_error": 1,
+        "operator_summary_missing": 1
+      }
+    },
+    {
+      "memory_mode": "on",
+      "suite": "smoke_pipeline",
+      "source_mode": "nvr_webhook",
+      "scenario_id": "smoke_driveway_activity_632",
+      "scenario_family": "pipeline_smoke",
+      "case_id": "smoke_driveway_activity_632",
+      "benchmark_kind": "action",
+      "repeat": 1,
+      "status_code": 404,
+      "expected_action": "suppress",
+      "expected_risk_level": "none",
+      "expected_visibility_policy": "hidden",
+      "expected_notification_policy": "none",
+      "action": "",
+      "risk_level": "none",
+      "visibility_policy": "hidden",
+      "notification_policy": "none",
+      "reasoning_degraded": false,
+      "fallback_agent_count": 0,
+      "case_fields_ok": false,
+      "consumer_summary_ok": false,
+      "operator_summary_ok": false,
+      "evidence_digest_ok": false,
+      "intelligence_quality_ok": false,
+      "latency_s": 0.0018,
+      "error": "",
+      "failure_buckets": {
+        "case_fields_missing": 1,
+        "consumer_summary_missing": 1,
+        "evidence_digest_missing": 1,
+        "http_error": 1,
+        "operator_summary_missing": 1
+      }
+    },
+    {
+      "memory_mode": "on",
+      "suite": "public_surveillance",
+      "source_mode": "nvr_webhook",
+      "scenario_id": "public_wildlife_entry_alert_285",
+      "scenario_family": "wildlife_near_entry",
+      "case_id": "public_wildlife_entry_alert_285",
+      "benchmark_kind": "action",
+      "repeat": 2,
+      "status_code": 404,
+      "expected_action": "alert",
+      "expected_risk_level": "high",
+      "expected_visibility_policy": "prominent",
+      "expected_notification_policy": "immediate",
+      "action": "",
+      "risk_level": "none",
+      "visibility_policy": "hidden",
+      "notification_policy": "none",
+      "reasoning_degraded": false,
+      "fallback_agent_count": 0,
+      "case_fields_ok": false,
+      "consumer_summary_ok": false,
+      "operator_summary_ok": false,
+      "evidence_digest_ok": false,
+      "intelligence_quality_ok": false,
+      "latency_s": 0.003,
+      "error": "",
+      "failure_buckets": {
+        "case_fields_missing": 1,
+        "consumer_summary_missing": 1,
+        "evidence_digest_missing": 1,
+        "http_error": 1,
+        "operator_summary_missing": 1
+      }
+    },
+    {
+      "memory_mode": "on",
+      "suite": "public_surveillance",
+      "source_mode": "nvr_webhook",
+      "scenario_id": "public_garage_approach_1000",
+      "scenario_family": "garage_activity",
+      "case_id": "public_garage_approach_1000",
+      "benchmark_kind": "action",
+      "repeat": 2,
+      "status_code": 404,
+      "expected_action": "suppress",
+      "expected_risk_level": "none",
+      "expected_visibility_policy": "hidden",
+      "expected_notification_policy": "none",
+      "action": "",
+      "risk_level": "none",
+      "visibility_policy": "hidden",
+      "notification_policy": "none",
+      "reasoning_degraded": false,
+      "fallback_agent_count": 0,
+      "case_fields_ok": false,
+      "consumer_summary_ok": false,
+      "operator_summary_ok": false,
+      "evidence_digest_ok": false,
+      "intelligence_quality_ok": false,
+      "latency_s": 0.0031,
+      "error": "",
+      "failure_buckets": {
+        "case_fields_missing": 1,
+        "consumer_summary_missing": 1,
+        "evidence_digest_missing": 1,
+        "http_error": 1,
+        "operator_summary_missing": 1
+      }
+    },
+    {
+      "memory_mode": "on",
+      "suite": "smoke_pipeline",
+      "source_mode": "nvr_webhook",
+      "scenario_id": "smoke_backyard_person_139",
+      "scenario_family": "pipeline_smoke",
+      "case_id": "smoke_backyard_person_139",
+      "benchmark_kind": "action",
+      "repeat": 2,
+      "status_code": 404,
+      "expected_action": "suppress",
+      "expected_risk_level": "none",
+      "expected_visibility_policy": "hidden",
+      "expected_notification_policy": "none",
+      "action": "",
+      "risk_level": "none",
+      "visibility_policy": "hidden",
+      "notification_policy": "none",
+      "reasoning_degraded": false,
+      "fallback_agent_count": 0,
+      "case_fields_ok": false,
+      "consumer_summary_ok": false,
+      "operator_summary_ok": false,
+      "evidence_digest_ok": false,
+      "intelligence_quality_ok": false,
+      "latency_s": 0.0023,
+      "error": "",
+      "failure_buckets": {
+        "case_fields_missing": 1,
+        "consumer_summary_missing": 1,
+        "evidence_digest_missing": 1,
+        "http_error": 1,
+        "operator_summary_missing": 1
+      }
+    },
+    {
+      "memory_mode": "on",
+      "suite": "smoke_pipeline",
+      "source_mode": "nvr_webhook",
+      "scenario_id": "smoke_driveway_activity_632",
+      "scenario_family": "pipeline_smoke",
+      "case_id": "smoke_driveway_activity_632",
+      "benchmark_kind": "action",
+      "repeat": 2,
+      "status_code": 404,
+      "expected_action": "suppress",
+      "expected_risk_level": "none",
+      "expected_visibility_policy": "hidden",
+      "expected_notification_policy": "none",
+      "action": "",
+      "risk_level": "none",
+      "visibility_policy": "hidden",
+      "notification_policy": "none",
+      "reasoning_degraded": false,
+      "fallback_agent_count": 0,
+      "case_fields_ok": false,
+      "consumer_summary_ok": false,
+      "operator_summary_ok": false,
+      "evidence_digest_ok": false,
+      "intelligence_quality_ok": false,
+      "latency_s": 0.002,
+      "error": "",
+      "failure_buckets": {
+        "case_fields_missing": 1,
+        "consumer_summary_missing": 1,
+        "evidence_digest_missing": 1,
+        "http_error": 1,
+        "operator_summary_missing": 1
+      }
+    }
+  ],
+  "results": {
+    "off": [
+      {
+        "repeat": 1,
+        "memory_mode": "off",
+        "suite": "public_surveillance",
+        "source_mode": "nvr_webhook",
+        "scenario_id": "public_wildlife_entry_alert_285",
+        "scenario_family": "wildlife_near_entry",
+        "case_id": "public_wildlife_entry_alert_285",
+        "cohort": "threat",
+        "benchmark_kind": "action",
+        "expected_action": "alert",
+        "expected_risk_level": "high",
+        "actual_action": "",
+        "risk_level": "none",
+        "visibility_policy": "hidden",
+        "notification_policy": "none",
+        "status_code": 404,
+        "latency_s": 0.0389,
+        "reasoning_degraded": false,
+        "fallback_agent_count": 0,
+        "context_ok": true,
+        "idempotency_ok": true,
+        "memory_present": false,
+        "case_fields_ok": false,
+        "consumer_summary_ok": false,
+        "operator_summary_ok": false,
+        "evidence_digest_ok": false,
+        "intelligence_quality_ok": false,
+        "ok": false,
+        "error": "",
+        "benchmark_telemetry": {}
+      },
+      {
+        "repeat": 1,
+        "memory_mode": "off",
+        "suite": "public_surveillance",
+        "source_mode": "nvr_webhook",
+        "scenario_id": "public_garage_approach_1000",
+        "scenario_family": "garage_activity",
+        "case_id": "public_garage_approach_1000",
+        "cohort": "ambiguous",
+        "benchmark_kind": "action",
+        "expected_action": "suppress",
+        "expected_risk_level": "none",
+        "actual_action": "",
+        "risk_level": "none",
+        "visibility_policy": "hidden",
+        "notification_policy": "none",
+        "status_code": 404,
+        "latency_s": 0.0049,
+        "reasoning_degraded": false,
+        "fallback_agent_count": 0,
+        "context_ok": true,
+        "idempotency_ok": true,
+        "memory_present": false,
+        "case_fields_ok": false,
+        "consumer_summary_ok": false,
+        "operator_summary_ok": false,
+        "evidence_digest_ok": false,
+        "intelligence_quality_ok": false,
+        "ok": false,
+        "error": "",
+        "benchmark_telemetry": {}
+      },
+      {
+        "repeat": 1,
+        "memory_mode": "off",
+        "suite": "smoke_pipeline",
+        "source_mode": "nvr_webhook",
+        "scenario_id": "smoke_backyard_person_139",
+        "scenario_family": "pipeline_smoke",
+        "case_id": "smoke_backyard_person_139",
+        "cohort": "benign",
+        "benchmark_kind": "action",
+        "expected_action": "suppress",
+        "expected_risk_level": "none",
+        "actual_action": "",
+        "risk_level": "none",
+        "visibility_policy": "hidden",
+        "notification_policy": "none",
+        "status_code": 404,
+        "latency_s": 0.0017,
+        "reasoning_degraded": false,
+        "fallback_agent_count": 0,
+        "context_ok": true,
+        "idempotency_ok": true,
+        "memory_present": false,
+        "case_fields_ok": false,
+        "consumer_summary_ok": false,
+        "operator_summary_ok": false,
+        "evidence_digest_ok": false,
+        "intelligence_quality_ok": false,
+        "ok": false,
+        "error": "",
+        "benchmark_telemetry": {}
+      },
+      {
+        "repeat": 1,
+        "memory_mode": "off",
+        "suite": "smoke_pipeline",
+        "source_mode": "nvr_webhook",
+        "scenario_id": "smoke_driveway_activity_632",
+        "scenario_family": "pipeline_smoke",
+        "case_id": "smoke_driveway_activity_632",
+        "cohort": "ops",
+        "benchmark_kind": "action",
+        "expected_action": "suppress",
+        "expected_risk_level": "none",
+        "actual_action": "",
+        "risk_level": "none",
+        "visibility_policy": "hidden",
+        "notification_policy": "none",
+        "status_code": 404,
+        "latency_s": 0.0045,
+        "reasoning_degraded": false,
+        "fallback_agent_count": 0,
+        "context_ok": true,
+        "idempotency_ok": true,
+        "memory_present": false,
+        "case_fields_ok": false,
+        "consumer_summary_ok": false,
+        "operator_summary_ok": false,
+        "evidence_digest_ok": false,
+        "intelligence_quality_ok": false,
+        "ok": false,
+        "error": "",
+        "benchmark_telemetry": {}
+      },
+      {
+        "repeat": 2,
+        "memory_mode": "off",
+        "suite": "public_surveillance",
+        "source_mode": "nvr_webhook",
+        "scenario_id": "public_wildlife_entry_alert_285",
+        "scenario_family": "wildlife_near_entry",
+        "case_id": "public_wildlife_entry_alert_285",
+        "cohort": "threat",
+        "benchmark_kind": "action",
+        "expected_action": "alert",
+        "expected_risk_level": "high",
+        "actual_action": "",
+        "risk_level": "none",
+        "visibility_policy": "hidden",
+        "notification_policy": "none",
+        "status_code": 404,
+        "latency_s": 0.0016,
+        "reasoning_degraded": false,
+        "fallback_agent_count": 0,
+        "context_ok": true,
+        "idempotency_ok": true,
+        "memory_present": false,
+        "case_fields_ok": false,
+        "consumer_summary_ok": false,
+        "operator_summary_ok": false,
+        "evidence_digest_ok": false,
+        "intelligence_quality_ok": false,
+        "ok": false,
+        "error": "",
+        "benchmark_telemetry": {}
+      },
+      {
+        "repeat": 2,
+        "memory_mode": "off",
+        "suite": "public_surveillance",
+        "source_mode": "nvr_webhook",
+        "scenario_id": "public_garage_approach_1000",
+        "scenario_family": "garage_activity",
+        "case_id": "public_garage_approach_1000",
+        "cohort": "ambiguous",
+        "benchmark_kind": "action",
+        "expected_action": "suppress",
+        "expected_risk_level": "none",
+        "actual_action": "",
+        "risk_level": "none",
+        "visibility_policy": "hidden",
+        "notification_policy": "none",
+        "status_code": 404,
+        "latency_s": 0.0016,
+        "reasoning_degraded": false,
+        "fallback_agent_count": 0,
+        "context_ok": true,
+        "idempotency_ok": true,
+        "memory_present": false,
+        "case_fields_ok": false,
+        "consumer_summary_ok": false,
+        "operator_summary_ok": false,
+        "evidence_digest_ok": false,
+        "intelligence_quality_ok": false,
+        "ok": false,
+        "error": "",
+        "benchmark_telemetry": {}
+      },
+      {
+        "repeat": 2,
+        "memory_mode": "off",
+        "suite": "smoke_pipeline",
+        "source_mode": "nvr_webhook",
+        "scenario_id": "smoke_backyard_person_139",
+        "scenario_family": "pipeline_smoke",
+        "case_id": "smoke_backyard_person_139",
+        "cohort": "benign",
+        "benchmark_kind": "action",
+        "expected_action": "suppress",
+        "expected_risk_level": "none",
+        "actual_action": "",
+        "risk_level": "none",
+        "visibility_policy": "hidden",
+        "notification_policy": "none",
+        "status_code": 404,
+        "latency_s": 0.0066,
+        "reasoning_degraded": false,
+        "fallback_agent_count": 0,
+        "context_ok": true,
+        "idempotency_ok": true,
+        "memory_present": false,
+        "case_fields_ok": false,
+        "consumer_summary_ok": false,
+        "operator_summary_ok": false,
+        "evidence_digest_ok": false,
+        "intelligence_quality_ok": false,
+        "ok": false,
+        "error": "",
+        "benchmark_telemetry": {}
+      },
+      {
+        "repeat": 2,
+        "memory_mode": "off",
+        "suite": "smoke_pipeline",
+        "source_mode": "nvr_webhook",
+        "scenario_id": "smoke_driveway_activity_632",
+        "scenario_family": "pipeline_smoke",
+        "case_id": "smoke_driveway_activity_632",
+        "cohort": "ops",
+        "benchmark_kind": "action",
+        "expected_action": "suppress",
+        "expected_risk_level": "none",
+        "actual_action": "",
+        "risk_level": "none",
+        "visibility_policy": "hidden",
+        "notification_policy": "none",
+        "status_code": 404,
+        "latency_s": 0.0052,
+        "reasoning_degraded": false,
+        "fallback_agent_count": 0,
+        "context_ok": true,
+        "idempotency_ok": true,
+        "memory_present": false,
+        "case_fields_ok": false,
+        "consumer_summary_ok": false,
+        "operator_summary_ok": false,
+        "evidence_digest_ok": false,
+        "intelligence_quality_ok": false,
+        "ok": false,
+        "error": "",
+        "benchmark_telemetry": {}
+      }
+    ],
+    "on": [
+      {
+        "repeat": 1,
+        "memory_mode": "on",
+        "suite": "public_surveillance",
+        "source_mode": "nvr_webhook",
+        "scenario_id": "public_wildlife_entry_alert_285",
+        "scenario_family": "wildlife_near_entry",
+        "case_id": "public_wildlife_entry_alert_285",
+        "cohort": "threat",
+        "benchmark_kind": "action",
+        "expected_action": "alert",
+        "expected_risk_level": "high",
+        "actual_action": "",
+        "risk_level": "none",
+        "visibility_policy": "hidden",
+        "notification_policy": "none",
+        "status_code": 404,
+        "latency_s": 0.0046,
+        "reasoning_degraded": false,
+        "fallback_agent_count": 0,
+        "context_ok": true,
+        "idempotency_ok": true,
+        "memory_present": false,
+        "case_fields_ok": false,
+        "consumer_summary_ok": false,
+        "operator_summary_ok": false,
+        "evidence_digest_ok": false,
+        "intelligence_quality_ok": false,
+        "ok": false,
+        "error": "",
+        "benchmark_telemetry": {}
+      },
+      {
+        "repeat": 1,
+        "memory_mode": "on",
+        "suite": "public_surveillance",
+        "source_mode": "nvr_webhook",
+        "scenario_id": "public_garage_approach_1000",
+        "scenario_family": "garage_activity",
+        "case_id": "public_garage_approach_1000",
+        "cohort": "ambiguous",
+        "benchmark_kind": "action",
+        "expected_action": "suppress",
+        "expected_risk_level": "none",
+        "actual_action": "",
+        "risk_level": "none",
+        "visibility_policy": "hidden",
+        "notification_policy": "none",
+        "status_code": 404,
+        "latency_s": 0.003,
+        "reasoning_degraded": false,
+        "fallback_agent_count": 0,
+        "context_ok": true,
+        "idempotency_ok": true,
+        "memory_present": false,
+        "case_fields_ok": false,
+        "consumer_summary_ok": false,
+        "operator_summary_ok": false,
+        "evidence_digest_ok": false,
+        "intelligence_quality_ok": false,
+        "ok": false,
+        "error": "",
+        "benchmark_telemetry": {}
+      },
+      {
+        "repeat": 1,
+        "memory_mode": "on",
+        "suite": "smoke_pipeline",
+        "source_mode": "nvr_webhook",
+        "scenario_id": "smoke_backyard_person_139",
+        "scenario_family": "pipeline_smoke",
+        "case_id": "smoke_backyard_person_139",
+        "cohort": "benign",
+        "benchmark_kind": "action",
+        "expected_action": "suppress",
+        "expected_risk_level": "none",
+        "actual_action": "",
+        "risk_level": "none",
+        "visibility_policy": "hidden",
+        "notification_policy": "none",
+        "status_code": 404,
+        "latency_s": 0.0034,
+        "reasoning_degraded": false,
+        "fallback_agent_count": 0,
+        "context_ok": true,
+        "idempotency_ok": true,
+        "memory_present": false,
+        "case_fields_ok": false,
+        "consumer_summary_ok": false,
+        "operator_summary_ok": false,
+        "evidence_digest_ok": false,
+        "intelligence_quality_ok": false,
+        "ok": false,
+        "error": "",
+        "benchmark_telemetry": {}
+      },
+      {
+        "repeat": 1,
+        "memory_mode": "on",
+        "suite": "smoke_pipeline",
+        "source_mode": "nvr_webhook",
+        "scenario_id": "smoke_driveway_activity_632",
+        "scenario_family": "pipeline_smoke",
+        "case_id": "smoke_driveway_activity_632",
+        "cohort": "ops",
+        "benchmark_kind": "action",
+        "expected_action": "suppress",
+        "expected_risk_level": "none",
+        "actual_action": "",
+        "risk_level": "none",
+        "visibility_policy": "hidden",
+        "notification_policy": "none",
+        "status_code": 404,
+        "latency_s": 0.0018,
+        "reasoning_degraded": false,
+        "fallback_agent_count": 0,
+        "context_ok": true,
+        "idempotency_ok": true,
+        "memory_present": false,
+        "case_fields_ok": false,
+        "consumer_summary_ok": false,
+        "operator_summary_ok": false,
+        "evidence_digest_ok": false,
+        "intelligence_quality_ok": false,
+        "ok": false,
+        "error": "",
+        "benchmark_telemetry": {}
+      },
+      {
+        "repeat": 2,
+        "memory_mode": "on",
+        "suite": "public_surveillance",
+        "source_mode": "nvr_webhook",
+        "scenario_id": "public_wildlife_entry_alert_285",
+        "scenario_family": "wildlife_near_entry",
+        "case_id": "public_wildlife_entry_alert_285",
+        "cohort": "threat",
+        "benchmark_kind": "action",
+        "expected_action": "alert",
+        "expected_risk_level": "high",
+        "actual_action": "",
+        "risk_level": "none",
+        "visibility_policy": "hidden",
+        "notification_policy": "none",
+        "status_code": 404,
+        "latency_s": 0.003,
+        "reasoning_degraded": false,
+        "fallback_agent_count": 0,
+        "context_ok": true,
+        "idempotency_ok": true,
+        "memory_present": false,
+        "case_fields_ok": false,
+        "consumer_summary_ok": false,
+        "operator_summary_ok": false,
+        "evidence_digest_ok": false,
+        "intelligence_quality_ok": false,
+        "ok": false,
+        "error": "",
+        "benchmark_telemetry": {}
+      },
+      {
+        "repeat": 2,
+        "memory_mode": "on",
+        "suite": "public_surveillance",
+        "source_mode": "nvr_webhook",
+        "scenario_id": "public_garage_approach_1000",
+        "scenario_family": "garage_activity",
+        "case_id": "public_garage_approach_1000",
+        "cohort": "ambiguous",
+        "benchmark_kind": "action",
+        "expected_action": "suppress",
+        "expected_risk_level": "none",
+        "actual_action": "",
+        "risk_level": "none",
+        "visibility_policy": "hidden",
+        "notification_policy": "none",
+        "status_code": 404,
+        "latency_s": 0.0031,
+        "reasoning_degraded": false,
+        "fallback_agent_count": 0,
+        "context_ok": true,
+        "idempotency_ok": true,
+        "memory_present": false,
+        "case_fields_ok": false,
+        "consumer_summary_ok": false,
+        "operator_summary_ok": false,
+        "evidence_digest_ok": false,
+        "intelligence_quality_ok": false,
+        "ok": false,
+        "error": "",
+        "benchmark_telemetry": {}
+      },
+      {
+        "repeat": 2,
+        "memory_mode": "on",
+        "suite": "smoke_pipeline",
+        "source_mode": "nvr_webhook",
+        "scenario_id": "smoke_backyard_person_139",
+        "scenario_family": "pipeline_smoke",
+        "case_id": "smoke_backyard_person_139",
+        "cohort": "benign",
+        "benchmark_kind": "action",
+        "expected_action": "suppress",
+        "expected_risk_level": "none",
+        "actual_action": "",
+        "risk_level": "none",
+        "visibility_policy": "hidden",
+        "notification_policy": "none",
+        "status_code": 404,
+        "latency_s": 0.0023,
+        "reasoning_degraded": false,
+        "fallback_agent_count": 0,
+        "context_ok": true,
+        "idempotency_ok": true,
+        "memory_present": false,
+        "case_fields_ok": false,
+        "consumer_summary_ok": false,
+        "operator_summary_ok": false,
+        "evidence_digest_ok": false,
+        "intelligence_quality_ok": false,
+        "ok": false,
+        "error": "",
+        "benchmark_telemetry": {}
+      },
+      {
+        "repeat": 2,
+        "memory_mode": "on",
+        "suite": "smoke_pipeline",
+        "source_mode": "nvr_webhook",
+        "scenario_id": "smoke_driveway_activity_632",
+        "scenario_family": "pipeline_smoke",
+        "case_id": "smoke_driveway_activity_632",
+        "cohort": "ops",
+        "benchmark_kind": "action",
+        "expected_action": "suppress",
+        "expected_risk_level": "none",
+        "actual_action": "",
+        "risk_level": "none",
+        "visibility_policy": "hidden",
+        "notification_policy": "none",
+        "status_code": 404,
+        "latency_s": 0.002,
+        "reasoning_degraded": false,
+        "fallback_agent_count": 0,
+        "context_ok": true,
+        "idempotency_ok": true,
+        "memory_present": false,
+        "case_fields_ok": false,
+        "consumer_summary_ok": false,
+        "operator_summary_ok": false,
+        "evidence_digest_ok": false,
+        "intelligence_quality_ok": false,
+        "ok": false,
+        "error": "",
+        "benchmark_telemetry": {}
+      }
+    ]
+  },
+  "gate_failures": [
+    "min_total_cases unmet: 4 < 12",
+    "min_benign_cases unmet: 1 < 3",
+    "min_threat_cases unmet: 1 < 2",
+    "min_ambiguous_cases unmet: 1 < 2",
+    "min_temporal_cases unmet: 0 < 1",
+    "min_context_cases unmet: 0 < 2",
+    "min_ops_cases unmet: 1 < 2",
+    "staged_real_home dataset missing: no primary pilot-gate cases",
+    "off: min_risk_level_accuracy unmet",
+    "off: min_medium_or_higher_recall unmet",
+    "off: min_show_policy_accuracy unmet",
+    "off: min_notification_policy_accuracy unmet",
+    "off: min_case_fields_completeness_rate unmet",
+    "off: min_consumer_summary_rate unmet",
+    "off: min_operator_summary_rate unmet",
+    "off: min_evidence_digest_rate unmet",
+    "off: min_intelligence_quality_rate unmet",
+    "off: min_entry_zone_threat_recall unmet",
+    "off: min_tamper_recall unmet",
+    "off: min_action_accuracy unmet",
+    "off: min_alert_recall unmet",
+    "off: min_context_propagation_rate unmet",
+    "off: min_idempotency_correctness_rate unmet",
+    "on: min_risk_level_accuracy unmet",
+    "on: min_medium_or_higher_recall unmet",
+    "on: min_show_policy_accuracy unmet",
+    "on: min_notification_policy_accuracy unmet",
+    "on: min_case_fields_completeness_rate unmet",
+    "on: min_consumer_summary_rate unmet",
+    "on: min_operator_summary_rate unmet",
+    "on: min_evidence_digest_rate unmet",
+    "on: min_intelligence_quality_rate unmet",
+    "on: min_entry_zone_threat_recall unmet",
+    "on: min_tamper_recall unmet",
+    "on: min_action_accuracy unmet",
+    "on: min_alert_recall unmet",
+    "on: min_context_propagation_rate unmet",
+    "on: min_idempotency_correctness_rate unmet"
+  ]
+}

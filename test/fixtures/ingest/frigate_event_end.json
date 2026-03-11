@@ -1,0 +1,16 @@
+{
+  "type": "end",
+  "before": {
+    "id": "1680791459.255384-abcdef",
+    "camera": "front_door",
+    "current_zones": []
+  },
+  "after": {
+    "id": "1680791459.255384-abcdef",
+    "camera": "front_door",
+    "label": "person",
+    "start_time": 1680791459.255384,
+    "current_zones": ["porch"],
+    "entered_zones": ["porch"]
+  }
+}

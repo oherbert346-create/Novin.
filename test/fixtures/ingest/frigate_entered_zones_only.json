@@ -1,0 +1,10 @@
+{
+  "type": "update",
+  "after": {
+    "id": "1680791500.123456-xyz789",
+    "camera": "driveway",
+    "label": "vehicle",
+    "start_time": 1680791500.123456,
+    "entered_zones": ["driveway"]
+  }
+}

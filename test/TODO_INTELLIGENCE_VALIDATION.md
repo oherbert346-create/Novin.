@@ -1,0 +1,8 @@
+- [x] Create test fixtures for false alarms, real events, and edge cases
+- [x] Implement test logic in `test/test_intelligence_scenarios.py`
+- [x] Run intelligence scenario tests
+- [x] Fix sequence detection failure in test
+- [x] Fix SQLAlchemy `NoForeignKeysError` in `test/test_intelligence_scenarios.py`
+- [x] Implement `test/test_reasoning_agents.py`
+- [ ] Implement `test/test_temporal_correlation.py`
+- [ ] Verify test results and iterate on pipeline

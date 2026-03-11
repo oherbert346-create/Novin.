@@ -1,0 +1,65 @@
+{
+  "policy_version": "launch-accuracy-v1",
+  "prompt_version": "launch-accuracy-v1-qwen1",
+  "latency_budget_ms": {
+    "pipeline_p95": 3000,
+    "vision_p95": 1200,
+    "reasoning_p95": 1200
+  },
+  "scenarios": [
+    {
+      "scenario_id": "routine_arrival_daytime",
+      "zone": "front_door",
+      "time_context": "2026-03-08T15:00:00",
+      "expected_action": "suppress",
+      "expected_risk_level": "low",
+      "expected_uncertainty": "low",
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "package_delivery",
+      "zone": "porch",
+      "time_context": "2026-03-08T14:00:00",
+      "expected_action": "suppress",
+      "expected_risk_level": "low",
+      "expected_uncertainty": "low",
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "pet_motion",
+      "zone": "backyard",
+      "time_context": "2026-03-08T13:00:00",
+      "expected_action": "suppress",
+      "expected_risk_level": "low",
+      "expected_uncertainty": "low",
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "after_hours_unknown_person",
+      "zone": "front_door",
+      "time_context": "2026-03-08T23:45:00",
+      "expected_action": "alert",
+      "expected_risk_level": "high",
+      "expected_uncertainty": "low",
+      "false_positive_critical": false
+    },
+    {
+      "scenario_id": "tamper_signal",
+      "zone": "garage",
+      "time_context": "2026-03-08T22:10:00",
+      "expected_action": "alert",
+      "expected_risk_level": "high",
+      "expected_uncertainty": "low",
+      "false_positive_critical": false
+    },
+    {
+      "scenario_id": "poor_visibility_person",
+      "zone": "driveway",
+      "time_context": "2026-03-08T20:15:00",
+      "expected_action": "suppress",
+      "expected_risk_level": "low",
+      "expected_uncertainty": "high",
+      "false_positive_critical": false
+    }
+  ]
+}

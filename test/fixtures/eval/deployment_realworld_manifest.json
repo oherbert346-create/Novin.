@@ -1,0 +1,39 @@
+[
+  {
+    "case_id": "false_alarm_pet_backyard",
+    "image_path": "/Users/Ollie/novin-home/test/fixtures/images/coco_000000000139.jpg",
+    "cam_id": "backyard_cam_1",
+    "home_id": "home",
+    "zone": "backyard",
+    "expected_action": "suppress",
+    "expected_categories": ["pet", "animal", "clear"],
+    "context": "Daytime backyard movement expected to be benign."
+  },
+  {
+    "case_id": "front_door_delivery_like",
+    "image_url": "http://images.cocodataset.org/val2017/000000000285.jpg",
+    "cam_id": "front_door_cam_1",
+    "home_id": "home",
+    "zone": "front_door",
+    "expected_categories": ["person", "package", "motion"],
+    "context": "Typical front door activity where explainability matters for suppress-vs-alert."
+  },
+  {
+    "case_id": "driveway_vehicle_activity",
+    "image_path": "/Users/Ollie/novin-home/test/fixtures/images/coco_000000000632.jpg",
+    "cam_id": "driveway_cam_1",
+    "home_id": "home",
+    "zone": "driveway",
+    "expected_categories": ["vehicle", "motion"],
+    "context": "Driveway activity used to validate category assignment and rationale quality."
+  },
+  {
+    "case_id": "porch_person_motion",
+    "image_path": "/Users/Ollie/novin-home/test/fixtures/images/coco_000000000724.jpg",
+    "cam_id": "porch_cam_1",
+    "home_id": "home",
+    "zone": "porch",
+    "expected_categories": ["person", "motion"],
+    "context": "Porch person-motion test to inspect multi-agent disagreement and final arbitration."
+  }
+]

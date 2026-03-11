@@ -1,0 +1,51 @@
+[
+  {
+    "source": "coco_000000000139",
+    "url": "http://images.cocodataset.org/val2017/000000000139.jpg",
+    "path": "/Users/Ollie/novin-home/test/fixtures/images/coco_000000000139.jpg",
+    "size": 161811,
+    "b64_preview": "/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAEBAQEBAQEBAQEBAQECAgMCAgICAgQDAwIDBQQFBQUEBAQF..."
+  },
+  {
+    "source": "coco_000000000285",
+    "url": "http://images.cocodataset.org/val2017/000000000285.jpg",
+    "path": "/Users/Ollie/novin-home/test/fixtures/images/coco_000000000285.jpg",
+    "size": 335861,
+    "b64_preview": "/9j/4AAQSkZJRgABAQEASABIAAD/4gxUSUNDX1BST0ZJTEUAAQEAAAxEVUNDTQJAAABtbnRyUkdCIFhZ..."
+  },
+  {
+    "source": "coco_000000000632",
+    "url": "http://images.cocodataset.org/val2017/000000000632.jpg",
+    "path": "/Users/Ollie/novin-home/test/fixtures/images/coco_000000000632.jpg",
+    "size": 155667,
+    "b64_preview": "/9j/4AAQSkZJRgABAQEBLAEsAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsN..."
+  },
+  {
+    "source": "coco_000000000724",
+    "url": "http://images.cocodataset.org/val2017/000000000724.jpg",
+    "path": "/Users/Ollie/novin-home/test/fixtures/images/coco_000000000724.jpg",
+    "size": 130107,
+    "b64_preview": "/9j/4AAQSkZJRgABAQEASABIAAD/4gxYSUNDX1BST0ZJTEUAAQEAAAxITGlubwIQAABtbnRyUkdCIFhZ..."
+  },
+  {
+    "source": "coco_000000001000",
+    "url": "http://images.cocodataset.org/val2017/000000001000.jpg",
+    "path": "/Users/Ollie/novin-home/test/fixtures/images/coco_000000001000.jpg",
+    "size": 321136,
+    "b64_preview": "/9j/4AAQSkZJRgABAQEASABIAAD/2wBDAAEBAQEBAQEBAQEBAQECAgMCAgICAgQDAwIDBQQFBQUEBAQF..."
+  },
+  {
+    "source": "picsum_0",
+    "url": "https://picsum.photos/800/600",
+    "path": "/Users/Ollie/novin-home/test/fixtures/images/picsum_0.jpg",
+    "size": 34247,
+    "b64_preview": "/9j/4QDeRXhpZgAASUkqAAgAAAAGABIBAwABAAAAAQAAABoBBQABAAAAVgAAABsBBQABAAAAXgAAACgB..."
+  },
+  {
+    "source": "picsum_1",
+    "url": "https://picsum.photos/640/480",
+    "path": "/Users/Ollie/novin-home/test/fixtures/images/picsum_1.jpg",
+    "size": 63270,
+    "b64_preview": "/9j/4QDeRXhpZgAASUkqAAgAAAAGABIBAwABAAAAAQAAABoBBQABAAAAVgAAABsBBQABAAAAXgAAACgB..."
+  }
+]

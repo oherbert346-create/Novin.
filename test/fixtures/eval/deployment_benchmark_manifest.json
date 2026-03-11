@@ -1,0 +1,150 @@
+[
+  {
+    "case_id": "benign_backyard_day_person_139",
+    "image_path": "/Users/Ollie/novin-home/test/fixtures/images/coco_000000000139.jpg",
+    "expected_action": "suppress",
+    "cohort": "benign",
+    "cam_id": "bench_cam_b1",
+    "home_id": "home",
+    "zone": "backyard"
+  },
+  {
+    "case_id": "benign_driveway_activity_632",
+    "image_path": "/Users/Ollie/novin-home/test/fixtures/images/coco_000000000632.jpg",
+    "expected_action": "suppress",
+    "cohort": "benign",
+    "cam_id": "bench_cam_b2",
+    "home_id": "home",
+    "zone": "driveway"
+  },
+  {
+    "case_id": "benign_porch_motion_724",
+    "image_path": "/Users/Ollie/novin-home/test/fixtures/images/coco_000000000724.jpg",
+    "expected_action": "suppress",
+    "cohort": "benign",
+    "cam_id": "bench_cam_b3",
+    "home_id": "home",
+    "zone": "porch"
+  },
+  {
+    "case_id": "threat_frontdoor_wildlife_285",
+    "image_url": "http://images.cocodataset.org/val2017/000000000285.jpg",
+    "expected_action": "alert",
+    "cohort": "threat",
+    "cam_id": "bench_cam_t1",
+    "home_id": "home",
+    "zone": "front_door"
+  },
+  {
+    "case_id": "threat_entryway_risk_1000",
+    "image_path": "/Users/Ollie/novin-home/test/fixtures/images/coco_000000001000.jpg",
+    "expected_action": "suppress",
+    "cohort": "ambiguous",
+    "cam_id": "bench_cam_t2",
+    "home_id": "home",
+    "zone": "garage"
+  },
+  {
+    "case_id": "threat_direct_frame_wildlife_285",
+    "image_path": "/Users/Ollie/novin-home/test/fixtures/images/coco_000000000285.jpg",
+    "expected_action": "alert",
+    "cohort": "threat",
+    "cam_id": "bench_cam_t3",
+    "home_id": "home",
+    "zone": "front_door",
+    "mode": "direct_frame",
+    "direct_label": "Threat Direct Frame"
+  },
+  {
+    "case_id": "ambiguous_frontyard_scene_picsum1",
+    "image_path": "/Users/Ollie/novin-home/test/fixtures/images/picsum_1.jpg",
+    "expected_action": "suppress",
+    "cohort": "ambiguous",
+    "cam_id": "bench_cam_a1",
+    "home_id": "home",
+    "zone": "front_yard"
+  },
+  {
+    "case_id": "ambiguous_driveway_person_139",
+    "image_path": "/Users/Ollie/novin-home/test/fixtures/images/coco_000000000139.jpg",
+    "expected_action": "suppress",
+    "cohort": "ambiguous",
+    "cam_id": "bench_cam_a2",
+    "home_id": "home",
+    "zone": "side_driveway"
+  },
+  {
+    "case_id": "temporal_memory_seed",
+    "image_path": "/Users/Ollie/novin-home/test/fixtures/images/coco_000000000724.jpg",
+    "expected_action": "suppress",
+    "cohort": "temporal",
+    "cam_id": "bench_cam_temp",
+    "home_id": "home",
+    "zone": "front_door",
+    "source": "temporal_nvr",
+    "source_event_id": "temporal-seed-001",
+    "metadata": {"sequence": "seed", "preferences": {"delivery_window": "9-17"}},
+    "expected_event_context": {
+      "source": "temporal_nvr",
+      "cam_id": "bench_cam_temp",
+      "home_id": "home",
+      "zone": "front_door"
+    }
+  },
+  {
+    "case_id": "context_webhook_event",
+    "image_path": "/Users/Ollie/novin-home/test/fixtures/images/coco_000000000724.jpg",
+    "expected_action": "suppress",
+    "cohort": "context",
+    "cam_id": "bench_cam_ctx1",
+    "home_id": "home-west",
+    "zone": "backyard",
+    "source": "custom_nvr",
+    "source_event_id": "ctx-evt-001",
+    "benchmark_kind": "context",
+    "metadata": {"origin": "benchmark", "preferences": {"pet_name": "Milo"}},
+    "expected_event_context": {
+      "source": "custom_nvr",
+      "source_event_id": "ctx-evt-001",
+      "cam_id": "bench_cam_ctx1",
+      "home_id": "home-west",
+      "zone": "backyard"
+    },
+    "expect_memory_items": true
+  },
+  {
+    "case_id": "context_duplicate_webhook",
+    "image_path": "/Users/Ollie/novin-home/test/fixtures/images/coco_000000000724.jpg",
+    "expected_action": "suppress",
+    "cohort": "context",
+    "cam_id": "bench_cam_ctx2",
+    "home_id": "home",
+    "zone": "front_door",
+    "source": "custom_nvr",
+    "source_event_id": "ctx-dup-001",
+    "benchmark_kind": "idempotency",
+    "expect_duplicate_status": true,
+    "expected_status": "duplicate",
+    "repeated_request": true
+  },
+  {
+    "case_id": "ops_direct_frame_path",
+    "image_path": "/Users/Ollie/novin-home/test/fixtures/images/coco_000000000632.jpg",
+    "expected_action": "suppress",
+    "cohort": "ops",
+    "cam_id": "bench_cam_ops1",
+    "home_id": "home",
+    "zone": "driveway",
+    "mode": "direct_frame",
+    "direct_label": "Ops Direct Frame"
+  },
+  {
+    "case_id": "ops_canonical_path",
+    "image_path": "/Users/Ollie/novin-home/test/fixtures/images/picsum_0.jpg",
+    "expected_action": "suppress",
+    "cohort": "ops",
+    "cam_id": "bench_cam_ops2",
+    "home_id": "home",
+    "zone": "yard"
+  }
+]

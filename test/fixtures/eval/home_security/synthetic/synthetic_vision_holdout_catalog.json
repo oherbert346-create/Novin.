@@ -1,0 +1,728 @@
+{
+  "schema_version": "novin_home_synthetic_scene_authoring_v2",
+  "policy_version": "launch-accuracy-v1",
+  "prompt_version": "launch-accuracy-v1-qwen1",
+  "notes": "Held-out synthetic scenes for post-tuning generalization checks. These cases were added after the initial Qwen prompt tuning pass.",
+  "scenarios": [
+    {
+      "scenario_id": "backpack_front_door_afternoon_holdout",
+      "scenario_family": "routine_arrival",
+      "cohort": "benign",
+      "zone": "front_door",
+      "time_context": "2026-03-09T16:15:00",
+      "scene_brief": "A person walks to the front door in the afternoon carrying a backpack.",
+      "camera_view": "Front-door camera with clear daylight and the porch steps fully visible.",
+      "scene_truth": {
+        "actual_outcome": "routine_home_arrival",
+        "authorized_presence": true,
+        "intent": "enter_home",
+        "actor_role": "occupant",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A person approaches the front door at a normal pace with a backpack over one shoulder. No dwell or contact with the lock is visible.",
+        "categories": ["person"],
+        "visible_objects": ["backpack"],
+        "risk_cues": ["entry_approach"],
+        "uncertainty": 0.1,
+        "confidence": 0.93,
+        "known_unknowns": ["identity_of_person", "whether_the_person_lives_here"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["daylight", "not_after_hours"],
+        "history_context": ["similar afternoon returns are common at this entry"],
+        "memory_hints": ["routine arrival patterns may exist at this camera"]
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "approach-only arrival with routine-compatible context"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "umbrella_porch_rain_evening_holdout",
+      "scenario_family": "routine_arrival",
+      "cohort": "benign",
+      "zone": "porch",
+      "time_context": "2026-03-09T18:22:00",
+      "scene_brief": "A person walks up the porch steps in light rain holding an umbrella.",
+      "camera_view": "Porch camera with rain streaks visible but the threshold still clear.",
+      "scene_truth": {
+        "actual_outcome": "routine_home_arrival",
+        "authorized_presence": true,
+        "intent": "reach_entry",
+        "actor_role": "occupant",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A person approaches the porch with an umbrella and stops only briefly to move toward the covered threshold. No probing or tamper action is visible.",
+        "categories": ["person"],
+        "visible_objects": ["umbrella"],
+        "risk_cues": ["entry_approach"],
+        "uncertainty": 0.17,
+        "confidence": 0.89,
+        "known_unknowns": ["identity_of_person"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["light_rain", "evening", "not_after_hours"],
+        "history_context": ["weather-related porch arrivals happen regularly"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "weather-related entry approach without threat cues"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "laundry_basket_back_door_day_holdout",
+      "scenario_family": "routine_outdoor_task",
+      "cohort": "benign",
+      "zone": "back_door",
+      "time_context": "2026-03-09T13:40:00",
+      "scene_brief": "A person carries a laundry basket toward the back door during the day.",
+      "camera_view": "Back-door camera covering the stoop and short garden path in daylight.",
+      "scene_truth": {
+        "actual_outcome": "household_chore",
+        "authorized_presence": true,
+        "intent": "move_items_between_rooms",
+        "actor_role": "occupant",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A person walks toward the back door carrying a laundry basket with both hands. Motion is direct and unhurried, with no contact at the lock.",
+        "categories": ["person"],
+        "visible_objects": ["laundry_basket"],
+        "risk_cues": ["entry_approach"],
+        "uncertainty": 0.12,
+        "confidence": 0.91,
+        "known_unknowns": ["identity_of_person"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["daylight", "not_after_hours"],
+        "history_context": ["back-door household chore traffic is routine at this home"],
+        "memory_hints": ["daytime chore patterns may exist for this property"]
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "household task with ordinary carried item and routine-compatible context"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "grocery_tote_garage_evening_holdout",
+      "scenario_family": "routine_arrival",
+      "cohort": "benign",
+      "zone": "garage",
+      "time_context": "2026-03-09T18:05:00",
+      "scene_brief": "A person walks toward the garage carrying two grocery totes in the early evening.",
+      "camera_view": "Garage exterior camera with driveway apron and side entry visible.",
+      "scene_truth": {
+        "actual_outcome": "routine_home_arrival",
+        "authorized_presence": true,
+        "intent": "enter_garage",
+        "actor_role": "occupant",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A person walks toward the garage with two tote bags and no visible tamper behavior. The motion is direct and steady.",
+        "categories": ["person"],
+        "visible_objects": ["grocery_tote", "grocery_tote"],
+        "risk_cues": ["entry_approach"],
+        "uncertainty": 0.13,
+        "confidence": 0.9,
+        "known_unknowns": ["identity_of_person", "whether_the_person_is_authorized"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["early_evening", "not_after_hours"],
+        "history_context": ["similar garage returns with carried items happen often"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "approach-only garage return with ordinary items"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "takeout_side_door_day_holdout",
+      "scenario_family": "delivery",
+      "cohort": "benign",
+      "zone": "back_door",
+      "time_context": "2026-03-09T12:28:00",
+      "scene_brief": "A person approaches the side door carrying a takeout bag at midday.",
+      "camera_view": "Side-door camera facing a short walkway and the back-door threshold.",
+      "scene_truth": {
+        "actual_outcome": "delivery_dropoff",
+        "authorized_presence": true,
+        "intent": "deliver_food",
+        "actor_role": "courier",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A person carrying a small food bag walks to the side door and remains in motion. No tamper behavior or repeated passes are visible.",
+        "categories": ["person", "package"],
+        "visible_objects": ["food_bag"],
+        "risk_cues": ["entry_approach"],
+        "uncertainty": 0.12,
+        "confidence": 0.92,
+        "known_unknowns": ["identity_of_person", "whether_the_delivery_is_expected"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["midday", "not_after_hours"],
+        "history_context": ["deliveries to the side door are occasional but not suspicious"],
+        "memory_hints": ["food deliveries happen for this household"]
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "delivery-like approach without probing or removal"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "school_project_box_front_door_dusk_holdout",
+      "scenario_family": "routine_arrival",
+      "cohort": "benign",
+      "zone": "front_door",
+      "time_context": "2026-03-09T19:03:00",
+      "scene_brief": "A person approaches the front door carrying a poster tube and a small project box at dusk.",
+      "camera_view": "Front-door camera with porch light on and the path fully visible.",
+      "scene_truth": {
+        "actual_outcome": "routine_home_arrival",
+        "authorized_presence": true,
+        "intent": "enter_home",
+        "actor_role": "occupant",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A person walks toward the front door carrying a tube and a box. The path is direct, with no visible probing, removal, or lock contact.",
+        "categories": ["person", "package"],
+        "visible_objects": ["poster_tube", "small_box"],
+        "risk_cues": ["entry_approach"],
+        "uncertainty": 0.15,
+        "confidence": 0.88,
+        "known_unknowns": ["identity_of_person"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["dusk", "not_after_hours"],
+        "history_context": ["no suspicious sequence precedes the arrival"],
+        "memory_hints": ["routine arrivals often include carried items"]
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "ordinary carried items and direct arrival without threat cues"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "opossum_porch_threshold_night_holdout",
+      "scenario_family": "wildlife",
+      "cohort": "ambiguous",
+      "zone": "porch",
+      "time_context": "2026-03-09T01:12:00",
+      "scene_brief": "A large opossum climbs onto the porch threshold near the front door late at night.",
+      "camera_view": "Porch infrared camera with the doorway, mat, and railing visible.",
+      "scene_truth": {
+        "actual_outcome": "wildlife_near_entry",
+        "authorized_presence": false,
+        "intent": "animal_foraging",
+        "actor_role": "opossum",
+        "safety_relevance": "warning"
+      },
+      "simulated_vision": {
+        "description": "A large animal climbs onto the porch threshold close to the front door at night. No person is visible.",
+        "categories": ["pet"],
+        "visible_objects": ["animal"],
+        "risk_cues": ["wildlife_near_entry"],
+        "uncertainty": 0.19,
+        "confidence": 0.84,
+        "known_unknowns": ["exact_species_of_animal"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["night", "entry_zone"],
+        "history_context": ["wildlife this close to the front threshold is uncommon"],
+        "memory_hints": ["wildlife tolerance may vary by household"]
+      },
+      "expected_judgement": {
+        "action": "alert",
+        "risk_level": "medium",
+        "uncertainty_state": "low",
+        "explanation_focus": "large wildlife at the threshold is a notifiable entry hazard"
+      },
+      "expected_routing": {
+        "visibility_policy": "prominent",
+        "notification_policy": "review",
+        "storage_policy": "full",
+        "delivery_targets": ["homeowner_app", "operator_queue", "timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "not_eligible"
+      },
+      "false_positive_critical": false
+    },
+    {
+      "scenario_id": "fox_back_door_step_night_holdout",
+      "scenario_family": "wildlife",
+      "cohort": "ambiguous",
+      "zone": "back_door",
+      "time_context": "2026-03-09T02:06:00",
+      "scene_brief": "A fox stands on the back-door step near the threshold in the middle of the night.",
+      "camera_view": "Back-door infrared camera with the step and door frame clearly visible.",
+      "scene_truth": {
+        "actual_outcome": "wildlife_near_entry",
+        "authorized_presence": false,
+        "intent": "animal_foraging",
+        "actor_role": "fox",
+        "safety_relevance": "warning"
+      },
+      "simulated_vision": {
+        "description": "A fox-sized animal stands directly on the back-door step at night. The animal is close to the threshold and no people are visible.",
+        "categories": ["pet"],
+        "visible_objects": ["animal"],
+        "risk_cues": ["wildlife_near_entry"],
+        "uncertainty": 0.2,
+        "confidence": 0.83,
+        "known_unknowns": ["exact_species_of_animal"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["night", "entry_zone"],
+        "history_context": ["nighttime wildlife at the back step is uncommon"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "alert",
+        "risk_level": "medium",
+        "uncertainty_state": "low",
+        "explanation_focus": "wildlife directly on an entry step should trigger review"
+      },
+      "expected_routing": {
+        "visibility_policy": "prominent",
+        "notification_policy": "review",
+        "storage_policy": "full",
+        "delivery_targets": ["homeowner_app", "operator_queue", "timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "not_eligible"
+      },
+      "false_positive_critical": false
+    },
+    {
+      "scenario_id": "deer_driveway_edge_dawn_holdout",
+      "scenario_family": "wildlife",
+      "cohort": "ambiguous",
+      "zone": "driveway",
+      "time_context": "2026-03-09T05:41:00",
+      "scene_brief": "A deer crosses the far edge of the driveway near dawn, away from the house entry.",
+      "camera_view": "Driveway camera with the curb line and front walk visible in low dawn light.",
+      "scene_truth": {
+        "actual_outcome": "wildlife_passing_by",
+        "authorized_presence": false,
+        "intent": "animal_passing",
+        "actor_role": "deer",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A large animal crosses the outer edge of the driveway and remains away from the porch and garage threshold.",
+        "categories": ["pet"],
+        "visible_objects": ["animal"],
+        "risk_cues": [],
+        "uncertainty": 0.24,
+        "confidence": 0.8,
+        "known_unknowns": ["exact_species_of_animal"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["dawn", "not_at_entry_threshold"],
+        "history_context": ["wildlife occasionally crosses the outer driveway edge"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "wildlife present but not at an entry threshold"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "raccoon_fence_line_backyard_night_holdout",
+      "scenario_family": "wildlife",
+      "cohort": "ambiguous",
+      "zone": "backyard",
+      "time_context": "2026-03-09T00:44:00",
+      "scene_brief": "A raccoon moves along the backyard fence line at night, away from doors and steps.",
+      "camera_view": "Backyard infrared camera with fence line and patio visible.",
+      "scene_truth": {
+        "actual_outcome": "wildlife_passing_by",
+        "authorized_presence": false,
+        "intent": "animal_passing",
+        "actor_role": "raccoon",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A small animal moves along the fence line at the edge of the backyard. It does not approach the patio door or porch threshold.",
+        "categories": ["pet"],
+        "visible_objects": ["animal"],
+        "risk_cues": [],
+        "uncertainty": 0.22,
+        "confidence": 0.82,
+        "known_unknowns": ["exact_species_of_animal"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["night", "not_at_entry_threshold"],
+        "history_context": ["backyard wildlife occasionally appears along the fence line"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "wildlife away from the threshold should remain timeline-only"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "ladder_wreath_front_door_afternoon_holdout",
+      "scenario_family": "maintenance",
+      "cohort": "benign",
+      "zone": "front_door",
+      "time_context": "2026-03-09T15:10:00",
+      "scene_brief": "A person stands on a small ladder near the front door hanging a wreath in the afternoon.",
+      "camera_view": "Front-door camera with the stoop and the full doorway visible.",
+      "scene_truth": {
+        "actual_outcome": "household_maintenance",
+        "authorized_presence": true,
+        "intent": "decorate_entry",
+        "actor_role": "occupant",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A person stands on a ladder near the front door holding a wreath. There is no visible tool at the lock and no concealment.",
+        "categories": ["person"],
+        "visible_objects": ["ladder", "wreath"],
+        "risk_cues": ["entry_approach"],
+        "uncertainty": 0.18,
+        "confidence": 0.86,
+        "known_unknowns": ["identity_of_person"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["daylight", "not_after_hours"],
+        "history_context": ["seasonal decorating has occurred before at this home"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "unusual but clearly household maintenance near entry"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "moving_boxes_open_garage_day_holdout",
+      "scenario_family": "routine_outdoor_task",
+      "cohort": "benign",
+      "zone": "garage",
+      "time_context": "2026-03-09T11:18:00",
+      "scene_brief": "Two people carry storage boxes into an open garage during the day.",
+      "camera_view": "Garage camera with the driveway and open garage fully visible.",
+      "scene_truth": {
+        "actual_outcome": "household_move_activity",
+        "authorized_presence": true,
+        "intent": "move_household_items",
+        "actor_role": "occupants",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "Two people carry boxes into an open garage in daylight. Motion is direct, and there is no visible tamper or removal from a secured area.",
+        "categories": ["person", "package"],
+        "visible_objects": ["storage_box", "storage_box"],
+        "risk_cues": ["entry_approach"],
+        "uncertainty": 0.16,
+        "confidence": 0.87,
+        "known_unknowns": ["identity_of_people"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["daylight", "open_garage"],
+        "history_context": ["garage loading activity sometimes happens on weekends"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "unfamiliar but non-hostile household move activity"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "hose_washing_porch_evening_holdout",
+      "scenario_family": "routine_outdoor_task",
+      "cohort": "benign",
+      "zone": "porch",
+      "time_context": "2026-03-09T18:47:00",
+      "scene_brief": "A person rinses the porch floor with a hose and bucket in the early evening.",
+      "camera_view": "Porch camera with the doorway, mat, and steps visible in porch light.",
+      "scene_truth": {
+        "actual_outcome": "household_cleanup",
+        "authorized_presence": true,
+        "intent": "clean_porch",
+        "actor_role": "occupant",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A person stands near the porch holding a hose and bucket while spraying the floor area. No tamper contact with the lock or window is visible.",
+        "categories": ["person"],
+        "visible_objects": ["hose", "bucket"],
+        "risk_cues": ["entry_approach"],
+        "uncertainty": 0.19,
+        "confidence": 0.85,
+        "known_unknowns": ["identity_of_person"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["early_evening", "not_after_hours"],
+        "history_context": ["no suspicious sequence precedes the activity"],
+        "memory_hints": ["occasional outdoor cleanup may happen near entry"]
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "household cleanup near entry without threat behavior"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "window_washing_side_path_morning_holdout",
+      "scenario_family": "maintenance",
+      "cohort": "benign",
+      "zone": "back_door",
+      "time_context": "2026-03-09T09:24:00",
+      "scene_brief": "A person stands near the side path using a squeegee to wash the back-door window in the morning.",
+      "camera_view": "Side-path camera with the back-door window and short path visible.",
+      "scene_truth": {
+        "actual_outcome": "household_maintenance",
+        "authorized_presence": true,
+        "intent": "wash_window",
+        "actor_role": "occupant",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A person stands near the back-door window holding a squeegee and spray bottle. Contact is with the glass surface only and no tamper cue is visible.",
+        "categories": ["person"],
+        "visible_objects": ["squeegee", "spray_bottle"],
+        "risk_cues": ["entry_approach"],
+        "uncertainty": 0.17,
+        "confidence": 0.86,
+        "known_unknowns": ["identity_of_person"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["morning", "daylight"],
+        "history_context": ["routine maintenance can happen near this entry"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "maintenance task near entry without probing or concealment"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "chair_carry_into_garage_day_holdout",
+      "scenario_family": "routine_outdoor_task",
+      "cohort": "benign",
+      "zone": "garage",
+      "time_context": "2026-03-09T14:32:00",
+      "scene_brief": "A person carries a dining chair into the garage during the day.",
+      "camera_view": "Garage exterior camera with driveway, side wall, and garage opening in full view.",
+      "scene_truth": {
+        "actual_outcome": "household_item_move",
+        "authorized_presence": true,
+        "intent": "store_item",
+        "actor_role": "occupant",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A person carries a chair toward the open garage at a normal pace. The object is visible and there is no probing or concealment behavior.",
+        "categories": ["person"],
+        "visible_objects": ["chair"],
+        "risk_cues": ["entry_approach"],
+        "uncertainty": 0.14,
+        "confidence": 0.89,
+        "known_unknowns": ["identity_of_person"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["daylight", "open_garage"],
+        "history_context": ["item-moving activity happens occasionally in daylight"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "unfamiliar but ordinary item-moving behavior"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    }
+  ]
+}

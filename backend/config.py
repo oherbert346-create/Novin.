@@ -1,50 +1,86 @@
 from __future__ import annotations
 
 from typing import Literal, Optional
-from pydantic_settings import BaseSettings
 from pydantic import Field
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
+
     # Groq
-    groq_api_key: str = Field(..., env="GROQ_API_KEY")
-    groq_vision_model: str = Field("meta-llama/llama-4-scout-17b-16e-instruct", env="GROQ_VISION_MODEL")
-    groq_reasoning_model: str = Field("meta-llama/llama-4-maverick-17b-128e-instruct", env="GROQ_REASONING_MODEL")
+    groq_api_key: Optional[str] = Field(None)
+    groq_vision_model: str = Field("meta-llama/llama-4-scout-17b-16e-instruct")
+    groq_reasoning_model: str = Field("qwen/qwen3-32b")
+    groq_reasoning_max_tokens: int = Field(600)
+    groq_enable_thinking: bool = Field(False)
+
+    # Vision provider
+    vision_provider: Literal["groq", "together", "siliconflow"] = Field("siliconflow")
 
     # Reasoning provider
-    reasoning_provider: Literal["groq", "cerebras"] = Field("groq", env="REASONING_PROVIDER")
-    cerebras_api_key: Optional[str] = Field(None, env="CEREBRAS_API_KEY")
-    cerebras_base_url: str = Field("https://api.cerebras.ai/v1", env="CEREBRAS_BASE_URL")
-    cerebras_reasoning_model: str = Field("llama-3.3-70b", env="CEREBRAS_REASONING_MODEL")
+    reasoning_provider: Literal["groq", "cerebras", "together", "siliconflow"] = Field("groq")
+    cerebras_api_key: Optional[str] = Field(None)
+    cerebras_base_url: str = Field("https://api.cerebras.ai/v1")
+    cerebras_reasoning_model: str = Field("gpt-oss-120b")
+    cerebras_max_completion_tokens: int = Field(1000)
+    together_api_key: Optional[str] = Field(None)
+    together_base_url: str = Field("https://api.together.xyz/v1")
+    together_vision_model: str = Field("Qwen/Qwen3-VL-8B-Instruct")
+    together_reasoning_model: str = Field("MiniMaxAI/MiniMax-M2.5")
+    together_reasoning_max_tokens: int = Field(1000)
+    siliconflow_api_key: Optional[str] = Field(None)
+    siliconflow_base_url: str = Field("https://api.siliconflow.com/v1")
+    siliconflow_vision_model: str = Field("Qwen/Qwen2.5-VL-7B-Instruct")
+    siliconflow_reasoning_model: str = Field("deepseek-ai/DeepSeek-V3.2")
 
     # Database
-    db_url: str = Field("sqlite+aiosqlite:///./novin-home.db", env="DB_URL")
+    db_url: str = Field("sqlite+aiosqlite:///./novin-home.db")
 
     # Frame processing
-    frame_jpeg_quality: int = Field(75, env="FRAME_JPEG_QUALITY")
-    frame_max_width: int = Field(1280, env="FRAME_MAX_WIDTH")
+    frame_jpeg_quality: int = Field(75)
+    frame_max_width: int = Field(1280)
 
     # Reasoning
-    reasoning_timeout_ms: int = Field(400, env="REASONING_TIMEOUT_MS")
+    reasoning_timeout_ms: int = Field(1200)
+    alert_threshold: float = Field(0.70)
+    min_severity_to_alert: str = Field("low")
+    reasoning_temperature: float = Field(0.0)
+    reasoning_top_p: float = Field(0.1)
+    siliconflow_reasoning_max_tokens: int = Field(1000)
+    siliconflow_enable_thinking: bool = Field(True)
+    siliconflow_thinking_budget: int = Field(1024)
+    release_latency_budget_ms: int = Field(3000)
+    vision_latency_budget_ms: int = Field(1200)
+    reasoning_latency_budget_ms: int = Field(1200)
+    overhead_latency_budget_ms: int = Field(600)
 
-    # Notifications
-    webhook_url: Optional[str] = Field(None, env="WEBHOOK_URL")
-    slack_webhook_url: Optional[str] = Field(None, env="SLACK_WEBHOOK_URL")
-    smtp_host: Optional[str] = Field(None, env="SMTP_HOST")
-    smtp_port: int = Field(587, env="SMTP_PORT")
-    smtp_user: Optional[str] = Field(None, env="SMTP_USER")
-    smtp_pass: Optional[str] = Field(None, env="SMTP_PASS")
-    alert_email_to: Optional[str] = Field(None, env="ALERT_EMAIL_TO")
+    # Notifications — WEBHOOK_URL = default; WEBHOOK_URL_{home_id} = per-home override
+    webhook_url: Optional[str] = Field(None)
+    slack_webhook_url: Optional[str] = Field(None)
+    smtp_host: Optional[str] = Field(None)
+    smtp_port: int = Field(587)
+    smtp_user: Optional[str] = Field(None)
+    smtp_pass: Optional[str] = Field(None)
+    alert_email_to: Optional[str] = Field(None)
+    shadow_mode: bool = Field(False)
+    shadow_webhook_url: Optional[str] = Field(None)
 
     # CORS
-    cors_origins: list[str] = Field(["http://localhost:5173"], env="CORS_ORIGINS")
+    cors_origins: list[str] = Field(["http://localhost:8000"])
 
-    # Local API credential (optional)
-    local_api_credential: Optional[str] = Field(None, env="LOCAL_API_CREDENTIAL")
+    # API credentials — required for /api paths
+    local_api_credential: Optional[str] = Field(None)
+    ingest_api_key: Optional[str] = Field(None)
+    
+    # Basic HTTP Auth — required for all /api endpoints
+    basic_auth_user: Optional[str] = Field(None)
+    basic_auth_pass: Optional[str] = Field(None)
 
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
+    # Ingest
+    ingest_async_default: bool = Field(True)
+    stream_sample_every_n_frames: int = Field(30)
+    enable_agent_memory: bool = Field(True)
 
 
 settings = Settings()

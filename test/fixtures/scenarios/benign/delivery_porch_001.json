@@ -1,0 +1,17 @@
+{
+  "scenario_id": "delivery_porch_001",
+  "category": "benign",
+  "description": "Package delivery at porch",
+  "image_source": "test/fixtures/images/coco_000000000724.jpg",
+  "camera_config": {
+    "zone": "porch",
+    "time": "14:00",
+    "site_id": "test_home"
+  },
+  "expected": {
+    "verdict": "suppress",
+    "min_confidence": 0.6,
+    "category": "package",
+    "reasoning_contains": ["delivery", "package", "benign"]
+  }
+}
