@@ -1,0 +1,92 @@
+[
+  {
+    "case_id": "resident_return_day_placeholder",
+    "image_path": "/Users/Ollie/novin-home/test/fixtures/images/coco_000000000139.jpg",
+    "expected_action": "suppress",
+    "cam_id": "front_door_cam",
+    "home_id": "home",
+    "zone": "front_door",
+    "context": "Placeholder: resident return in daylight. Replace with real staged shot.",
+    "expected_categories": ["person", "motion"]
+  },
+  {
+    "case_id": "delivery_front_door_placeholder",
+    "image_url": "http://images.cocodataset.org/val2017/000000000285.jpg",
+    "expected_action": "suppress",
+    "cam_id": "front_door_cam",
+    "home_id": "home",
+    "zone": "front_door",
+    "context": "Placeholder: delivery at front door. Replace with real staged shot.",
+    "expected_categories": ["person", "package", "motion"]
+  },
+  {
+    "case_id": "pet_backyard_placeholder",
+    "image_path": "/Users/Ollie/novin-home/test/fixtures/images/coco_000000000632.jpg",
+    "expected_action": "suppress",
+    "cam_id": "backyard_cam",
+    "home_id": "home",
+    "zone": "backyard",
+    "context": "Placeholder: pet or harmless wildlife in yard. Replace with real staged shot.",
+    "expected_categories": ["vehicle", "motion"]
+  },
+  {
+    "case_id": "porch_person_placeholder",
+    "image_path": "/Users/Ollie/novin-home/test/fixtures/images/coco_000000000724.jpg",
+    "expected_action": "suppress",
+    "cam_id": "porch_cam",
+    "home_id": "home",
+    "zone": "porch",
+    "context": "Placeholder: porch person motion. Replace with real staged shot.",
+    "expected_categories": ["person", "motion"]
+  },
+  {
+    "case_id": "vehicle_driveway_placeholder",
+    "image_path": "/Users/Ollie/novin-home/test/fixtures/images/coco_000000000632.jpg",
+    "expected_action": "suppress",
+    "cam_id": "driveway_cam",
+    "home_id": "home",
+    "zone": "driveway",
+    "context": "Placeholder: vehicle in driveway. Replace with real staged shot.",
+    "expected_categories": ["vehicle", "motion"]
+  },
+  {
+    "case_id": "wildlife_backyard_placeholder",
+    "image_path": "/Users/Ollie/novin-home/test/fixtures/images/coco_000000000139.jpg",
+    "expected_action": "suppress",
+    "cam_id": "backyard_cam",
+    "home_id": "home",
+    "zone": "backyard",
+    "context": "Placeholder: wildlife in backyard. Replace with real staged shot.",
+    "expected_categories": ["pet", "wildlife", "motion"]
+  },
+  {
+    "case_id": "delivery_porch_placeholder",
+    "image_path": "/Users/Ollie/novin-home/test/fixtures/images/coco_000000000724.jpg",
+    "expected_action": "suppress",
+    "cam_id": "porch_cam",
+    "home_id": "home",
+    "zone": "porch",
+    "context": "Placeholder: package delivery at porch. Replace with real staged shot.",
+    "expected_categories": ["person", "package", "motion"]
+  },
+  {
+    "case_id": "person_living_room_placeholder",
+    "image_path": "/Users/Ollie/novin-home/test/fixtures/images/coco_000000000139.jpg",
+    "expected_action": "suppress",
+    "cam_id": "living_room_cam",
+    "home_id": "home",
+    "zone": "living_room",
+    "context": "Placeholder: person in living room. Replace with real staged shot.",
+    "expected_categories": ["person", "motion"]
+  },
+  {
+    "case_id": "motion_clear_placeholder",
+    "image_path": "/Users/Ollie/novin-home/test/fixtures/images/picsum_0.jpg",
+    "expected_action": "suppress",
+    "cam_id": "front_door_cam",
+    "home_id": "home",
+    "zone": "front_door",
+    "context": "Placeholder: clear scene or routine motion. Replace with real staged shot.",
+    "expected_categories": ["clear", "motion"]
+  }
+]

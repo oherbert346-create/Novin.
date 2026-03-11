@@ -1,0 +1,17 @@
+{
+  "scenario_id": "person_living_room_001",
+  "category": "benign",
+  "description": "Person in living room",
+  "image_source": "test/fixtures/images/coco_000000000139.jpg",
+  "camera_config": {
+    "zone": "living_room",
+    "time": "18:00",
+    "site_id": "test_home"
+  },
+  "expected": {
+    "verdict": "suppress",
+    "min_confidence": 0.6,
+    "category": "person",
+    "reasoning_contains": ["person", "routine", "benign"]
+  }
+}

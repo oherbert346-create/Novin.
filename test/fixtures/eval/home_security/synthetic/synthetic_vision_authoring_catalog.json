@@ -1,0 +1,2033 @@
+{
+  "schema_version": "novin_home_synthetic_scene_authoring_v2",
+  "policy_version": "launch-accuracy-v1",
+  "prompt_version": "launch-accuracy-v1-qwen1",
+  "notes": "Perception-aligned synthetic scenarios. Simulated vision contains only visible scene facts, observable cues, uncertainty, and explicit unknowns.",
+  "scenarios": [
+    {
+      "scenario_id": "routine_arrival_bag_front_door_day",
+      "scenario_family": "routine_arrival",
+      "cohort": "benign",
+      "zone": "front_door",
+      "time_context": "2026-03-08T17:42:00",
+      "scene_brief": "A person walks straight to the front door in daylight carrying a reusable shopping bag.",
+      "camera_view": "Wide front-door camera angled over the porch steps with clear daylight visibility.",
+      "scene_truth": {
+        "actual_outcome": "routine_home_arrival",
+        "authorized_presence": true,
+        "intent": "enter_home",
+        "actor_role": "resident",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A person walks directly toward the front door carrying a bag. The subject is upright, moving at a normal pace, and close to the entry.",
+        "categories": ["person"],
+        "visible_objects": ["bag"],
+        "risk_cues": ["entry_approach"],
+        "uncertainty": 0.12,
+        "confidence": 0.91,
+        "known_unknowns": ["identity_of_person", "whether_the_person_lives_here"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["daylight", "not_after_hours"],
+        "history_context": ["similar arrivals are common at this entry"],
+        "memory_hints": ["routine arrival patterns may exist for this home"]
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "entry approach without threat cues and with routine-compatible context"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "package_drop_porch_day",
+      "scenario_family": "delivery",
+      "cohort": "benign",
+      "zone": "porch",
+      "time_context": "2026-03-08T14:08:00",
+      "scene_brief": "A person bends at the porch and places a box near the front door during the day.",
+      "camera_view": "Porch camera with a tight view of the mat, threshold, and first few steps.",
+      "scene_truth": {
+        "actual_outcome": "delivery_dropoff",
+        "authorized_presence": true,
+        "intent": "leave_package",
+        "actor_role": "courier",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A person bends near the front door and places a box-shaped object on the porch. After placing the object, the subject turns away from the door.",
+        "categories": ["person", "package"],
+        "visible_objects": ["package"],
+        "risk_cues": ["entry_approach"],
+        "uncertainty": 0.08,
+        "confidence": 0.95,
+        "known_unknowns": ["identity_of_person", "whether_the_object_is_being_delivered_or_removed"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["daylight"],
+        "history_context": ["porch deliveries are common"],
+        "memory_hints": ["delivery-like patterns may recur at this camera"]
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "package placement plus immediate departure is consistent with benign delivery"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "dog_walker_lateral_driveway_day",
+      "scenario_family": "pass_through",
+      "cohort": "benign",
+      "zone": "driveway",
+      "time_context": "2026-03-08T09:11:00",
+      "scene_brief": "A person with a dog walks across the outer edge of the driveway without approaching the home.",
+      "camera_view": "Driveway camera with street edge and lateral walkway visible.",
+      "scene_truth": {
+        "actual_outcome": "street_pass_through",
+        "authorized_presence": true,
+        "intent": "continue_walking",
+        "actor_role": "passerby",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A person walks laterally across the edge of the driveway with a dog on a leash. The movement stays parallel to the home and does not approach the entry.",
+        "categories": ["person", "pet"],
+        "visible_objects": ["dog_leash"],
+        "risk_cues": [],
+        "uncertainty": 0.1,
+        "confidence": 0.9,
+        "known_unknowns": ["identity_of_person"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["daylight"],
+        "history_context": ["street-adjacent pass-throughs occur regularly"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "none",
+        "uncertainty_state": "low",
+        "explanation_focus": "lateral pass-through not directed at the home"
+      },
+      "expected_routing": {
+        "visibility_policy": "hidden",
+        "notification_policy": "none",
+        "storage_policy": "diagnostic",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "cat_crosses_backyard_night",
+      "scenario_family": "pet_activity",
+      "cohort": "benign",
+      "zone": "backyard",
+      "time_context": "2026-03-08T22:18:00",
+      "scene_brief": "A small animal crosses the backyard fence line at night.",
+      "camera_view": "Infrared backyard camera with lawn and fence line visible.",
+      "scene_truth": {
+        "actual_outcome": "pet_motion",
+        "authorized_presence": true,
+        "intent": "cross_yard",
+        "actor_role": "house_cat",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A small animal moves across the backyard in infrared view. No people or entry interaction are visible.",
+        "categories": ["pet"],
+        "visible_objects": [],
+        "risk_cues": [],
+        "uncertainty": 0.14,
+        "confidence": 0.86,
+        "known_unknowns": ["exact_species_of_animal"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["night", "infrared_view"],
+        "history_context": ["animal crossings occur in this zone"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "none",
+        "uncertainty_state": "low",
+        "explanation_focus": "animal-only activity without human or threat cues"
+      },
+      "expected_routing": {
+        "visibility_policy": "hidden",
+        "notification_policy": "none",
+        "storage_policy": "diagnostic",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "vehicle_turnaround_driveway_day",
+      "scenario_family": "vehicle_activity",
+      "cohort": "benign",
+      "zone": "driveway",
+      "time_context": "2026-03-08T13:33:00",
+      "scene_brief": "A sedan enters the driveway briefly to turn around and then exits.",
+      "camera_view": "Driveway camera facing the parking area and street entrance.",
+      "scene_truth": {
+        "actual_outcome": "vehicle_turnaround",
+        "authorized_presence": true,
+        "intent": "turnaround",
+        "actor_role": "driver",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A vehicle enters the driveway, pauses briefly, and turns back toward the street. No person exits the vehicle and no one approaches the home.",
+        "categories": ["vehicle"],
+        "visible_objects": ["sedan"],
+        "risk_cues": [],
+        "uncertainty": 0.07,
+        "confidence": 0.92,
+        "known_unknowns": ["identity_of_driver"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["daylight"],
+        "history_context": ["short vehicle incursions happen occasionally"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "vehicle-only activity without occupant approach"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "yard_tool_side_yard_day_with_metadata",
+      "scenario_family": "maintenance",
+      "cohort": "benign",
+      "zone": "backyard",
+      "time_context": "2026-03-08T11:20:00",
+      "scene_brief": "A person with a long handheld tool moves through the side yard during the day.",
+      "camera_view": "Backyard camera covering gate entrance and side yard.",
+      "scene_truth": {
+        "actual_outcome": "scheduled_maintenance",
+        "authorized_presence": true,
+        "intent": "yard_work",
+        "actor_role": "service_worker",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A person is visible in the side yard holding a long handheld tool. The subject moves steadily through the yard and does not interact with entry hardware.",
+        "categories": ["person"],
+        "visible_objects": ["yard_tool"],
+        "risk_cues": [],
+        "uncertainty": 0.11,
+        "confidence": 0.88,
+        "known_unknowns": ["identity_of_person", "whether_the_person_is_authorized"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {
+          "trusted_visitor": true,
+          "identity_source": "brand_service_schedule"
+        },
+        "time_context_facts": ["daylight"],
+        "history_context": ["similar daytime yard-service events have occurred before"],
+        "memory_hints": ["service schedule known for this home"]
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "daytime yard work plus explicit upstream trust metadata"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "package_pickup_porch_day_unclear_authorization",
+      "scenario_family": "package_interaction",
+      "cohort": "ambiguous",
+      "zone": "porch",
+      "time_context": "2026-03-08T15:14:00",
+      "scene_brief": "A person looks at a package on the porch, picks it up, and leaves.",
+      "camera_view": "Porch camera showing the package area and path away from the door.",
+      "scene_truth": {
+        "actual_outcome": "misdelivery_recovery",
+        "authorized_presence": true,
+        "intent": "retrieve_misdelivered_package",
+        "actor_role": "neighbor",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A person looks down at a package near the door, lifts it, and walks away from the porch. No earlier package placement is visible in this frame.",
+        "categories": ["person", "package"],
+        "visible_objects": ["package"],
+        "risk_cues": [],
+        "uncertainty": 0.34,
+        "confidence": 0.79,
+        "known_unknowns": ["identity_of_person", "whether_the_package_removal_is_authorized", "whether_this_is_the_recipient"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["daylight"],
+        "history_context": ["no prior delivery frame linked to this event"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "medium",
+        "explanation_focus": "package interaction is visible but authorization is unclear and threat evidence is weak"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline", "operator_queue"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "not_eligible"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "bike_arrival_garage_dusk",
+      "scenario_family": "routine_arrival",
+      "cohort": "benign",
+      "zone": "garage",
+      "time_context": "2026-03-08T18:51:00",
+      "scene_brief": "A person rolls a bicycle toward the garage at dusk.",
+      "camera_view": "Garage exterior camera with driveway apron and garage opening visible.",
+      "scene_truth": {
+        "actual_outcome": "routine_arrival",
+        "authorized_presence": true,
+        "intent": "enter_garage",
+        "actor_role": "resident",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A person moves a bicycle toward the garage entrance at dusk. The motion is direct and there is no visible tamper interaction.",
+        "categories": ["person", "vehicle"],
+        "visible_objects": ["bicycle"],
+        "risk_cues": ["entry_approach"],
+        "uncertainty": 0.16,
+        "confidence": 0.87,
+        "known_unknowns": ["identity_of_person", "whether_the_person_is_authorized"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["dusk", "not_after_hours"],
+        "history_context": ["similar garage arrivals happen regularly"],
+        "memory_hints": ["arrival routines may exist at this camera"]
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "direct garage approach without suspicious cues"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "headlight_glare_motion_driveway_night",
+      "scenario_family": "environmental_motion",
+      "cohort": "ambiguous",
+      "zone": "driveway",
+      "time_context": "2026-03-08T20:26:00",
+      "scene_brief": "Headlight glare washes across the driveway camera and creates moving shadows.",
+      "camera_view": "Driveway camera facing toward the street at night.",
+      "scene_truth": {
+        "actual_outcome": "glare_artifact",
+        "authorized_presence": true,
+        "intent": "none",
+        "actor_role": "none_visible",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "Strong light glare and moving shadows pass across the driveway. No clear person, vehicle occupant, or entry interaction is visible.",
+        "categories": ["motion"],
+        "visible_objects": [],
+        "risk_cues": [],
+        "uncertainty": 0.78,
+        "confidence": 0.51,
+        "known_unknowns": ["whether_any_subject_is_present"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["night"],
+        "history_context": ["glare artifacts have occurred on this camera before"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "none",
+        "uncertainty_state": "high",
+        "explanation_focus": "insufficient evidence due to glare-only motion"
+      },
+      "expected_routing": {
+        "visibility_policy": "hidden",
+        "notification_policy": "none",
+        "storage_policy": "diagnostic",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "not_eligible"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "rain_streaks_motion_front_door_night",
+      "scenario_family": "weather_noise",
+      "cohort": "ambiguous",
+      "zone": "front_door",
+      "time_context": "2026-03-08T23:02:00",
+      "scene_brief": "Heavy rain streaks near the lens trigger motion near the front door.",
+      "camera_view": "Front-door camera under partial overhang at night in rain.",
+      "scene_truth": {
+        "actual_outcome": "weather_artifact",
+        "authorized_presence": true,
+        "intent": "none",
+        "actor_role": "none_visible",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "Rain streaks and lens artifacts create motion near the front door. No person, package, or interaction with the door is clearly visible.",
+        "categories": ["motion"],
+        "visible_objects": [],
+        "risk_cues": [],
+        "uncertainty": 0.81,
+        "confidence": 0.48,
+        "known_unknowns": ["whether_any_subject_is_present"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["night", "heavy_rain"],
+        "history_context": ["weather-triggered motion occurs occasionally"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "none",
+        "uncertainty_state": "high",
+        "explanation_focus": "weather-driven motion without visible actor"
+      },
+      "expected_routing": {
+        "visibility_policy": "hidden",
+        "notification_policy": "none",
+        "storage_policy": "diagnostic",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "not_eligible"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "after_hours_person_dwell_front_door",
+      "scenario_family": "entry_dwell",
+      "cohort": "threat",
+      "zone": "front_door",
+      "time_context": "2026-03-08T23:47:00",
+      "scene_brief": "A person stands at the front door after hours facing the lock area.",
+      "camera_view": "Front-door camera with clear view of the handle and threshold under porch light.",
+      "scene_truth": {
+        "actual_outcome": "suspicious_entry_attempt",
+        "authorized_presence": false,
+        "intent": "probe_entry",
+        "actor_role": "unknown_person",
+        "safety_relevance": "threat"
+      },
+      "simulated_vision": {
+        "description": "A person remains close to the front door and faces the handle area after hours. The subject appears to stay in place rather than pass through.",
+        "categories": ["person"],
+        "visible_objects": [],
+        "risk_cues": ["entry_dwell", "entry_approach"],
+        "uncertainty": 0.11,
+        "confidence": 0.94,
+        "known_unknowns": ["identity_of_person", "whether_the_person_is_authorized", "intent_of_the_entry_dwell"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["after_hours", "entry_zone"],
+        "history_context": ["no recent benign routine linked to this event"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "alert",
+        "risk_level": "high",
+        "uncertainty_state": "low",
+        "explanation_focus": "after-hours entry dwell without benign context"
+      },
+      "expected_routing": {
+        "visibility_policy": "prominent",
+        "notification_policy": "immediate",
+        "storage_policy": "full",
+        "delivery_targets": ["homeowner_app", "operator_queue", "webhook", "monitoring"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "human_confirmation"
+      },
+      "false_positive_critical": false
+    },
+    {
+      "scenario_id": "back_gate_latch_check_after_hours",
+      "scenario_family": "perimeter_probe",
+      "cohort": "threat",
+      "zone": "backyard",
+      "time_context": "2026-03-08T22:41:00",
+      "scene_brief": "A person stands at the backyard gate and appears to pull at the latch area at night.",
+      "camera_view": "Backyard camera aimed at the gate line and side path with infrared detail.",
+      "scene_truth": {
+        "actual_outcome": "perimeter_probe",
+        "authorized_presence": false,
+        "intent": "test_gate",
+        "actor_role": "unknown_person",
+        "safety_relevance": "threat"
+      },
+      "simulated_vision": {
+        "description": "A person stands at the backyard gate and appears to interact with the latch area at night. The subject is focused on the boundary access point.",
+        "categories": ["person"],
+        "visible_objects": ["gate"],
+        "risk_cues": ["perimeter_progression"],
+        "uncertainty": 0.17,
+        "confidence": 0.89,
+        "known_unknowns": ["identity_of_person", "whether_the_gate_interaction_is_authorized"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["after_hours", "fenced_boundary"],
+        "history_context": ["no recent benign maintenance at the gate"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "alert",
+        "risk_level": "high",
+        "uncertainty_state": "low",
+        "explanation_focus": "after-hours perimeter interaction at a boundary access point"
+      },
+      "expected_routing": {
+        "visibility_policy": "prominent",
+        "notification_policy": "immediate",
+        "storage_policy": "full",
+        "delivery_targets": ["homeowner_app", "operator_queue", "webhook", "monitoring"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "human_confirmation"
+      },
+      "false_positive_critical": false
+    },
+    {
+      "scenario_id": "package_removed_from_porch_day",
+      "scenario_family": "package_theft",
+      "cohort": "threat",
+      "zone": "porch",
+      "time_context": "2026-03-08T16:21:00",
+      "scene_brief": "A person picks up a package from the porch and departs immediately.",
+      "camera_view": "Porch camera with package area and front walk visible.",
+      "scene_truth": {
+        "actual_outcome": "package_theft",
+        "authorized_presence": false,
+        "intent": "remove_package",
+        "actor_role": "unknown_person",
+        "safety_relevance": "threat"
+      },
+      "simulated_vision": {
+        "description": "A person reaches for a package by the door, lifts it, and moves away from the porch. No package placement or handoff is visible in this frame.",
+        "categories": ["person", "package"],
+        "visible_objects": ["package"],
+        "risk_cues": [],
+        "uncertainty": 0.19,
+        "confidence": 0.88,
+        "known_unknowns": ["identity_of_person", "whether_the_package_removal_is_authorized"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["daylight"],
+        "history_context": ["a package was previously delivered to this porch"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "alert",
+        "risk_level": "medium",
+        "uncertainty_state": "medium",
+        "explanation_focus": "package removal following delivery context is suspicious enough to escalate"
+      },
+      "expected_routing": {
+        "visibility_policy": "prominent",
+        "notification_policy": "review",
+        "storage_policy": "full",
+        "delivery_targets": ["homeowner_app", "operator_queue", "timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "not_eligible"
+      },
+      "false_positive_critical": false
+    },
+    {
+      "scenario_id": "camera_tamper_hand_over_lens_night",
+      "scenario_family": "tamper",
+      "cohort": "threat",
+      "zone": "front_door",
+      "time_context": "2026-03-08T22:54:00",
+      "scene_brief": "A hand and forearm dominate the image as someone reaches directly toward the camera housing.",
+      "camera_view": "Front-door camera at very close range to a subject attempting lens obstruction.",
+      "scene_truth": {
+        "actual_outcome": "camera_tamper",
+        "authorized_presence": false,
+        "intent": "obstruct_camera",
+        "actor_role": "unknown_person",
+        "safety_relevance": "threat"
+      },
+      "simulated_vision": {
+        "description": "A hand reaches directly toward the camera and partially obscures the view. The scene shows abrupt close-range contact with the device.",
+        "categories": ["person"],
+        "visible_objects": ["hand", "forearm"],
+        "risk_cues": ["tamper"],
+        "uncertainty": 0.09,
+        "confidence": 0.97,
+        "known_unknowns": ["identity_of_person"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["night", "camera_contact"],
+        "history_context": [],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "alert",
+        "risk_level": "high",
+        "uncertainty_state": "low",
+        "explanation_focus": "direct camera tamper is an immediate escalation cue"
+      },
+      "expected_routing": {
+        "visibility_policy": "prominent",
+        "notification_policy": "immediate",
+        "storage_policy": "full",
+        "delivery_targets": ["homeowner_app", "operator_queue", "webhook", "monitoring"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "human_confirmation"
+      },
+      "false_positive_critical": false
+    },
+    {
+      "scenario_id": "tool_at_lock_front_door_night",
+      "scenario_family": "forced_entry",
+      "cohort": "threat",
+      "zone": "front_door",
+      "time_context": "2026-03-08T23:31:00",
+      "scene_brief": "A person leans into the lock area with a metal object angled toward the door seam.",
+      "camera_view": "Tight front-door view with strong porch light on the lock area.",
+      "scene_truth": {
+        "actual_outcome": "forced_entry_attempt",
+        "authorized_presence": false,
+        "intent": "force_open_entry",
+        "actor_role": "unknown_person",
+        "safety_relevance": "threat"
+      },
+      "simulated_vision": {
+        "description": "A person is close to the door lock and holds a metal object near the seam and handle area. The interaction is focused on entry hardware.",
+        "categories": ["person"],
+        "visible_objects": ["metal_object", "door_lock"],
+        "risk_cues": ["forced_entry", "entry_dwell"],
+        "uncertainty": 0.13,
+        "confidence": 0.95,
+        "known_unknowns": ["identity_of_person", "exact_type_of_tool"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["after_hours", "entry_zone"],
+        "history_context": [],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "alert",
+        "risk_level": "high",
+        "uncertainty_state": "low",
+        "explanation_focus": "direct forced-entry cue at a primary entry point"
+      },
+      "expected_routing": {
+        "visibility_policy": "prominent",
+        "notification_policy": "immediate",
+        "storage_policy": "full",
+        "delivery_targets": ["homeowner_app", "operator_queue", "webhook", "monitoring"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "human_confirmation"
+      },
+      "false_positive_critical": false
+    },
+    {
+      "scenario_id": "person_in_living_room_after_hours_no_metadata",
+      "scenario_family": "interior_breach",
+      "cohort": "threat",
+      "zone": "living_room",
+      "time_context": "2026-03-08T02:14:00",
+      "scene_brief": "An indoor camera sees a person crossing the living room at 2 AM with no trust metadata.",
+      "camera_view": "Indoor corner camera covering couch, hallway, and window line.",
+      "scene_truth": {
+        "actual_outcome": "interior_intrusion",
+        "authorized_presence": false,
+        "intent": "inside_home_after_hours",
+        "actor_role": "unknown_person",
+        "safety_relevance": "threat"
+      },
+      "simulated_vision": {
+        "description": "A person is visible inside the living room during late-night hours. The subject is indoors and moving across the room.",
+        "categories": ["person"],
+        "visible_objects": [],
+        "risk_cues": [],
+        "uncertainty": 0.22,
+        "confidence": 0.86,
+        "known_unknowns": ["identity_of_person", "whether_the_presence_is_authorized"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["after_hours", "interior_zone"],
+        "history_context": ["no matching trusted presence metadata"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "alert",
+        "risk_level": "high",
+        "uncertainty_state": "medium",
+        "explanation_focus": "interior after-hours person without trusted context requires escalation"
+      },
+      "expected_routing": {
+        "visibility_policy": "prominent",
+        "notification_policy": "immediate",
+        "storage_policy": "full",
+        "delivery_targets": ["homeowner_app", "operator_queue", "webhook", "monitoring"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "human_confirmation"
+      },
+      "false_positive_critical": false
+    },
+    {
+      "scenario_id": "vehicle_idles_near_garage_after_hours",
+      "scenario_family": "vehicle_probe",
+      "cohort": "threat",
+      "zone": "garage",
+      "time_context": "2026-03-08T01:06:00",
+      "scene_brief": "A vehicle is stopped near the garage after hours and a person stands outside it.",
+      "camera_view": "Garage camera covering driveway apron and garage face.",
+      "scene_truth": {
+        "actual_outcome": "suspicious_vehicle_probe",
+        "authorized_presence": false,
+        "intent": "observe_or_test_access",
+        "actor_role": "unknown_person",
+        "safety_relevance": "threat"
+      },
+      "simulated_vision": {
+        "description": "A vehicle is stopped near the garage and a person stands outside beside it late at night. The subject remains close to the garage area.",
+        "categories": ["vehicle", "person"],
+        "visible_objects": ["vehicle"],
+        "risk_cues": ["entry_approach"],
+        "uncertainty": 0.24,
+        "confidence": 0.83,
+        "known_unknowns": ["identity_of_person", "why_the_vehicle_is_stopped_here"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["after_hours", "garage_zone"],
+        "history_context": ["no known arrival routine linked to this event"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "alert",
+        "risk_level": "medium",
+        "uncertainty_state": "medium",
+        "explanation_focus": "after-hours vehicle plus person lingering near garage"
+      },
+      "expected_routing": {
+        "visibility_policy": "prominent",
+        "notification_policy": "review",
+        "storage_policy": "full",
+        "delivery_targets": ["homeowner_app", "operator_queue", "timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "not_eligible"
+      },
+      "false_positive_critical": false
+    },
+    {
+      "scenario_id": "repeat_pass_then_front_door_dwell_after_hours",
+      "scenario_family": "sequence_escalation",
+      "cohort": "threat",
+      "zone": "front_door",
+      "time_context": "2026-03-08T23:58:00",
+      "scene_brief": "A person previously passed by the driveway multiple times and now dwells at the front door just before midnight.",
+      "camera_view": "Front-door camera with recent driveway history available to reasoning.",
+      "scene_truth": {
+        "actual_outcome": "escalating_suspicious_presence",
+        "authorized_presence": false,
+        "intent": "probe_entry",
+        "actor_role": "unknown_person",
+        "safety_relevance": "threat"
+      },
+      "simulated_vision": {
+        "description": "A person stands near the front door close to the handle area and remains there rather than passing through. The current frame shows prolonged presence at the entry.",
+        "categories": ["person"],
+        "visible_objects": [],
+        "risk_cues": ["entry_dwell", "entry_approach"],
+        "uncertainty": 0.16,
+        "confidence": 0.92,
+        "known_unknowns": ["identity_of_person", "whether_the_entry_dwell_is_authorized"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["after_hours", "entry_zone"],
+        "history_context": ["same subject pattern seen at driveway twice in recent sequence"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "alert",
+        "risk_level": "high",
+        "uncertainty_state": "low",
+        "explanation_focus": "entry dwell combined with repeated prior presence indicates escalation"
+      },
+      "expected_routing": {
+        "visibility_policy": "prominent",
+        "notification_policy": "immediate",
+        "storage_policy": "full",
+        "delivery_targets": ["homeowner_app", "operator_queue", "webhook", "monitoring"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "human_confirmation"
+      },
+      "false_positive_critical": false
+    },
+    {
+      "scenario_id": "partial_person_behind_parked_car_night",
+      "scenario_family": "poor_visibility",
+      "cohort": "ambiguous",
+      "zone": "driveway",
+      "time_context": "2026-03-08T21:44:00",
+      "scene_brief": "Only part of a human figure is visible behind a parked car at night.",
+      "camera_view": "Driveway camera partially blocked by a parked SUV.",
+      "scene_truth": {
+        "actual_outcome": "street_side_passerby",
+        "authorized_presence": true,
+        "intent": "pass_through",
+        "actor_role": "passerby",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A partially occluded person is visible behind a parked vehicle at the driveway edge. The subject is incomplete and intent cannot be determined from the frame.",
+        "categories": ["person"],
+        "visible_objects": ["parked_vehicle"],
+        "risk_cues": [],
+        "uncertainty": 0.72,
+        "confidence": 0.58,
+        "known_unknowns": ["full_body_position", "movement_direction", "intent_of_person"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["night"],
+        "history_context": ["no supporting sequence evidence"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "high",
+        "explanation_focus": "possible person present but evidence is too incomplete to escalate"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline", "operator_queue"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "not_eligible"
+      },
+      "false_positive_critical": false
+    },
+    {
+      "scenario_id": "ir_silhouette_near_side_gate_unclear",
+      "scenario_family": "poor_visibility",
+      "cohort": "ambiguous",
+      "zone": "backyard",
+      "time_context": "2026-03-08T22:57:00",
+      "scene_brief": "An infrared silhouette appears near the side gate, but the subject is indistinct.",
+      "camera_view": "Backyard IR camera with noise and low contrast.",
+      "scene_truth": {
+        "actual_outcome": "benign_perimeter_motion",
+        "authorized_presence": true,
+        "intent": "pass_through",
+        "actor_role": "passerby",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A human-like silhouette is visible near the side gate in infrared view. The subject is indistinct and any interaction with the gate is unclear.",
+        "categories": ["person"],
+        "visible_objects": ["gate"],
+        "risk_cues": [],
+        "uncertainty": 0.76,
+        "confidence": 0.55,
+        "known_unknowns": ["whether_the_subject_is_touching_the_gate", "identity_of_person", "intent_of_person"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["night", "infrared_view"],
+        "history_context": ["no corroborating event sequence"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "high",
+        "explanation_focus": "human-like presence is too ambiguous to escalate without corroboration"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline", "operator_queue"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "not_eligible"
+      },
+      "false_positive_critical": false
+    },
+    {
+      "scenario_id": "blurred_person_with_box_porch_dusk",
+      "scenario_family": "ambiguous_delivery",
+      "cohort": "ambiguous",
+      "zone": "porch",
+      "time_context": "2026-03-08T19:09:00",
+      "scene_brief": "A blurred person-shaped figure appears on the porch with a box-like object at dusk.",
+      "camera_view": "Porch camera at dusk with motion blur from a fast-moving subject.",
+      "scene_truth": {
+        "actual_outcome": "delivery_dropoff",
+        "authorized_presence": true,
+        "intent": "leave_package",
+        "actor_role": "courier",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A blurred figure is visible near the porch holding a box-shaped object. The exact action at the door is not clear because of motion blur.",
+        "categories": ["person", "package"],
+        "visible_objects": ["box_shaped_object"],
+        "risk_cues": ["entry_approach"],
+        "uncertainty": 0.68,
+        "confidence": 0.61,
+        "known_unknowns": ["whether_the_object_is_being_delivered_or_removed", "identity_of_person"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["dusk"],
+        "history_context": ["no linked prior frame"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "high",
+        "explanation_focus": "possible delivery-like activity but evidence is too blurred for escalation"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline", "operator_queue"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "not_eligible"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "school_dropoff_driveway_morning",
+      "scenario_family": "vehicle_activity",
+      "cohort": "benign",
+      "zone": "driveway",
+      "time_context": "2026-03-08T07:46:00",
+      "scene_brief": "A minivan pauses in the driveway while two people move quickly away from it in the morning.",
+      "camera_view": "Driveway camera with vehicle pad and walkway visible.",
+      "scene_truth": {
+        "actual_outcome": "routine_dropoff",
+        "authorized_presence": true,
+        "intent": "morning_departure",
+        "actor_role": "household_members",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A vehicle is stopped briefly in the driveway while two people move quickly away from it. No one is approaching the home or interacting with the entry.",
+        "categories": ["vehicle", "person"],
+        "visible_objects": ["minivan"],
+        "risk_cues": [],
+        "uncertainty": 0.18,
+        "confidence": 0.84,
+        "known_unknowns": ["identity_of_people", "reason_for_short_stop"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["morning", "not_after_hours"],
+        "history_context": ["similar short morning driveway events occur frequently"],
+        "memory_hints": ["morning routine may be known for this home"]
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "short morning vehicle activity without threat cues"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "trash_bin_rollout_side_drive_evening",
+      "scenario_family": "routine_outdoor_task",
+      "cohort": "benign",
+      "zone": "side_driveway",
+      "time_context": "2026-03-08T19:41:00",
+      "scene_brief": "A person rolls a large bin from the side yard toward the curb around sunset.",
+      "camera_view": "Side-drive camera with gate, side path, and curb lane visible.",
+      "scene_truth": {
+        "actual_outcome": "routine_household_task",
+        "authorized_presence": true,
+        "intent": "move_bin_to_curb",
+        "actor_role": "resident",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A person rolls a large wheeled bin along the side driveway toward the curb. The movement is direct and does not interact with doors or locks.",
+        "categories": ["person", "motion"],
+        "visible_objects": ["wheeled_bin"],
+        "risk_cues": [],
+        "uncertainty": 0.15,
+        "confidence": 0.86,
+        "known_unknowns": ["identity_of_person"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["evening", "not_after_hours"],
+        "history_context": ["bin movement occurs on a weekly schedule"],
+        "memory_hints": ["trash-day pattern may be learned"]
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "routine outdoor task with no security-specific cue"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "large_raccoon_near_porch_night",
+      "scenario_family": "wildlife",
+      "cohort": "ambiguous",
+      "zone": "porch",
+      "time_context": "2026-03-08T01:22:00",
+      "scene_brief": "A large animal climbs the porch railing close to the front door late at night.",
+      "camera_view": "Porch infrared camera with railing and doorway visible.",
+      "scene_truth": {
+        "actual_outcome": "wildlife_near_entry",
+        "authorized_presence": true,
+        "intent": "animal_foraging",
+        "actor_role": "raccoon",
+        "safety_relevance": "warning"
+      },
+      "simulated_vision": {
+        "description": "A large animal climbs near the porch railing close to the front door at night. No person is visible.",
+        "categories": ["pet"],
+        "visible_objects": ["animal"],
+        "risk_cues": ["wildlife_near_entry"],
+        "uncertainty": 0.21,
+        "confidence": 0.82,
+        "known_unknowns": ["exact_species_of_animal"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["night", "entry_zone"],
+        "history_context": ["large wildlife near entry is uncommon at this home"],
+        "memory_hints": ["user wildlife tolerance may matter"]
+      },
+      "expected_judgement": {
+        "action": "alert",
+        "risk_level": "medium",
+        "uncertainty_state": "low",
+        "explanation_focus": "large wildlife directly at an entry can warrant notification"
+      },
+      "expected_routing": {
+        "visibility_policy": "prominent",
+        "notification_policy": "review",
+        "storage_policy": "full",
+        "delivery_targets": ["homeowner_app", "operator_queue", "timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "not_eligible"
+      },
+      "false_positive_critical": false
+    },
+    {
+      "scenario_id": "night_arrival_with_bag_trusted_metadata",
+      "scenario_family": "trusted_visitor",
+      "cohort": "benign",
+      "zone": "front_door",
+      "time_context": "2026-03-08T22:03:00",
+      "scene_brief": "A person arrives at the front door at night carrying a duffel bag and pauses briefly.",
+      "camera_view": "Front-door camera under porch lighting.",
+      "scene_truth": {
+        "actual_outcome": "trusted_visitor_arrival",
+        "authorized_presence": true,
+        "intent": "arrive_at_home",
+        "actor_role": "house_sitter",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A person arrives at the front door at night carrying a bag and pauses briefly near the entry. No tamper or forced-entry cue is visible.",
+        "categories": ["person"],
+        "visible_objects": ["duffel_bag"],
+        "risk_cues": ["entry_approach"],
+        "uncertainty": 0.14,
+        "confidence": 0.9,
+        "known_unknowns": ["identity_of_person", "whether_the_person_is_authorized"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {
+          "trusted_visitor": true,
+          "identity_source": "brand_trusted_person"
+        },
+        "time_context_facts": ["night", "entry_zone"],
+        "history_context": [],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "entry arrival is benign once explicit trusted metadata is applied"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "visitor_waits_on_porch_day_unclear",
+      "scenario_family": "visitor_wait",
+      "cohort": "ambiguous",
+      "zone": "porch",
+      "time_context": "2026-03-08T12:57:00",
+      "scene_brief": "A person stands on the porch longer than a quick knock but remains fully visible.",
+      "camera_view": "Porch camera with doorway and mat visible in daylight.",
+      "scene_truth": {
+        "actual_outcome": "ordinary_visitor_wait",
+        "authorized_presence": true,
+        "intent": "wait_for_answer",
+        "actor_role": "visitor",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A person remains on the porch in front of the door longer than a brief stop. The subject stays visible and does not handle the lock or camera.",
+        "categories": ["person"],
+        "visible_objects": [],
+        "risk_cues": ["entry_dwell"],
+        "uncertainty": 0.43,
+        "confidence": 0.74,
+        "known_unknowns": ["identity_of_person", "whether_the_wait_has_innocent_context_or_security_relevance"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["daylight", "entry_zone"],
+        "history_context": ["no prior suspicious sequence"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "medium",
+        "explanation_focus": "notable porch dwell, but daylight and lack of threat cues keep it below alert"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline", "operator_queue"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "not_eligible"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "window_peek_side_path_night",
+      "scenario_family": "window_probe",
+      "cohort": "threat",
+      "zone": "side_driveway",
+      "time_context": "2026-03-08T23:16:00",
+      "scene_brief": "A person leans toward a side window while moving slowly along the wall at night.",
+      "camera_view": "Side-path camera showing exterior wall, window, and narrow walkway.",
+      "scene_truth": {
+        "actual_outcome": "window_probe",
+        "authorized_presence": false,
+        "intent": "look_inside_home",
+        "actor_role": "unknown_person",
+        "safety_relevance": "threat"
+      },
+      "simulated_vision": {
+        "description": "A person moves slowly along the side of the home and leans toward a window. The subject stays close to the wall after hours.",
+        "categories": ["person"],
+        "visible_objects": ["window"],
+        "risk_cues": ["suspicious_presence", "perimeter_progression"],
+        "uncertainty": 0.18,
+        "confidence": 0.9,
+        "known_unknowns": ["identity_of_person"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["after_hours", "side_of_home"],
+        "history_context": [],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "alert",
+        "risk_level": "high",
+        "uncertainty_state": "low",
+        "explanation_focus": "after-hours window-focused perimeter behavior is strongly suspicious"
+      },
+      "expected_routing": {
+        "visibility_policy": "prominent",
+        "notification_policy": "immediate",
+        "storage_policy": "full",
+        "delivery_targets": ["homeowner_app", "operator_queue", "webhook", "monitoring"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "human_confirmation"
+      },
+      "false_positive_critical": false
+    },
+    {
+      "scenario_id": "mail_carrier_walks_past_no_stop_day",
+      "scenario_family": "pass_through",
+      "cohort": "benign",
+      "zone": "front_door",
+      "time_context": "2026-03-08T10:36:00",
+      "scene_brief": "A person walks past the front door toward a neighboring property without stopping.",
+      "camera_view": "Front-door camera with sidewalk and shared path visible.",
+      "scene_truth": {
+        "actual_outcome": "pass_through",
+        "authorized_presence": true,
+        "intent": "continue_along_path",
+        "actor_role": "postal_worker",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A person walks past the front entry without stopping or interacting with the door. Movement is lateral across the camera view.",
+        "categories": ["person"],
+        "visible_objects": [],
+        "risk_cues": [],
+        "uncertainty": 0.09,
+        "confidence": 0.89,
+        "known_unknowns": ["identity_of_person"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["daylight"],
+        "history_context": ["street-adjacent lateral pass-throughs are common"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "none",
+        "uncertainty_state": "low",
+        "explanation_focus": "lateral movement with no interaction at the home"
+      },
+      "expected_routing": {
+        "visibility_policy": "hidden",
+        "notification_policy": "none",
+        "storage_policy": "diagnostic",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "person_visible_in_open_garage_day",
+      "scenario_family": "garage_activity",
+      "cohort": "benign",
+      "zone": "garage",
+      "time_context": "2026-03-08T16:48:00",
+      "scene_brief": "A person is visible inside an open garage moving boxes near a parked car.",
+      "camera_view": "Garage exterior camera facing the threshold and front of the interior.",
+      "scene_truth": {
+        "actual_outcome": "routine_garage_activity",
+        "authorized_presence": true,
+        "intent": "move_items",
+        "actor_role": "resident",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A person moves box-like objects inside an open garage during the day. No forced entry, concealment, or tamper behavior is visible.",
+        "categories": ["person", "vehicle"],
+        "visible_objects": ["boxes", "parked_vehicle"],
+        "risk_cues": [],
+        "uncertainty": 0.17,
+        "confidence": 0.83,
+        "known_unknowns": ["identity_of_person"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["daylight"],
+        "history_context": ["open-garage daytime activity is normal here"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "ordinary garage occupancy and object movement"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "crouched_person_under_deck_after_hours",
+      "scenario_family": "loitering",
+      "cohort": "threat",
+      "zone": "backyard",
+      "time_context": "2026-03-08T00:49:00",
+      "scene_brief": "A person remains crouched near the back deck for an extended period after hours.",
+      "camera_view": "Backyard IR camera with deck stairs and patio visible.",
+      "scene_truth": {
+        "actual_outcome": "concealed_loitering",
+        "authorized_presence": false,
+        "intent": "hide_or_wait",
+        "actor_role": "unknown_person",
+        "safety_relevance": "threat"
+      },
+      "simulated_vision": {
+        "description": "A person remains low to the ground near the back deck and stays in place after hours. The posture suggests concealment or prolonged waiting.",
+        "categories": ["person"],
+        "visible_objects": [],
+        "risk_cues": ["entry_dwell", "suspicious_presence"],
+        "uncertainty": 0.2,
+        "confidence": 0.87,
+        "known_unknowns": ["identity_of_person", "exact_purpose_of_crouched_posture"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["after_hours", "rear_of_home"],
+        "history_context": ["no matching benign activity sequence"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "alert",
+        "risk_level": "high",
+        "uncertainty_state": "low",
+        "explanation_focus": "after-hours concealed loitering near the home exterior"
+      },
+      "expected_routing": {
+        "visibility_policy": "prominent",
+        "notification_policy": "immediate",
+        "storage_policy": "full",
+        "delivery_targets": ["homeowner_app", "operator_queue", "webhook", "monitoring"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "human_confirmation"
+      },
+      "false_positive_critical": false
+    },
+    {
+      "scenario_id": "child_chalk_front_walk_afternoon",
+      "scenario_family": "routine_outdoor_task",
+      "cohort": "benign",
+      "zone": "front_door",
+      "time_context": "2026-03-08T16:02:00",
+      "scene_brief": "A child kneels on the front walkway drawing on the ground in daylight.",
+      "camera_view": "Front-door camera capturing porch steps and walkway.",
+      "scene_truth": {
+        "actual_outcome": "routine_child_activity",
+        "authorized_presence": true,
+        "intent": "draw_on_walkway",
+        "actor_role": "child_resident",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A small person kneels on the front walkway and appears focused on the ground. The scene shows stationary activity near the walkway rather than entry handling.",
+        "categories": ["person"],
+        "visible_objects": ["small_object_in_hand"],
+        "risk_cues": [],
+        "uncertainty": 0.19,
+        "confidence": 0.8,
+        "known_unknowns": ["identity_of_person", "exact_activity_item"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["daylight"],
+        "history_context": ["similar benign outdoor family activity occurs here"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "benign stationary activity without threat cues"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "runner_crosses_driveway_edge_night",
+      "scenario_family": "pass_through",
+      "cohort": "ambiguous",
+      "zone": "driveway",
+      "time_context": "2026-03-08T21:12:00",
+      "scene_brief": "A person runs quickly along the street edge crossing the driveway view at night.",
+      "camera_view": "Driveway camera facing the street with partial sidewalk coverage.",
+      "scene_truth": {
+        "actual_outcome": "street_runner_pass_through",
+        "authorized_presence": true,
+        "intent": "continue_running",
+        "actor_role": "passerby",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A person runs laterally across the edge of the driveway view at night. The movement is fast and does not stop near the home.",
+        "categories": ["person", "motion"],
+        "visible_objects": [],
+        "risk_cues": [],
+        "uncertainty": 0.42,
+        "confidence": 0.76,
+        "known_unknowns": ["identity_of_person"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["night", "driveway_edge"],
+        "history_context": ["no corroborating sequence near the entry"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "medium",
+        "explanation_focus": "night movement is notable, but lateral pass-through lacks home-directed threat cues"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "package_grab_and_depart_daylight",
+      "scenario_family": "package_theft",
+      "cohort": "threat",
+      "zone": "porch",
+      "time_context": "2026-03-08T13:18:00",
+      "scene_brief": "A person crouches, grabs a parcel, and leaves the porch quickly.",
+      "camera_view": "Porch camera with front walk and parcel location fully visible.",
+      "scene_truth": {
+        "actual_outcome": "package_theft",
+        "authorized_presence": false,
+        "intent": "steal_package",
+        "actor_role": "unknown_person",
+        "safety_relevance": "threat"
+      },
+      "simulated_vision": {
+        "description": "A person crouches near a parcel on the porch, picks it up, and moves away quickly. The frame does not show package placement, only removal.",
+        "categories": ["person", "package"],
+        "visible_objects": ["parcel"],
+        "risk_cues": [],
+        "uncertainty": 0.16,
+        "confidence": 0.9,
+        "known_unknowns": ["identity_of_person", "whether_the_removal_is_authorized"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["daylight"],
+        "history_context": ["prior delivery event exists for this porch"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "alert",
+        "risk_level": "medium",
+        "uncertainty_state": "medium",
+        "explanation_focus": "rapid parcel removal after delivery context justifies alert"
+      },
+      "expected_routing": {
+        "visibility_policy": "prominent",
+        "notification_policy": "review",
+        "storage_policy": "full",
+        "delivery_targets": ["homeowner_app", "operator_queue", "timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "not_eligible"
+      },
+      "false_positive_critical": false
+    },
+    {
+      "scenario_id": "person_reaches_for_car_handle_after_hours",
+      "scenario_family": "vehicle_probe",
+      "cohort": "threat",
+      "zone": "driveway",
+      "time_context": "2026-03-08T00:34:00",
+      "scene_brief": "A person reaches toward a parked car door handle in the driveway after hours.",
+      "camera_view": "Driveway camera with parked car side profile visible.",
+      "scene_truth": {
+        "actual_outcome": "vehicle_break_in_probe",
+        "authorized_presence": false,
+        "intent": "test_car_access",
+        "actor_role": "unknown_person",
+        "safety_relevance": "threat"
+      },
+      "simulated_vision": {
+        "description": "A person stands close to a parked vehicle and reaches toward the door handle after hours. The action is focused on the vehicle door area.",
+        "categories": ["person", "vehicle"],
+        "visible_objects": ["parked_vehicle"],
+        "risk_cues": ["suspicious_presence"],
+        "uncertainty": 0.18,
+        "confidence": 0.88,
+        "known_unknowns": ["identity_of_person", "whether_the_vehicle_access_is_authorized"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["after_hours", "driveway_zone"],
+        "history_context": ["no routine late-night vehicle access on record"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "alert",
+        "risk_level": "medium",
+        "uncertainty_state": "medium",
+        "explanation_focus": "after-hours direct interaction with parked vehicle is suspicious"
+      },
+      "expected_routing": {
+        "visibility_policy": "prominent",
+        "notification_policy": "review",
+        "storage_policy": "full",
+        "delivery_targets": ["homeowner_app", "operator_queue", "timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "not_eligible"
+      },
+      "false_positive_critical": false
+    },
+    {
+      "scenario_id": "indoor_cleaning_day_with_trusted_metadata",
+      "scenario_family": "trusted_visitor",
+      "cohort": "benign",
+      "zone": "living_room",
+      "time_context": "2026-03-08T11:03:00",
+      "scene_brief": "An indoor camera shows a person moving a vacuum through the living room during the day.",
+      "camera_view": "Living-room corner camera covering couch and hallway.",
+      "scene_truth": {
+        "actual_outcome": "scheduled_cleaning_visit",
+        "authorized_presence": true,
+        "intent": "clean_home",
+        "actor_role": "cleaner",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A person is moving a vacuum-like object through the living room in daylight. The subject is indoors and engaged in repetitive room movement.",
+        "categories": ["person"],
+        "visible_objects": ["vacuum_like_object"],
+        "risk_cues": [],
+        "uncertainty": 0.09,
+        "confidence": 0.92,
+        "known_unknowns": ["identity_of_person", "whether_the_presence_is_authorized"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {
+          "trusted_visitor": true,
+          "identity_source": "brand_service_schedule"
+        },
+        "time_context_facts": ["daylight", "interior_zone"],
+        "history_context": ["recurring daytime indoor service visits are expected"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "interior occupancy is benign once trusted metadata is applied"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "spider_web_ir_artifact_garage",
+      "scenario_family": "camera_artifact",
+      "cohort": "ambiguous",
+      "zone": "garage",
+      "time_context": "2026-03-08T04:52:00",
+      "scene_brief": "A spider web close to the lens reflects infrared light and creates ghost motion near the garage.",
+      "camera_view": "Garage exterior IR camera with a web crossing one corner of the frame.",
+      "scene_truth": {
+        "actual_outcome": "camera_artifact",
+        "authorized_presence": true,
+        "intent": "none",
+        "actor_role": "none_visible",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A bright web-like artifact close to the lens creates shifting motion in infrared view. No clear person or vehicle is visible at the garage.",
+        "categories": ["motion"],
+        "visible_objects": ["lens_artifact"],
+        "risk_cues": [],
+        "uncertainty": 0.84,
+        "confidence": 0.44,
+        "known_unknowns": ["whether_any_subject_is_present"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["night", "infrared_view"],
+        "history_context": ["artifact-like events happen when webs form near the lens"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "none",
+        "uncertainty_state": "high",
+        "explanation_focus": "camera artifact with no discernible actor"
+      },
+      "expected_routing": {
+        "visibility_policy": "hidden",
+        "notification_policy": "none",
+        "storage_policy": "diagnostic",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "not_eligible"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "person_opens_side_gate_dusk",
+      "scenario_family": "perimeter_probe",
+      "cohort": "threat",
+      "zone": "backyard",
+      "time_context": "2026-03-08T19:28:00",
+      "scene_brief": "A person opens the side gate at dusk and steps partly into the backyard.",
+      "camera_view": "Backyard camera pointed toward gate opening and side fence line.",
+      "scene_truth": {
+        "actual_outcome": "unauthorized_boundary_crossing",
+        "authorized_presence": false,
+        "intent": "enter_fenced_area",
+        "actor_role": "unknown_person",
+        "safety_relevance": "threat"
+      },
+      "simulated_vision": {
+        "description": "A person opens the side gate and moves into the backyard area. The frame shows interaction with a boundary access point.",
+        "categories": ["person"],
+        "visible_objects": ["gate"],
+        "risk_cues": ["perimeter_progression", "entry_approach"],
+        "uncertainty": 0.15,
+        "confidence": 0.91,
+        "known_unknowns": ["identity_of_person", "whether_the_gate_entry_is_authorized"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["dusk", "fenced_boundary"],
+        "history_context": ["no benign gate-access context tied to this event"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "alert",
+        "risk_level": "medium",
+        "uncertainty_state": "low",
+        "explanation_focus": "boundary crossing into protected yard area"
+      },
+      "expected_routing": {
+        "visibility_policy": "prominent",
+        "notification_policy": "review",
+        "storage_policy": "full",
+        "delivery_targets": ["homeowner_app", "operator_queue", "timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "not_eligible"
+      },
+      "false_positive_critical": false
+    },
+    {
+      "scenario_id": "brief_mail_slot_check_morning",
+      "scenario_family": "routine_outdoor_task",
+      "cohort": "benign",
+      "zone": "front_door",
+      "time_context": "2026-03-08T08:14:00",
+      "scene_brief": "A person steps onto the porch in the morning, checks near the door, and returns inside.",
+      "camera_view": "Front-door camera with porch landing and door fully visible.",
+      "scene_truth": {
+        "actual_outcome": "brief_routine_check",
+        "authorized_presence": true,
+        "intent": "check_mail_or_entry",
+        "actor_role": "resident",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A person briefly steps onto the porch, looks near the door area, and then turns back. The stop is short and there is no visible tamper interaction.",
+        "categories": ["person"],
+        "visible_objects": [],
+        "risk_cues": ["entry_approach"],
+        "uncertainty": 0.13,
+        "confidence": 0.88,
+        "known_unknowns": ["identity_of_person", "exact_reason_for_brief_stop"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["morning", "not_after_hours"],
+        "history_context": ["similar short door-area checks are common"],
+        "memory_hints": ["brief porch routines may be learned"]
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "brief entry-area interaction without threat evidence"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "two_people_arguing_on_steps_evening",
+      "scenario_family": "social_conflict",
+      "cohort": "ambiguous",
+      "zone": "front_door",
+      "time_context": "2026-03-08T20:07:00",
+      "scene_brief": "Two people stand on the front steps gesturing intensely at each other.",
+      "camera_view": "Front-door camera with porch steps and upper-body gestures visible.",
+      "scene_truth": {
+        "actual_outcome": "verbal_argument_only",
+        "authorized_presence": true,
+        "intent": "argument",
+        "actor_role": "visitors",
+        "safety_relevance": "ambiguous"
+      },
+      "simulated_vision": {
+        "description": "Two people are on the front steps making animated gestures toward each other. No weapon, forced entry, or clear physical assault is visible in the frame.",
+        "categories": ["person"],
+        "visible_objects": [],
+        "risk_cues": ["suspicious_presence"],
+        "uncertainty": 0.47,
+        "confidence": 0.73,
+        "known_unknowns": ["whether_the_interaction_will_escalate", "relationship_between_the_people"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["evening", "entry_zone"],
+        "history_context": ["no prior violent behavior in sequence"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "medium",
+        "explanation_focus": "social conflict is notable but lacks concrete security-threat evidence"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline", "operator_queue"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "not_eligible"
+      },
+      "false_positive_critical": false
+    },
+    {
+      "scenario_id": "wind_shadows_backyard_night",
+      "scenario_family": "environmental_motion",
+      "cohort": "ambiguous",
+      "zone": "backyard",
+      "time_context": "2026-03-08T00:12:00",
+      "scene_brief": "Tree shadows move rapidly over the patio in strong wind with no visible subject.",
+      "camera_view": "Backyard camera covering patio and fence under motion-activated lighting.",
+      "scene_truth": {
+        "actual_outcome": "shadow_artifact",
+        "authorized_presence": true,
+        "intent": "none",
+        "actor_role": "none_visible",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "Moving shadows sweep across the backyard patio. No person, animal, or vehicle is clearly visible in the frame.",
+        "categories": ["motion"],
+        "visible_objects": [],
+        "risk_cues": [],
+        "uncertainty": 0.82,
+        "confidence": 0.46,
+        "known_unknowns": ["whether_any_subject_is_present"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["night", "windy_conditions"],
+        "history_context": ["shadow-triggered motion has happened before on windy nights"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "none",
+        "uncertainty_state": "high",
+        "explanation_focus": "environmental motion only with no visible actor"
+      },
+      "expected_routing": {
+        "visibility_policy": "hidden",
+        "notification_policy": "none",
+        "storage_policy": "diagnostic",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "not_eligible"
+      },
+      "false_positive_critical": true
+    },
+    {
+      "scenario_id": "person_carries_large_object_out_side_gate_day",
+      "scenario_family": "property_removal",
+      "cohort": "threat",
+      "zone": "side_driveway",
+      "time_context": "2026-03-08T15:52:00",
+      "scene_brief": "A person exits through the side gate carrying a large object away from the property.",
+      "camera_view": "Side-drive camera with side gate and path to the street visible.",
+      "scene_truth": {
+        "actual_outcome": "unauthorized_property_removal",
+        "authorized_presence": false,
+        "intent": "remove_property",
+        "actor_role": "unknown_person",
+        "safety_relevance": "threat"
+      },
+      "simulated_vision": {
+        "description": "A person leaves through the side gate carrying a large object away from the property. The movement is directed outward from the yard.",
+        "categories": ["person"],
+        "visible_objects": ["large_carried_object", "gate"],
+        "risk_cues": ["perimeter_progression"],
+        "uncertainty": 0.23,
+        "confidence": 0.85,
+        "known_unknowns": ["identity_of_person", "what_the_object_is", "whether_the_removal_is_authorized"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["daylight", "exit_from_property_boundary"],
+        "history_context": ["no scheduled move-out or service event is known"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "alert",
+        "risk_level": "medium",
+        "uncertainty_state": "medium",
+        "explanation_focus": "property appears to be leaving through a protected boundary without benign context"
+      },
+      "expected_routing": {
+        "visibility_policy": "prominent",
+        "notification_policy": "review",
+        "storage_policy": "full",
+        "delivery_targets": ["homeowner_app", "operator_queue", "timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "not_eligible"
+      },
+      "false_positive_critical": false
+    },
+    {
+      "scenario_id": "gift_bag_arrival_front_door_evening",
+      "scenario_family": "social_visit",
+      "cohort": "benign",
+      "zone": "front_door",
+      "time_context": "2026-03-08T18:36:00",
+      "scene_brief": "A person approaches the front door carrying a gift bag and balloon in the early evening.",
+      "camera_view": "Front-door camera with clear porch lighting at dusk.",
+      "scene_truth": {
+        "actual_outcome": "ordinary_social_visit",
+        "authorized_presence": true,
+        "intent": "visit_home",
+        "actor_role": "guest",
+        "safety_relevance": "benign"
+      },
+      "simulated_vision": {
+        "description": "A person approaches the front door holding a bag and a balloon-like object. The movement is direct and there is no visible tamper behavior.",
+        "categories": ["person"],
+        "visible_objects": ["gift_bag", "balloon_like_object"],
+        "risk_cues": ["entry_approach"],
+        "uncertainty": 0.14,
+        "confidence": 0.9,
+        "known_unknowns": ["identity_of_person", "whether_the_visit_is_expected"],
+        "prohibited_inference_compliant": true
+      },
+      "expected_reasoning_inputs": {
+        "upstream_identity_metadata": {},
+        "time_context_facts": ["evening", "not_after_hours"],
+        "history_context": ["no suspicious prior sequence"],
+        "memory_hints": []
+      },
+      "expected_judgement": {
+        "action": "suppress",
+        "risk_level": "low",
+        "uncertainty_state": "low",
+        "explanation_focus": "visitor-like arrival without threat cues"
+      },
+      "expected_routing": {
+        "visibility_policy": "timeline",
+        "notification_policy": "none",
+        "storage_policy": "timeline",
+        "delivery_targets": ["timeline"]
+      },
+      "expected_action_readiness": {
+        "autonomy_eligible": "low_risk_later"
+      },
+      "false_positive_critical": true
+    }
+  ]
+}

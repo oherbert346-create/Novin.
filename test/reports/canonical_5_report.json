@@ -1,0 +1,596 @@
+{
+  "metrics": {
+    "total": 5,
+    "action_accuracy": 0.8,
+    "action_correct": 4,
+    "cohort_accuracy": {
+      "benign": 0.6666666666666666,
+      "threat": 1.0,
+      "ambiguous": 1.0
+    },
+    "p50_latency_ms": 914.52,
+    "p95_latency_ms": 914.52,
+    "mean_latency_ms": 1014.182
+  },
+  "results": [
+    {
+      "scenario_id": "payload_1_baseline_benign",
+      "cohort": "benign",
+      "expected": "suppress",
+      "actual": "suppress",
+      "risk_level": "medium",
+      "confidence": 0.0,
+      "reasoning_latency_ms": 1590.33,
+      "explainability": {
+        "consumer_summary": {
+          "headline": "Check recent activity at porch",
+          "reason": "person may need verification because of entry approach.",
+          "action_now": "Notify the homeowner, keep the case visible, and request quick verification"
+        },
+        "operator_summary": {
+          "what_observed": "person in porch; categories=person; risk_labels=entry_approach.",
+          "why_flagged": "routed as medium risk with 0.30 anomaly signal",
+          "why_not_benign": "no dominant benign pattern",
+          "what_is_uncertain": "missing_historical_context",
+          "timeline_context": "no linked case history yet",
+          "recommended_next_step": "Notify the homeowner, keep the case visible, and request quick verification."
+        },
+        "evidence_digest": [
+          {
+            "kind": "vision",
+            "claim": "Mail carrier walks to porch, places package at door, turns and leaves. Direct purposeful movement.. Props: package, mail_bag. History: Mail and package deliveries are common at thi",
+            "source": "vision",
+            "status": "supporting"
+          },
+          {
+            "kind": "risk",
+            "claim": "entry_approach",
+            "source": "policy",
+            "status": "missing"
+          },
+          {
+            "kind": "history",
+            "claim": "no linked case history yet",
+            "source": "history",
+            "status": "missing"
+          },
+          {
+            "kind": "uncertainty",
+            "claim": "missing_historical_context",
+            "source": "case_engine",
+            "status": "missing"
+          },
+          {
+            "kind": "consensus",
+            "claim": "0 alert, 4 suppress, decision=suppress",
+            "source": "reasoning_agents",
+            "status": "supporting"
+          }
+        ],
+        "judgement": {
+          "decision_rationale": "RISK_BASIS: home-security routing assessed this scene as medium. ALERT_BASIS: confidence_unmet 0%<70%; severity_met none>=low; threat_semantics_met; risk_level=medium; visibility=prominent; notify=review. SUPPRESS_BASIS: final_action=suppress; risk_level=medium; visibility=prominent; notify=review; suppress_norm=100%; alert_norm=0%. CONFIDENCE_DECOMPOSITION: selected=0%; alert_norm=0%; suppress_norm=100%; raw_alert=0.000; raw_suppress=0.903; raw_uncertain=0.000; residual=0.097; contributions=[context_baseline_reasoner:suppress weighted=0.135 (w=0.15, c=0.90); trajectory_intent_assessor:suppress weighted=0.180 (w=0.20, c=0.90); falsification_auditor:suppress weighted=0.138 (w=0.15, c=0.92); executive_triage_commander:suppress weighted=0.450 (w=0.50, c=0.90)]. CONSISTENCY_CHECKS: warn: suppress-leaning votes conflict with threat-oriented vision semantics.",
+          "contradiction_markers": []
+        },
+        "decision_reasoning": "RISK_BASIS: home-security routing assessed this scene as medium. ALERT_BASIS: confidence_unmet 0%<70%; severity_met none>=low; threat_semantics_met; risk_level=medium; visibility=prominent; notify=review. SUPPRESS_BASIS: final_action=suppress; risk_level=medium; visibility=prominent; notify=review; suppress_norm=100%; alert_norm=0%. CONFIDENCE_DECOMPOSITION: selected=0%; alert_norm=0%; suppress_norm=100%; raw_alert=0.000; raw_suppress=0.903; raw_uncertain=0.000; residual=0.097; contributions=[context_baseline_reasoner:suppress weighted=0.135 (w=0.15, c=0.90); trajectory_intent_assessor:suppress weighted=0.180 (w=0.20, c=0.90); falsification_auditor:suppress weighted=0.138 (w=0.15, c=0.92); executive_triage_commander:suppress weighted=0.450 (w=0.50, c=0.90)]. CONSISTENCY_CHECKS: warn: suppress-leaning votes conflict with threat-oriented vision semantics.",
+        "agent_outputs": [
+          {
+            "agent_id": "context_baseline_reasoner",
+            "verdict": "suppress",
+            "risk_level": "low",
+            "rationale": "SIGNAL: entry_approach EVIDENCE: mail carrier delivering package on porch at 14:00, typical daytime activity, baseline normal. UNCERTAINTY: none. DECISION: matches routine, no threat.",
+            "chain_notes": {
+              "focus": "context_baseline",
+              "risk_level": "low",
+              "recommended_action": "continue monitoring and keep visible in timeline",
+              "zone_risk": "medium",
+              "threat_outcome": "LOW"
+            }
+          },
+          {
+            "agent_id": "trajectory_intent_assessor",
+            "verdict": "suppress",
+            "risk_level": "low",
+            "rationale": "SIGNAL: benign entry approach EVIDENCE: direct purposeful path, short dwell placing package, no hesitation, carrying mail items UNCERTAINTY: none, identity not confirmed but behavior clear DECISION: low risk, suppress",
+            "chain_notes": {
+              "focus": "trajectory_intent",
+              "risk_level": "low",
+              "recommended_action": "continue monitoring and keep visible in timeline",
+              "intent": "ambiguous",
+              "threat_outcome": "LOW"
+            }
+          },
+          {
+            "agent_id": "falsification_auditor",
+            "verdict": "suppress",
+            "risk_level": "low",
+            "rationale": "SIGNAL: benign delivery. EVIDENCE: person with mail bag places package, purposeful walk, no tamper. UNCERTAINTY: none, all expected delivery props present. DECISION: threat cues explained by routine mail carrier, so supp",
+            "chain_notes": {
+              "focus": "falsification_auditor",
+              "risk_level": "low",
+              "recommended_action": "continue monitoring and keep visible in timeline",
+              "benign_theory": "accepted",
+              "threat_outcome": "LOW"
+            }
+          },
+          {
+            "agent_id": "executive_triage_commander",
+            "verdict": "suppress",
+            "risk_level": "low",
+            "rationale": "SIGNAL: benign entry approach EVIDENCE: mail carrier places package on porch during daytime, matching routine delivery props UNCERTAINTY: none DECISION: all agents agree no threat, suppress",
+            "chain_notes": {
+              "focus": "executive_triage",
+              "risk_level": "low",
+              "recommended_action": "continue monitoring and keep visible in timeline",
+              "triage": "silent_log",
+              "threat_outcome": "LOW"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "payload_2_obvious_threat",
+      "cohort": "threat",
+      "expected": "alert",
+      "actual": "alert",
+      "risk_level": "high",
+      "confidence": 1.0,
+      "reasoning_latency_ms": 853.86,
+      "explainability": {
+        "consumer_summary": {
+          "headline": "Urgent security review for backyard",
+          "reason": "person linked to entry dwell.",
+          "action_now": "Escalate immediately, preserve the incident timeline, and notify downstream monitoring"
+        },
+        "operator_summary": {
+          "what_observed": "person in backyard; categories=person; risk_labels=forced_entry,entry_dwell,suspicious_presence.",
+          "why_flagged": "entry_dwell, forced_entry, perimeter_progression",
+          "why_not_benign": "no dominant benign pattern",
+          "what_is_uncertain": "missing_historical_context",
+          "timeline_context": "no linked case history yet",
+          "recommended_next_step": "Escalate immediately, preserve the incident timeline, and notify downstream monitoring."
+        },
+        "evidence_digest": [
+          {
+            "kind": "vision",
+            "claim": "Masked individual approaches back door, tests handle with crowbar. Focused on entry hardware.. Props: crowbar, mask. History: No benign routine at this hour. No prior maintenance o",
+            "source": "vision",
+            "status": "supporting"
+          },
+          {
+            "kind": "risk",
+            "claim": "entry_dwell, forced_entry, perimeter_progression",
+            "source": "policy",
+            "status": "supporting"
+          },
+          {
+            "kind": "history",
+            "claim": "no linked case history yet",
+            "source": "history",
+            "status": "missing"
+          },
+          {
+            "kind": "uncertainty",
+            "claim": "missing_historical_context",
+            "source": "case_engine",
+            "status": "missing"
+          },
+          {
+            "kind": "consensus",
+            "claim": "3 alert, 0 suppress, decision=alert",
+            "source": "reasoning_agents",
+            "status": "supporting"
+          }
+        ],
+        "judgement": {
+          "decision_rationale": "RISK_BASIS: home-security routing assessed this scene as high. ALERT_BASIS: confidence_met 100%>=70%; severity_met high>=low; threat_semantics_met; fast_path_entry_risk; risk_level=high; visibility=prominent; notify=immediate. SUPPRESS_BASIS: final_action=alert; risk_level=high; visibility=prominent; notify=immediate; suppress_norm=0%; alert_norm=100%. CONFIDENCE_DECOMPOSITION: selected=100%; alert_norm=100%; suppress_norm=0%; raw_alert=0.765; raw_suppress=0.000; raw_uncertain=0.000; residual=0.235; contributions=[context_baseline_reasoner:uncertain weighted=0.000 (w=0.15, c=0.00); trajectory_intent_assessor:alert weighted=0.180 (w=0.20, c=0.90); falsification_auditor:alert weighted=0.135 (w=0.15, c=0.90); executive_triage_commander:alert weighted=0.450 (w=0.50, c=0.90)]. CONSISTENCY_CHECKS: pass: vision semantics and vote direction are aligned.",
+          "contradiction_markers": []
+        },
+        "decision_reasoning": "RISK_BASIS: home-security routing assessed this scene as high. ALERT_BASIS: confidence_met 100%>=70%; severity_met high>=low; threat_semantics_met; fast_path_entry_risk; risk_level=high; visibility=prominent; notify=immediate. SUPPRESS_BASIS: final_action=alert; risk_level=high; visibility=prominent; notify=immediate; suppress_norm=0%; alert_norm=100%. CONFIDENCE_DECOMPOSITION: selected=100%; alert_norm=100%; suppress_norm=0%; raw_alert=0.765; raw_suppress=0.000; raw_uncertain=0.000; residual=0.235; contributions=[context_baseline_reasoner:uncertain weighted=0.000 (w=0.15, c=0.00); trajectory_intent_assessor:alert weighted=0.180 (w=0.20, c=0.90); falsification_auditor:alert weighted=0.135 (w=0.15, c=0.90); executive_triage_commander:alert weighted=0.450 (w=0.50, c=0.90)]. CONSISTENCY_CHECKS: pass: vision semantics and vote direction are aligned.",
+        "agent_outputs": [
+          {
+            "agent_id": "context_baseline_reasoner",
+            "verdict": "uncertain",
+            "risk_level": "low",
+            "rationale": "Agent fallback: contradiction: alert_without_threat_evidence",
+            "chain_notes": {
+              "focus": "context_baseline",
+              "risk_level": "low",
+              "recommended_action": "continue monitoring and keep visible in timeline",
+              "zone_risk": "medium",
+              "threat_outcome": "LOW"
+            }
+          },
+          {
+            "agent_id": "trajectory_intent_assessor",
+            "verdict": "alert",
+            "risk_level": "high",
+            "rationale": "SIGNAL: forced entry intent EVIDENCE: masked person approaches back door, uses crowbar on handle, dwells on hardware UNCERTAINTY: none DECISION: clear threat cues demand immediate alert",
+            "chain_notes": {
+              "focus": "trajectory_intent",
+              "risk_level": "low",
+              "recommended_action": "continue monitoring and keep visible in timeline",
+              "intent": "ambiguous",
+              "threat_outcome": "LOW"
+            }
+          },
+          {
+            "agent_id": "falsification_auditor",
+            "verdict": "alert",
+            "risk_level": "high",
+            "rationale": "SIGNAL: forced entry cues present. EVIDENCE: masked person with crowbar testing back door handle. UNCERTAINTY: no benign props or routine explain crowbar use. DECISION: threat cannot be falsified, issue alert.",
+            "chain_notes": {
+              "focus": "falsification_auditor",
+              "risk_level": "low",
+              "recommended_action": "continue monitoring and keep visible in timeline",
+              "benign_theory": "accepted",
+              "threat_outcome": "LOW"
+            }
+          },
+          {
+            "agent_id": "executive_triage_commander",
+            "verdict": "alert",
+            "risk_level": "high",
+            "rationale": "SIGNAL: forced entry threat. EVIDENCE: masked individual with crowbar testing back\u2011door handle, dwelling on entry hardware. UNCERTAINTY: none. DECISION: strong intent and unfalsifiable cues mandate immediate alert.",
+            "chain_notes": {
+              "focus": "executive_triage",
+              "risk_level": "low",
+              "recommended_action": "continue monitoring and keep visible in timeline",
+              "triage": "silent_log",
+              "threat_outcome": "LOW"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "payload_3_benign_edge_case",
+      "cohort": "benign",
+      "expected": "suppress",
+      "actual": "alert",
+      "risk_level": "high",
+      "confidence": 1.0,
+      "reasoning_latency_ms": 988.83,
+      "explainability": {
+        "consumer_summary": {
+          "headline": "Urgent security review for front door",
+          "reason": "person linked to entry approach.",
+          "action_now": "Send an immediate alert and queue this case for operator review"
+        },
+        "operator_summary": {
+          "what_observed": "person in front door; categories=person; risk_labels=entry_approach,suspicious_presence.",
+          "why_flagged": "routed as high risk with 0.60 anomaly signal",
+          "why_not_benign": "no dominant benign pattern",
+          "what_is_uncertain": "missing_historical_context",
+          "timeline_context": "no linked case history yet",
+          "recommended_next_step": "Send an immediate alert and queue this case for operator review."
+        },
+        "evidence_digest": [
+          {
+            "kind": "vision",
+            "claim": "Person approaches door quietly at 2 AM, uses key, enters quickly. Furtive but no tools or forced entry.. History: Teenager returning late is plausible. No prior intrusion pattern. ",
+            "source": "vision",
+            "status": "supporting"
+          },
+          {
+            "kind": "risk",
+            "claim": "entry_approach, suspicious_presence",
+            "source": "policy",
+            "status": "missing"
+          },
+          {
+            "kind": "history",
+            "claim": "no linked case history yet",
+            "source": "history",
+            "status": "missing"
+          },
+          {
+            "kind": "uncertainty",
+            "claim": "missing_historical_context",
+            "source": "case_engine",
+            "status": "missing"
+          },
+          {
+            "kind": "consensus",
+            "claim": "2 alert, 0 suppress, decision=alert",
+            "source": "reasoning_agents",
+            "status": "supporting"
+          }
+        ],
+        "judgement": {
+          "decision_rationale": "RISK_BASIS: home-security routing assessed this scene as high. ALERT_BASIS: confidence_met 100%>=70%; severity_met none>=low; threat_semantics_met; fast_path_entry_risk; risk_level=high; visibility=prominent; notify=immediate. SUPPRESS_BASIS: final_action=alert; risk_level=high; visibility=prominent; notify=immediate; suppress_norm=0%; alert_norm=100%. CONFIDENCE_DECOMPOSITION: selected=100%; alert_norm=100%; suppress_norm=0%; raw_alert=0.595; raw_suppress=0.000; raw_uncertain=0.000; residual=0.405; contributions=[context_baseline_reasoner:uncertain weighted=0.000 (w=0.15, c=0.00); trajectory_intent_assessor:alert weighted=0.170 (w=0.20, c=0.85); falsification_auditor:uncertain weighted=0.000 (w=0.15, c=0.00); executive_triage_commander:alert weighted=0.425 (w=0.50, c=0.85)]. CONSISTENCY_CHECKS: pass: vision semantics and vote direction are aligned.",
+          "contradiction_markers": [
+            "non_threat_scene_alerted"
+          ]
+        },
+        "decision_reasoning": "RISK_BASIS: home-security routing assessed this scene as high. ALERT_BASIS: confidence_met 100%>=70%; severity_met none>=low; threat_semantics_met; fast_path_entry_risk; risk_level=high; visibility=prominent; notify=immediate. SUPPRESS_BASIS: final_action=alert; risk_level=high; visibility=prominent; notify=immediate; suppress_norm=0%; alert_norm=100%. CONFIDENCE_DECOMPOSITION: selected=100%; alert_norm=100%; suppress_norm=0%; raw_alert=0.595; raw_suppress=0.000; raw_uncertain=0.000; residual=0.405; contributions=[context_baseline_reasoner:uncertain weighted=0.000 (w=0.15, c=0.00); trajectory_intent_assessor:alert weighted=0.170 (w=0.20, c=0.85); falsification_auditor:uncertain weighted=0.000 (w=0.15, c=0.00); executive_triage_commander:alert weighted=0.425 (w=0.50, c=0.85)]. CONSISTENCY_CHECKS: pass: vision semantics and vote direction are aligned.",
+        "agent_outputs": [
+          {
+            "agent_id": "context_baseline_reasoner",
+            "verdict": "uncertain",
+            "risk_level": "low",
+            "rationale": "Agent fallback: privacy_policy: inferred_identity",
+            "chain_notes": {
+              "focus": "context_baseline",
+              "risk_level": "low",
+              "recommended_action": "continue monitoring and keep visible in timeline",
+              "zone_risk": "medium",
+              "threat_outcome": "LOW"
+            }
+          },
+          {
+            "agent_id": "trajectory_intent_assessor",
+            "verdict": "alert",
+            "risk_level": "high",
+            "rationale": "SIGNAL: entry_approach with key at 2\u202fAM EVIDENCE: quiet approach, key use, rapid entry, no forced tools UNCERTAINTY: identity/trust unknown DECISION: entry\u2011zone threat cues trigger alert",
+            "chain_notes": {
+              "focus": "trajectory_intent",
+              "risk_level": "low",
+              "recommended_action": "continue monitoring and keep visible in timeline",
+              "intent": "ambiguous",
+              "threat_outcome": "LOW"
+            }
+          },
+          {
+            "agent_id": "falsification_auditor",
+            "verdict": "uncertain",
+            "risk_level": "low",
+            "rationale": "Agent fallback: contradiction: suppress_with_threat_evidence",
+            "chain_notes": {
+              "focus": "falsification_auditor",
+              "risk_level": "low",
+              "recommended_action": "continue monitoring and keep visible in timeline",
+              "benign_theory": "accepted",
+              "threat_outcome": "LOW"
+            }
+          },
+          {
+            "agent_id": "executive_triage_commander",
+            "verdict": "alert",
+            "risk_level": "high",
+            "rationale": "SIGNAL: entry_approach at 2\u202fAM with key. EVIDENCE: quiet approach, key use, rapid entry, no forced tools. UNCERTAINTY: identity/trust unknown. DECISION: threat cues at entry zone trigger alert per policy.",
+            "chain_notes": {
+              "focus": "executive_triage",
+              "risk_level": "low",
+              "recommended_action": "continue monitoring and keep visible in timeline",
+              "triage": "silent_log",
+              "threat_outcome": "LOW"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "payload_4_false_flag",
+      "cohort": "benign",
+      "expected": "suppress",
+      "actual": "suppress",
+      "risk_level": "none",
+      "confidence": 1.0,
+      "reasoning_latency_ms": 723.37,
+      "explainability": {
+        "consumer_summary": {
+          "headline": "Benign activity logged at driveway",
+          "reason": "pet looks consistent with pet activity.",
+          "action_now": "Keep in the timeline only and close as benign unless new evidence appears"
+        },
+        "operator_summary": {
+          "what_observed": "pet in driveway; categories=pet; risk_labels=clear.",
+          "why_flagged": "routed as none risk with 0.60 anomaly signal",
+          "why_not_benign": "benign alternatives considered: pet_activity",
+          "what_is_uncertain": "missing_historical_context",
+          "timeline_context": "no linked case history yet",
+          "recommended_next_step": "Keep in the timeline only and close as benign unless new evidence appears."
+        },
+        "evidence_digest": [
+          {
+            "kind": "vision",
+            "claim": "Raccoon knocks over trash can. Casts human-sized shadow from streetlight. No bipedal gait or human form.. Props: trash_can. History: Wildlife near trash occurs regularly. No person",
+            "source": "vision",
+            "status": "supporting"
+          },
+          {
+            "kind": "risk",
+            "claim": "pet_activity",
+            "source": "policy",
+            "status": "counter"
+          },
+          {
+            "kind": "history",
+            "claim": "no linked case history yet",
+            "source": "history",
+            "status": "missing"
+          },
+          {
+            "kind": "uncertainty",
+            "claim": "missing_historical_context",
+            "source": "case_engine",
+            "status": "missing"
+          },
+          {
+            "kind": "consensus",
+            "claim": "0 alert, 4 suppress, decision=suppress",
+            "source": "reasoning_agents",
+            "status": "supporting"
+          }
+        ],
+        "judgement": {
+          "decision_rationale": "RISK_BASIS: home-security routing assessed this scene as none. ALERT_BASIS: confidence_unmet 0%<70%; severity_unmet none<low; threat_semantics_unmet; risk_level=none; visibility=hidden; notify=none. SUPPRESS_BASIS: final_action=suppress; risk_level=none; visibility=hidden; notify=none; suppress_norm=100%; alert_norm=0%. CONFIDENCE_DECOMPOSITION: selected=100%; alert_norm=0%; suppress_norm=100%; raw_alert=0.000; raw_suppress=0.862; raw_uncertain=0.000; residual=0.138; contributions=[context_baseline_reasoner:suppress weighted=0.128 (w=0.15, c=0.85); trajectory_intent_assessor:suppress weighted=0.170 (w=0.20, c=0.85); falsification_auditor:suppress weighted=0.140 (w=0.15, c=0.93); executive_triage_commander:suppress weighted=0.425 (w=0.50, c=0.85)]. CONSISTENCY_CHECKS: pass: vision semantics and vote direction are aligned.",
+          "contradiction_markers": []
+        },
+        "decision_reasoning": "RISK_BASIS: home-security routing assessed this scene as none. ALERT_BASIS: confidence_unmet 0%<70%; severity_unmet none<low; threat_semantics_unmet; risk_level=none; visibility=hidden; notify=none. SUPPRESS_BASIS: final_action=suppress; risk_level=none; visibility=hidden; notify=none; suppress_norm=100%; alert_norm=0%. CONFIDENCE_DECOMPOSITION: selected=100%; alert_norm=0%; suppress_norm=100%; raw_alert=0.000; raw_suppress=0.862; raw_uncertain=0.000; residual=0.138; contributions=[context_baseline_reasoner:suppress weighted=0.128 (w=0.15, c=0.85); trajectory_intent_assessor:suppress weighted=0.170 (w=0.20, c=0.85); falsification_auditor:suppress weighted=0.140 (w=0.15, c=0.93); executive_triage_commander:suppress weighted=0.425 (w=0.50, c=0.85)]. CONSISTENCY_CHECKS: pass: vision semantics and vote direction are aligned.",
+        "agent_outputs": [
+          {
+            "agent_id": "context_baseline_reasoner",
+            "verdict": "suppress",
+            "risk_level": "none",
+            "rationale": "SIGNAL: wildlife activity EVIDENCE: raccoon knocked trash can on driveway at 23:00 after-hours, history shows only wildlife events, no human threat cues UNCERTAINTY: none significant missing DECISION: event matches basel",
+            "chain_notes": {
+              "focus": "context_baseline",
+              "risk_level": "low",
+              "recommended_action": "continue monitoring and keep visible in timeline",
+              "zone_risk": "medium",
+              "threat_outcome": "LOW"
+            }
+          },
+          {
+            "agent_id": "trajectory_intent_assessor",
+            "verdict": "suppress",
+            "risk_level": "none",
+            "rationale": "SIGNAL: wildlife activity EVIDENCE: raccoon moving erratically, knocking trash can, no human gait, entry zone driveway UNCERTAINTY: none DECISION: benign wildlife behavior leads to suppress",
+            "chain_notes": {
+              "focus": "trajectory_intent",
+              "risk_level": "low",
+              "recommended_action": "continue monitoring and keep visible in timeline",
+              "intent": "ambiguous",
+              "threat_outcome": "LOW"
+            }
+          },
+          {
+            "agent_id": "falsification_auditor",
+            "verdict": "suppress",
+            "risk_level": "none",
+            "rationale": "SIGNAL: no threat EVIDENCE: raccoon seen knocking trash can, human-sized shadow from streetlight, no bipedal gait, wildlife history Props: trash_can UNCERTAINTY: none DECISION: benign wildlife activity confirmed, no entr",
+            "chain_notes": {
+              "focus": "falsification_auditor",
+              "risk_level": "low",
+              "recommended_action": "continue monitoring and keep visible in timeline",
+              "benign_theory": "accepted",
+              "threat_outcome": "LOW"
+            }
+          },
+          {
+            "agent_id": "executive_triage_commander",
+            "verdict": "suppress",
+            "risk_level": "none",
+            "rationale": "SIGNAL: wildlife activity EVIDENCE: raccoon knocked trash can on driveway after-hours, no human gait or entry cues UNCERTAINTY: none significant DECISION: all agents agree benign, no alert needed",
+            "chain_notes": {
+              "focus": "executive_triage",
+              "risk_level": "low",
+              "recommended_action": "continue monitoring and keep visible in timeline",
+              "triage": "silent_log",
+              "threat_outcome": "LOW"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "scenario_id": "payload_5_conflicting_data",
+      "cohort": "ambiguous",
+      "expected": "alert",
+      "actual": "alert",
+      "risk_level": "high",
+      "confidence": 1.0,
+      "reasoning_latency_ms": 914.52,
+      "explainability": {
+        "consumer_summary": {
+          "headline": "Urgent security review for porch",
+          "reason": "person linked to entry approach.",
+          "action_now": "Send an immediate alert and queue this case for operator review"
+        },
+        "operator_summary": {
+          "what_observed": "person in porch; categories=person; risk_labels=entry_approach,suspicious_presence.",
+          "why_flagged": "routed as high risk with 0.30 anomaly signal",
+          "why_not_benign": "no dominant benign pattern",
+          "what_is_uncertain": "missing_historical_context, partial_subject",
+          "timeline_context": "no linked case history yet",
+          "recommended_next_step": "Send an immediate alert and queue this case for operator review."
+        },
+        "evidence_digest": [
+          {
+            "kind": "vision",
+            "claim": "Person with package at door at 3 AM. Erratic pacing, looks into windows. Delivery-like prop but suspicious behavior.. Props: package. History: No routine 3 AM deliveries. Context s",
+            "source": "vision",
+            "status": "supporting"
+          },
+          {
+            "kind": "risk",
+            "claim": "entry_approach, suspicious_presence",
+            "source": "policy",
+            "status": "missing"
+          },
+          {
+            "kind": "history",
+            "claim": "no linked case history yet",
+            "source": "history",
+            "status": "missing"
+          },
+          {
+            "kind": "uncertainty",
+            "claim": "missing_historical_context, partial_subject",
+            "source": "case_engine",
+            "status": "missing"
+          },
+          {
+            "kind": "consensus",
+            "claim": "3 alert, 0 suppress, decision=alert",
+            "source": "reasoning_agents",
+            "status": "supporting"
+          }
+        ],
+        "judgement": {
+          "decision_rationale": "RISK_BASIS: home-security routing assessed this scene as high. ALERT_BASIS: confidence_met 100%>=70%; severity_met none>=low; threat_semantics_met; fast_path_entry_risk; risk_level=high; visibility=prominent; notify=immediate. SUPPRESS_BASIS: final_action=alert; risk_level=high; visibility=prominent; notify=immediate; suppress_norm=0%; alert_norm=100%. CONFIDENCE_DECOMPOSITION: selected=100%; alert_norm=100%; suppress_norm=0%; raw_alert=0.627; raw_suppress=0.000; raw_uncertain=0.000; residual=0.373; contributions=[context_baseline_reasoner:alert weighted=0.117 (w=0.15, c=0.78); trajectory_intent_assessor:alert weighted=0.140 (w=0.20, c=0.70); falsification_auditor:uncertain weighted=0.000 (w=0.15, c=0.00); executive_triage_commander:alert weighted=0.370 (w=0.50, c=0.74)]. CONSISTENCY_CHECKS: pass: vision semantics and vote direction are aligned.",
+          "contradiction_markers": [
+            "non_threat_scene_alerted"
+          ]
+        },
+        "decision_reasoning": "RISK_BASIS: home-security routing assessed this scene as high. ALERT_BASIS: confidence_met 100%>=70%; severity_met none>=low; threat_semantics_met; fast_path_entry_risk; risk_level=high; visibility=prominent; notify=immediate. SUPPRESS_BASIS: final_action=alert; risk_level=high; visibility=prominent; notify=immediate; suppress_norm=0%; alert_norm=100%. CONFIDENCE_DECOMPOSITION: selected=100%; alert_norm=100%; suppress_norm=0%; raw_alert=0.627; raw_suppress=0.000; raw_uncertain=0.000; residual=0.373; contributions=[context_baseline_reasoner:alert weighted=0.117 (w=0.15, c=0.78); trajectory_intent_assessor:alert weighted=0.140 (w=0.20, c=0.70); falsification_auditor:uncertain weighted=0.000 (w=0.15, c=0.00); executive_triage_commander:alert weighted=0.370 (w=0.50, c=0.74)]. CONSISTENCY_CHECKS: pass: vision semantics and vote direction are aligned.",
+        "agent_outputs": [
+          {
+            "agent_id": "context_baseline_reasoner",
+            "verdict": "alert",
+            "risk_level": "high",
+            "rationale": "SIGNAL: entry_approach at 3\u202fAM. EVIDENCE: person with package pacing on porch after hours, no historical matches. UNCERTAINTY: identity unknown. DECISION: deviation from baseline warrants alert.",
+            "chain_notes": {
+              "focus": "context_baseline",
+              "risk_level": "low",
+              "recommended_action": "continue monitoring and keep visible in timeline",
+              "zone_risk": "medium",
+              "threat_outcome": "LOW"
+            }
+          },
+          {
+            "agent_id": "trajectory_intent_assessor",
+            "verdict": "alert",
+            "risk_level": "high",
+            "rationale": "SIGNAL: entry_approach with erratic pacing EVIDENCE: person at door 3\u202fAM, carrying package, pacing irregularly, glancing at windows UNCERTAINTY: no identity or purpose confirmation DECISION: threat cues at entry zone man",
+            "chain_notes": {
+              "focus": "trajectory_intent",
+              "risk_level": "low",
+              "recommended_action": "continue monitoring and keep visible in timeline",
+              "intent": "ambiguous",
+              "threat_outcome": "LOW"
+            }
+          },
+          {
+            "agent_id": "falsification_auditor",
+            "verdict": "uncertain",
+            "risk_level": "low",
+            "rationale": "Agent fallback: prompt_drift: rationale_format",
+            "chain_notes": {
+              "focus": "falsification_auditor",
+              "risk_level": "low",
+              "recommended_action": "continue monitoring and keep visible in timeline",
+              "benign_theory": "accepted",
+              "threat_outcome": "LOW"
+            }
+          },
+          {
+            "agent_id": "executive_triage_commander",
+            "verdict": "alert",
+            "risk_level": "high",
+            "rationale": "SIGNAL: entry_approach at 3\u202fAM. EVIDENCE: person with package pacing erratically on porch after hours, no prior matches. UNCERTAINTY: identity and intent unknown. DECISION: strong entry\u2011zone cue and high\u2011risk timing mand",
+            "chain_notes": {
+              "focus": "executive_triage",
+              "risk_level": "low",
+              "recommended_action": "continue monitoring and keep visible in timeline",
+              "triage": "silent_log",
+              "threat_outcome": "LOW"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -18,4 +18,6 @@ EXPOSE 8000
 HEALTHCHECK --interval=10s --timeout=5s --retries=3 \
     CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"
 
+# workers=1 required when DB_URL is SQLite (concurrent writes will corrupt it).
+# Switch to postgresql+asyncpg and increase workers for multi-instance deployments.
 CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "1"]

@@ -9,6 +9,20 @@ from backend.models.schemas import AgentOutput, FramePacket, VisionResult
 logger = logging.getLogger(__name__)
 
 
+def _location_for_display(packet: FramePacket) -> str | None:
+    """Return location/camera name only when JSON explicitly mentions it (vision or stream metadata)."""
+    if packet.vision.setting and packet.vision.setting != "unknown":
+        return packet.vision.setting.replace("_", " ")
+    if packet.vision.spatial_tags:
+        for tag in packet.vision.spatial_tags:
+            if tag and tag != "unknown_location":
+                return tag.replace("_", " ")
+    label = (packet.stream_meta.label or "").strip()
+    if label and label.lower() not in ("test camera", "camera", "cam", "pipeline_test", ""):
+        return label
+    return None
+
+
 class SecurityEventNarrator:
     """Builds concise, homeowner-friendly summaries grounded in observed facts."""
 
@@ -25,28 +39,36 @@ class SecurityEventNarrator:
         self,
         *,
         packet: FramePacket,
-        action: str,
+        risk_level: str,
         final_confidence: float,
     ) -> str:
-        label = self._event_label(packet.vision)
-        severity = packet.vision.severity.lower()
-        confidence = max(0.0, min(1.0, final_confidence))
+        identity_label = self._identity_label(packet.vision)
+        risk_label = self._risk_label(packet.vision)
+        severity = risk_level.lower()
+        loc = _location_for_display(packet)
+        loc_phrase = f" in {loc}" if loc else ""
 
-        if action == "alert":
+        if risk_level == "high":
             return (
-                f"{severity.capitalize()}-severity {label} detected in {packet.stream_meta.zone}; "
-                f"alert confidence {confidence:.0%}."
+                f"{severity.capitalize()} home-security risk ({risk_label}){loc_phrase}; "
+                f"observed {identity_label}."
             )
 
-        if packet.vision.threat:
+        if risk_level == "medium":
             return (
-                f"{severity.capitalize()}-severity {label} observed in {packet.stream_meta.zone}, "
-                f"but signal was suppressed at {confidence:.0%} confidence."
+                f"{severity.capitalize()} home-security concern{loc_phrase}; "
+                f"observed {identity_label} with elevated risk signal ({risk_label})."
+            )
+
+        if risk_level == "low":
+            return (
+                f"Observed {identity_label}{loc_phrase}; "
+                f"low home-security risk ({risk_label}), visible for homeowner review."
             )
 
         return (
-            f"No home security concern in {packet.stream_meta.zone}; "
-            f"routine activity at {confidence:.0%} confidence."
+            f"Observed {identity_label}{loc_phrase}; "
+            f"no home-security concern, suppressed from the main feed."
         )
 
     def generate_narrative(
@@ -54,22 +76,21 @@ class SecurityEventNarrator:
         *,
         packet: FramePacket,
         agent_outputs: Sequence[AgentOutput],
-        action: str,
+        risk_level: str,
         final_confidence: float,
     ) -> str:
         bullets = [
             self._threat_bullet(packet.vision),
             self._location_time_bullet(packet.timestamp, packet),
-            self._confidence_bullet(agent_outputs, final_confidence),
-            self._action_bullet(packet, action),
+            self._consensus_bullet(agent_outputs),
+            self._action_bullet(packet, risk_level),
             self._history_bullet(packet),
         ]
         return "\n".join(bullets)
 
-    def _confidence_bullet(
+    def _consensus_bullet(
         self,
         agent_outputs: Sequence[AgentOutput],
-        final_confidence: float,
     ) -> str:
         alert_votes = sum(1 for output in agent_outputs if output.verdict == "alert")
         suppress_votes = sum(1 for output in agent_outputs if output.verdict == "suppress")
@@ -78,31 +99,41 @@ class SecurityEventNarrator:
             f"agent consensus: {alert_votes} alert, {suppress_votes} suppress"
             + (f", {uncertain_votes} uncertain" if uncertain_votes else "")
         )
-        return f"• Confidence: {final_confidence:.0%} ({vote_text})."
+        if uncertain_votes > 0:
+            return f"• Agent consensus: {vote_text}; ambiguity remains and monitoring continues."
+        return f"• Agent consensus: {vote_text}."
 
     def _threat_bullet(self, vision: VisionResult) -> str:
-        if not vision.threat:
-            return f"• Activity: no home security concern detected (severity: {vision.severity})"
-        label = self._event_label(vision)
+        identity = self._identity_label(vision)
+        risk = self._risk_label(vision)
+        if not vision.threat and risk == "no explicit risk signal":
+            return f"• Activity identity: {identity}. Security interpretation: no home security concern (risk level: none)."
         desc = (vision.description or "No additional scene details provided").strip().rstrip(".")
-        return f"• Activity: {label} ({vision.severity} severity). Observed: {desc}."
+        return (
+            f"• Activity identity: {identity}. Security interpretation: {risk} "
+            f"({vision.severity} risk). Observed: {desc}."
+        )
 
     def _location_time_bullet(self, timestamp: datetime, packet: FramePacket) -> str:
-        zone = packet.stream_meta.zone or "zone not specified"
-        return f"• Location/Time: {zone} at {timestamp.strftime('%H:%M:%S UTC')}."
+        loc = _location_for_display(packet)
+        if loc:
+            return f"• Location/Time: {loc} at {timestamp.strftime('%H:%M:%S UTC')}."
+        return f"• Time: {timestamp.strftime('%H:%M:%S UTC')}."
 
-    def _action_bullet(self, packet: FramePacket, action: str) -> str:
-        severity = packet.vision.severity.lower()
-        if action == "alert":
-            if severity in {"high", "critical"}:
-                text = "Check the app and consider calling emergency services; save footage"
+    def _action_bullet(self, packet: FramePacket, risk_level: str) -> str:
+        severity = risk_level.lower()
+        if risk_level == "high":
+            if severity == "high":
+                text = "Check the app immediately and consider emergency response if the threat is active"
             else:
-                text = "Check the app to verify the scene; consider notifying household members"
+                text = "Check the app immediately and verify the threat"
             return f"• Recommended action: {text}."
 
-        if packet.vision.threat and severity in {"medium", "high", "critical"}:
-            return "• Recommended action: Keep an eye on this camera for any escalation."
-        return "• Recommended action: No immediate action needed; routine monitoring continues."
+        if risk_level == "medium":
+            return "• Recommended action: Review this event promptly; risk is elevated but not yet routed as an urgent notification."
+        if risk_level == "low":
+            return "• Recommended action: Keep this visible in history for homeowner awareness; no urgent action needed."
+        return "• Recommended action: Keep this suppressed from the main feed unless new evidence raises the risk."
 
     def _history_bullet(self, packet: FramePacket) -> str:
         recent_count = len(packet.history.recent_events)
@@ -126,8 +157,19 @@ class SecurityEventNarrator:
             f"anomaly score {anomaly:.2f} (moderate)."
         )
 
-    def _event_label(self, vision: VisionResult) -> str:
-        categories = [cat for cat in vision.categories if cat and cat != "clear"]
-        if not categories:
+    def _identity_label(self, vision: VisionResult) -> str:
+        labels = [label for label in vision.identity_labels if label and label != "clear"]
+        if not labels:
+            labels = [cat for cat in vision.categories if cat and cat not in {"clear", "intrusion", "motion"}]
+        if not labels:
             return "home activity"
-        return self._CATEGORY_LABELS.get(categories[0], categories[0].replace("_", " "))
+        return labels[0].replace("_", " ")
+
+    def _risk_label(self, vision: VisionResult) -> str:
+        labels = [label for label in vision.risk_labels if label and label != "clear"]
+        if not labels:
+            labels = [cat for cat in vision.categories if cat and cat in {"intrusion", "motion"}]
+        if not labels:
+            return "no explicit risk signal"
+        label = labels[0].replace("_", " ")
+        return self._CATEGORY_LABELS.get(labels[0], label)

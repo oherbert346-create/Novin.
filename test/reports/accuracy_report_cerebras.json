@@ -1,0 +1,276 @@
+{
+  "manifest_case_count": 8,
+  "repeats": 3,
+  "metrics": {
+    "attempts_total": 24,
+    "attempts_passed": 18,
+    "attempts_failed": 6,
+    "accuracy_action": 0.75,
+    "confusion": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 6,
+      "tn": 18
+    },
+    "alert_precision": 0.0,
+    "alert_recall": 0.0,
+    "alert_f1": 0.0,
+    "false_alert_rate_benign": 0.0,
+    "missed_alert_rate_threat": 1.0,
+    "cohort_accuracy": {
+      "ambiguous": 1.0,
+      "benign": 1.0,
+      "threat": 0.0
+    },
+    "run_accuracy": [
+      0.75,
+      0.75,
+      0.75
+    ],
+    "run_accuracy_variance": 0.0,
+    "unstable_case_ids": [],
+    "flip_rate": 0.0
+  },
+  "results": [
+    {
+      "repeat": 1,
+      "case_id": "benign_backyard_day_person_139",
+      "cohort": "benign",
+      "expected_action": "suppress",
+      "actual_action": "suppress",
+      "status_code": 200,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "repeat": 1,
+      "case_id": "benign_driveway_activity_632",
+      "cohort": "benign",
+      "expected_action": "suppress",
+      "actual_action": "suppress",
+      "status_code": 200,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "repeat": 1,
+      "case_id": "benign_porch_motion_724",
+      "cohort": "benign",
+      "expected_action": "suppress",
+      "actual_action": "suppress",
+      "status_code": 200,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "repeat": 1,
+      "case_id": "benign_random_scene_picsum0",
+      "cohort": "benign",
+      "expected_action": "suppress",
+      "actual_action": "suppress",
+      "status_code": 200,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "repeat": 1,
+      "case_id": "threat_frontdoor_wildlife_285",
+      "cohort": "threat",
+      "expected_action": "alert",
+      "actual_action": "suppress",
+      "status_code": 200,
+      "ok": false,
+      "error": ""
+    },
+    {
+      "repeat": 1,
+      "case_id": "threat_entryway_risk_1000",
+      "cohort": "threat",
+      "expected_action": "alert",
+      "actual_action": "suppress",
+      "status_code": 200,
+      "ok": false,
+      "error": ""
+    },
+    {
+      "repeat": 1,
+      "case_id": "ambiguous_frontyard_scene_picsum1",
+      "cohort": "ambiguous",
+      "expected_action": "suppress",
+      "actual_action": "suppress",
+      "status_code": 200,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "repeat": 1,
+      "case_id": "ambiguous_driveway_person_139",
+      "cohort": "ambiguous",
+      "expected_action": "suppress",
+      "actual_action": "suppress",
+      "status_code": 200,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "repeat": 2,
+      "case_id": "benign_backyard_day_person_139",
+      "cohort": "benign",
+      "expected_action": "suppress",
+      "actual_action": "suppress",
+      "status_code": 200,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "repeat": 2,
+      "case_id": "benign_driveway_activity_632",
+      "cohort": "benign",
+      "expected_action": "suppress",
+      "actual_action": "suppress",
+      "status_code": 200,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "repeat": 2,
+      "case_id": "benign_porch_motion_724",
+      "cohort": "benign",
+      "expected_action": "suppress",
+      "actual_action": "suppress",
+      "status_code": 200,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "repeat": 2,
+      "case_id": "benign_random_scene_picsum0",
+      "cohort": "benign",
+      "expected_action": "suppress",
+      "actual_action": "suppress",
+      "status_code": 200,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "repeat": 2,
+      "case_id": "threat_frontdoor_wildlife_285",
+      "cohort": "threat",
+      "expected_action": "alert",
+      "actual_action": "suppress",
+      "status_code": 200,
+      "ok": false,
+      "error": ""
+    },
+    {
+      "repeat": 2,
+      "case_id": "threat_entryway_risk_1000",
+      "cohort": "threat",
+      "expected_action": "alert",
+      "actual_action": "suppress",
+      "status_code": 200,
+      "ok": false,
+      "error": ""
+    },
+    {
+      "repeat": 2,
+      "case_id": "ambiguous_frontyard_scene_picsum1",
+      "cohort": "ambiguous",
+      "expected_action": "suppress",
+      "actual_action": "suppress",
+      "status_code": 200,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "repeat": 2,
+      "case_id": "ambiguous_driveway_person_139",
+      "cohort": "ambiguous",
+      "expected_action": "suppress",
+      "actual_action": "suppress",
+      "status_code": 200,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "repeat": 3,
+      "case_id": "benign_backyard_day_person_139",
+      "cohort": "benign",
+      "expected_action": "suppress",
+      "actual_action": "suppress",
+      "status_code": 200,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "repeat": 3,
+      "case_id": "benign_driveway_activity_632",
+      "cohort": "benign",
+      "expected_action": "suppress",
+      "actual_action": "suppress",
+      "status_code": 200,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "repeat": 3,
+      "case_id": "benign_porch_motion_724",
+      "cohort": "benign",
+      "expected_action": "suppress",
+      "actual_action": "suppress",
+      "status_code": 200,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "repeat": 3,
+      "case_id": "benign_random_scene_picsum0",
+      "cohort": "benign",
+      "expected_action": "suppress",
+      "actual_action": "suppress",
+      "status_code": 200,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "repeat": 3,
+      "case_id": "threat_frontdoor_wildlife_285",
+      "cohort": "threat",
+      "expected_action": "alert",
+      "actual_action": "suppress",
+      "status_code": 200,
+      "ok": false,
+      "error": ""
+    },
+    {
+      "repeat": 3,
+      "case_id": "threat_entryway_risk_1000",
+      "cohort": "threat",
+      "expected_action": "alert",
+      "actual_action": "suppress",
+      "status_code": 200,
+      "ok": false,
+      "error": ""
+    },
+    {
+      "repeat": 3,
+      "case_id": "ambiguous_frontyard_scene_picsum1",
+      "cohort": "ambiguous",
+      "expected_action": "suppress",
+      "actual_action": "suppress",
+      "status_code": 200,
+      "ok": true,
+      "error": ""
+    },
+    {
+      "repeat": 3,
+      "case_id": "ambiguous_driveway_person_139",
+      "cohort": "ambiguous",
+      "expected_action": "suppress",
+      "actual_action": "suppress",
+      "status_code": 200,
+      "ok": true,
+      "error": ""
+    }
+  ]
+}

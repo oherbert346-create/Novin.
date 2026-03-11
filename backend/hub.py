@@ -7,12 +7,24 @@ from typing import Callable
 
 from fastapi import WebSocket
 from groq import AsyncGroq
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from backend.config import settings
 from backend.models.schemas import StreamMeta, Verdict
+from backend.public import public_verdict
 
 logger = logging.getLogger(__name__)
+
+
+def _resolved_event_zone(verdict: Verdict) -> str | None:
+    if verdict.event_context and verdict.event_context.zone:
+        return verdict.event_context.zone
+    if getattr(verdict, "case", None) and getattr(verdict.case, "observation", None):
+        zone = verdict.case.observation.zone
+        if zone:
+            return zone
+    return None
 
 
 class WebSocketManager:
@@ -50,7 +62,7 @@ class PipelineManager:
         self._db_factory: Callable | None = None
 
     def init(self, db_factory: Callable) -> None:
-        self._groq_client = AsyncGroq(api_key=settings.groq_api_key)
+        self._groq_client = AsyncGroq(api_key=settings.groq_api_key) if settings.groq_api_key else None
         self._db_factory = db_factory
 
     async def start(
@@ -108,9 +120,7 @@ class PipelineManager:
             await _persist_verdict(db, verdict)
 
         # Broadcast via WebSocket
-        payload = verdict.model_dump(mode="json")
-        payload.pop("b64_frame", None)
-        await ws_manager.broadcast(payload)
+        await ws_manager.broadcast(public_verdict(verdict))
 
         # Fire notifications (alert only)
         await notifier.dispatch(verdict)
@@ -124,19 +134,48 @@ class PipelineManager:
         return list(self._pipelines.keys())
 
     @property
-    def groq_client(self) -> AsyncGroq:
-        if self._groq_client is None:
-            raise RuntimeError("PipelineManager is not initialised")
+    def groq_client(self) -> AsyncGroq | None:
         return self._groq_client
 
 
-async def _persist_verdict(db: AsyncSession, verdict: Verdict) -> None:
+async def _persist_verdict(
+    db: AsyncSession,
+    verdict: Verdict,
+    source_event_id: str | None = None,
+    source: str | None = None,
+) -> None:
+    """Persist verdict to database with event, agent outputs, and threshold config."""
     import json as _json
-    from backend.models.db import AgentTrace, Event
+    from backend.models.db import Event, AgentTrace
+    from backend.public import public_case_fields
+    from backend.agent.memory import update_memory
+
+    source = source or (verdict.event_context.source if verdict.event_context else None)
+    source_event_id = source_event_id or (
+        verdict.event_context.source_event_id if verdict.event_context else None
+    )
+    persisted_context = verdict.event_context.model_dump(mode="json") if verdict.event_context else {}
+    metadata = persisted_context.get("metadata", {}) if isinstance(persisted_context, dict) else {}
+    if not isinstance(metadata, dict):
+        metadata = {}
+    metadata["routing"] = {
+        "risk_level": verdict.routing.risk_level,
+        "visibility_policy": verdict.routing.visibility_policy,
+        "notification_policy": verdict.routing.notification_policy,
+        "storage_policy": verdict.routing.storage_policy,
+        "decision_reason": verdict.audit.liability_digest.decision_reasoning,
+    }
+    metadata["case"] = public_case_fields(verdict)["case"]
+    persisted_context["metadata"] = metadata
+
+    stream_db_id = await _resolve_stream_db_id(db, verdict.stream_id)
+    if not stream_db_id:
+        raise ValueError(f"Stream not found for URI: {verdict.stream_id}")
 
     event = Event(
-        id=verdict.frame_id,
-        stream_id=verdict.stream_id,
+        id=verdict.event_id,
+        stream_id=stream_db_id,
+        zone=_resolved_event_zone(verdict),
         timestamp=verdict.timestamp,
         severity=verdict.routing.severity,
         categories=_json.dumps(verdict.routing.categories),
@@ -147,15 +186,26 @@ async def _persist_verdict(db: AsyncSession, verdict: Verdict) -> None:
         final_confidence=verdict.audit.liability_digest.confidence_score,
         summary=verdict.summary.headline,
         narrative_summary=verdict.summary.narrative,
-        alert_reason=verdict.audit.liability_digest.decision_reasoning if verdict.routing.action == "alert" else None,
-        suppress_reason=verdict.audit.liability_digest.decision_reasoning if verdict.routing.action == "suppress" else None,
+        alert_reason=(
+            verdict.audit.liability_digest.decision_reasoning
+            if verdict.routing.notification_policy == "immediate"
+            else None
+        ),
+        suppress_reason=(
+            verdict.audit.liability_digest.decision_reasoning
+            if verdict.routing.visibility_policy == "hidden"
+            else None
+        ),
+        source_event_id=source_event_id,
+        source=source,
+        event_context=_json.dumps(persisted_context),
     )
     db.add(event)
 
     for agent_output in verdict.audit.agent_outputs:
         trace = AgentTrace(
             id=str(uuid.uuid4()),
-            event_id=verdict.frame_id,
+            event_id=verdict.event_id,
             agent_id=agent_output.agent_id,
             role=agent_output.role,
             verdict=agent_output.verdict,
@@ -165,7 +215,30 @@ async def _persist_verdict(db: AsyncSession, verdict: Verdict) -> None:
         )
         db.add(trace)
 
+    await update_memory(db, verdict)
     await db.commit()
+
+    from backend.agent.schedule import ScheduleLearner
+
+    learner = ScheduleLearner()
+    await learner.refresh_schedule_if_due(db, verdict.site_id)
+
+
+async def _resolve_stream_db_id(db: AsyncSession, stream_identifier: str) -> str | None:
+    """Resolve a persisted stream foreign key for both live and ingest-style identifiers."""
+    from backend.models.db import Stream
+
+    stream_result = await db.execute(
+        select(Stream.id).where(Stream.id == stream_identifier)
+    )
+    stream_db_id = stream_result.scalar_one_or_none()
+    if stream_db_id:
+        return stream_db_id
+
+    legacy_result = await db.execute(
+        select(Stream.id).where(Stream.uri == stream_identifier)
+    )
+    return legacy_result.scalar_one_or_none()
 
 
 ws_manager = WebSocketManager()

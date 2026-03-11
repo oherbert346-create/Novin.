@@ -1,14 +1,15 @@
+"""Legacy ingest API — delegates to /api/novin for backward compatibility."""
+
 from __future__ import annotations
 
 import logging
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from backend.database import get_db
-from backend.hub import pipeline_manager
-from backend.models.schemas import StreamMeta, Verdict
+from backend.policy import UNKNOWN_ZONE
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/ingest", tags=["ingest"])
@@ -19,47 +20,12 @@ class FrameIngestRequest(BaseModel):
     stream_id: str
     label: str = "direct"
     site_id: str = "home"
-    zone: str = "front_door"  # front_door, porch, driveway, backyard, garage, living_room, kitchen
+    zone: str = UNKNOWN_ZONE
 
 
 @router.post("/frame", response_model=dict)
 async def ingest_frame(body: FrameIngestRequest, db: AsyncSession = Depends(get_db)):
-    from backend.agent.pipeline import process_frame
-    from backend.agent.ingest import Base64FrameSource
-    from backend.hub import ws_manager
-    from backend.notifications import notifier
-    from backend.hub import _persist_verdict
+    """Delegate to novin ingest. Kept for backward compatibility."""
+    from backend.api.novin.ingest import ingest_frame as novin_ingest_frame
 
-    meta = StreamMeta(
-        stream_id=body.stream_id,
-        label=body.label,
-        site_id=body.site_id,
-        zone=body.zone,
-        uri="direct",
-    )
-
-    source = Base64FrameSource(body.b64_frame)
-    frame = None
-    async for f in source.stream():
-        frame = f
-        break
-
-    if frame is None:
-        raise HTTPException(400, "Could not decode frame")
-
-    groq_client = pipeline_manager.groq_client
-    verdict = await process_frame(
-        frame=frame,
-        stream_meta=meta,
-        db=db,
-        groq_client=groq_client,
-    )
-
-    await _persist_verdict(db, verdict)
-
-    payload = verdict.model_dump(mode="json")
-    payload.pop("b64_frame", None)
-    await ws_manager.broadcast(payload)
-    await notifier.dispatch(verdict)
-
-    return payload
+    return await novin_ingest_frame(body=body, async_mode=False, db=db)

@@ -1,0 +1,130 @@
+{
+  "metrics": {
+    "total": 1,
+    "action_accuracy": 1.0,
+    "action_correct": 1,
+    "cohort_accuracy": {
+      "benign": 1.0
+    },
+    "p50_latency_ms": 1127.58,
+    "p95_latency_ms": 1127.58,
+    "mean_latency_ms": 1127.58
+  },
+  "results": [
+    {
+      "scenario_id": "payload_1_baseline_benign",
+      "cohort": "benign",
+      "expected": "suppress",
+      "actual": "suppress",
+      "risk_level": "medium",
+      "confidence": 0.0,
+      "reasoning_latency_ms": 1127.58,
+      "explainability": {
+        "consumer_summary": {
+          "headline": "Check recent activity at porch",
+          "reason": "person may need verification because of entry approach.",
+          "action_now": "Notify the homeowner, keep the case visible, and request quick verification"
+        },
+        "operator_summary": {
+          "what_observed": "person in porch; categories=person; risk_labels=entry_approach.",
+          "why_flagged": "routed as medium risk with 0.30 anomaly signal",
+          "why_not_benign": "no dominant benign pattern",
+          "what_is_uncertain": "missing_historical_context",
+          "timeline_context": "no linked case history yet",
+          "recommended_next_step": "Notify the homeowner, keep the case visible, and request quick verification."
+        },
+        "evidence_digest": [
+          {
+            "kind": "vision",
+            "claim": "Mail carrier walks to porch, places package at door, turns and leaves. Direct purposeful movement.. Props: package, mail_bag. History: Mail and package deliveries are common at thi",
+            "source": "vision",
+            "status": "supporting"
+          },
+          {
+            "kind": "risk",
+            "claim": "entry_approach",
+            "source": "policy",
+            "status": "missing"
+          },
+          {
+            "kind": "history",
+            "claim": "no linked case history yet",
+            "source": "history",
+            "status": "missing"
+          },
+          {
+            "kind": "uncertainty",
+            "claim": "missing_historical_context",
+            "source": "case_engine",
+            "status": "missing"
+          },
+          {
+            "kind": "consensus",
+            "claim": "0 alert, 3 suppress, decision=suppress",
+            "source": "reasoning_agents",
+            "status": "supporting"
+          }
+        ],
+        "judgement": {
+          "decision_rationale": "RISK_BASIS: home-security routing assessed this scene as medium. ALERT_BASIS: confidence_unmet 0%<70%; severity_met none>=low; threat_semantics_met; risk_level=medium; visibility=prominent; notify=review. SUPPRESS_BASIS: final_action=suppress; risk_level=medium; visibility=prominent; notify=review; suppress_norm=100%; alert_norm=0%. CONFIDENCE_DECOMPOSITION: selected=0%; alert_norm=0%; suppress_norm=100%; raw_alert=0.000; raw_suppress=0.715; raw_uncertain=0.000; residual=0.285; contributions=[context_baseline_reasoner:suppress weighted=0.135 (w=0.15, c=0.90); trajectory_intent_assessor:uncertain weighted=0.000 (w=0.20, c=0.00); falsification_auditor:suppress weighted=0.140 (w=0.15, c=0.93); executive_triage_commander:suppress weighted=0.440 (w=0.50, c=0.88)]. CONSISTENCY_CHECKS: warn: suppress-leaning votes conflict with threat-oriented vision semantics.",
+          "contradiction_markers": []
+        },
+        "decision_reasoning": "RISK_BASIS: home-security routing assessed this scene as medium. ALERT_BASIS: confidence_unmet 0%<70%; severity_met none>=low; threat_semantics_met; risk_level=medium; visibility=prominent; notify=review. SUPPRESS_BASIS: final_action=suppress; risk_level=medium; visibility=prominent; notify=review; suppress_norm=100%; alert_norm=0%. CONFIDENCE_DECOMPOSITION: selected=0%; alert_norm=0%; suppress_norm=100%; raw_alert=0.000; raw_suppress=0.715; raw_uncertain=0.000; residual=0.285; contributions=[context_baseline_reasoner:suppress weighted=0.135 (w=0.15, c=0.90); trajectory_intent_assessor:uncertain weighted=0.000 (w=0.20, c=0.00); falsification_auditor:suppress weighted=0.140 (w=0.15, c=0.93); executive_triage_commander:suppress weighted=0.440 (w=0.50, c=0.88)]. CONSISTENCY_CHECKS: warn: suppress-leaning votes conflict with threat-oriented vision semantics.",
+        "agent_outputs": [
+          {
+            "agent_id": "context_baseline_reasoner",
+            "verdict": "suppress",
+            "risk_level": "low",
+            "rationale": "SIGNAL: low entry approach risk EVIDENCE: daytime porch delivery, mail carrier routine, baseline normal EVIDENCE: no after-hours, history shows regular mail activity UNCERTAINTY: none DECISION: matches baseline, safe",
+            "chain_notes": {
+              "focus": "context_baseline",
+              "risk_level": "low",
+              "recommended_action": "continue monitoring and keep visible in timeline",
+              "zone_risk": "medium",
+              "threat_outcome": "LOW"
+            }
+          },
+          {
+            "agent_id": "trajectory_intent_assessor",
+            "verdict": "uncertain",
+            "risk_level": "low",
+            "rationale": "Agent fallback: prompt_drift: rationale_format",
+            "chain_notes": {
+              "focus": "trajectory_intent",
+              "risk_level": "low",
+              "recommended_action": "continue monitoring and keep visible in timeline",
+              "intent": "ambiguous",
+              "threat_outcome": "LOW"
+            }
+          },
+          {
+            "agent_id": "falsification_auditor",
+            "verdict": "suppress",
+            "risk_level": "none",
+            "rationale": "SIGNAL: no threat cues EVIDENCE: person walks purposefully, places package, mail bag present, typical delivery pattern UNCERTAINTY: none missing, activity matches normal mail delivery DECISION: benign delivery confirmed,",
+            "chain_notes": {
+              "focus": "falsification_auditor",
+              "risk_level": "low",
+              "recommended_action": "continue monitoring and keep visible in timeline",
+              "benign_theory": "accepted",
+              "threat_outcome": "LOW"
+            }
+          },
+          {
+            "agent_id": "executive_triage_commander",
+            "verdict": "suppress",
+            "risk_level": "low",
+            "rationale": "SIGNAL: low entry approach risk EVIDENCE: daytime mail carrier delivers package, routine activity, no after-hours cue UNCERTAINTY: none DECISION: consensus suppresses alert",
+            "chain_notes": {
+              "focus": "executive_triage",
+              "risk_level": "low",
+              "recommended_action": "continue monitoring and keep visible in timeline",
+              "triage": "silent_log",
+              "threat_outcome": "LOW"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

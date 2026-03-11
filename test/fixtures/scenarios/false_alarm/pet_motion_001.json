@@ -1,0 +1,17 @@
+{
+  "scenario_id": "pet_motion_001",
+  "category": "false_alarm",
+  "description": "Cat walking in backyard",
+  "image_source": "test/fixtures/images/coco_000000000139.jpg",
+  "camera_config": {
+    "zone": "backyard",
+    "time": "14:00",
+    "site_id": "test_home"
+  },
+  "expected": {
+    "verdict": "suppress",
+    "min_confidence": 0.6,
+    "category": "pet",
+    "reasoning_contains": ["pet", "animal", "benign"]
+  }
+}

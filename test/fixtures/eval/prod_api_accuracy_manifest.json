@@ -1,0 +1,29 @@
+[
+  {
+    "case_id": "coco-person-outdoor-1",
+    "image_url": "http://images.cocodataset.org/val2017/000000000139.jpg",
+    "expected_action": "suppress",
+    "cam_id": "prod_eval_cam_1",
+    "home_id": "home",
+    "zone": "backyard",
+    "context": "Outdoor person/pet style scene expected benign."
+  },
+  {
+    "case_id": "coco-frontdoor-like-2",
+    "image_url": "http://images.cocodataset.org/val2017/000000000285.jpg",
+    "expected_action": "suppress",
+    "cam_id": "prod_eval_cam_2",
+    "home_id": "home",
+    "zone": "front_door",
+    "context": "Typical household front door activity expected suppress."
+  },
+  {
+    "case_id": "picsum-benign-3",
+    "image_url": "http://images.cocodataset.org/val2017/000000000632.jpg",
+    "expected_action": "suppress",
+    "cam_id": "prod_eval_cam_3",
+    "home_id": "home",
+    "zone": "driveway",
+    "context": "COCO driveway-style scene expected suppress."
+  }
+]
