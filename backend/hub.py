@@ -170,7 +170,20 @@ async def _persist_verdict(
 
     stream_db_id = await _resolve_stream_db_id(db, verdict.stream_id)
     if not stream_db_id:
-        raise ValueError(f"Stream not found for URI: {verdict.stream_id}")
+        # Auto-create stream when not found (e.g. ingest-created verdicts with
+        # a stream_id that differs from the auto-provisioned URI).
+        from backend.models.db import Stream
+
+        new_stream = Stream(
+            uri=verdict.stream_id,
+            site_id=verdict.site_id,
+            zone=_resolved_event_zone(verdict) or "unknown",
+            label=f"Auto-created: {verdict.stream_id}",
+        )
+        db.add(new_stream)
+        await db.flush()
+        stream_db_id = new_stream.id
+        logger.info("Auto-created stream %s for verdict persist", verdict.stream_id)
 
     event = Event(
         id=verdict.event_id,

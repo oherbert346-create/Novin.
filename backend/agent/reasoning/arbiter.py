@@ -353,7 +353,7 @@ def _compute_verdict(
         _, visibility_policy, notification_policy, storage_policy = _routing_policies("high")
     else:
         action, visibility_policy, notification_policy, storage_policy = _routing_policies(risk_level)
-    decision_confidence = alert_confidence if risk_level in {"medium", "high"} else suppress_confidence
+    decision_confidence = alert_confidence if action == "alert" else suppress_confidence
     contradiction_checks: list[str] = []
     if not has_threat_semantic and alert_vote_weight > suppress_vote_weight:
         contradiction_checks.append("warn: alert-leaning votes conflict with non-threat vision semantics")
