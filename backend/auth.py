@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import base64
+import hmac
 import logging
 from typing import Callable
 
@@ -42,8 +43,10 @@ class BasicAuthMiddleware(BaseHTTPMiddleware):
                     decoded = base64.b64decode(encoded_credentials).decode("utf-8")
                     username, password = decoded.split(":", 1)
 
-                    # Validate credentials
-                    if username != settings.basic_auth_user or password != settings.basic_auth_pass:
+                    # Validate credentials — use constant-time comparison to prevent timing attacks
+                    user_match = hmac.compare_digest(username, settings.basic_auth_user)
+                    pass_match = hmac.compare_digest(password, settings.basic_auth_pass)
+                    if not (user_match and pass_match):
                         logger.warning("Failed Basic Auth attempt: user=%s from=%s", username, request.client.host if request.client else "unknown")
                         return JSONResponse(
                             status_code=401,
