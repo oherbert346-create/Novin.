@@ -61,6 +61,7 @@ async def build_readiness_report() -> dict:
         "prompt_version": PROMPT_VERSION,
         "blessed_stack": BLESSED_STACK,
         "latency_budget_ms": RELEASE_LATENCY_BUDGET_MS,
+        "shadow_mode": settings.shadow_mode,
     }
 
 

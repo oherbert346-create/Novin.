@@ -63,8 +63,16 @@ class Settings(BaseSettings):
     smtp_user: Optional[str] = Field(None)
     smtp_pass: Optional[str] = Field(None)
     alert_email_to: Optional[str] = Field(None)
-    shadow_mode: bool = Field(False)
+    shadow_mode: bool = Field(True)  # Default ON for pilot safety; disable explicitly when ready for live notifications
     shadow_webhook_url: Optional[str] = Field(None)
+
+    # Webhook security — sign outbound payloads with HMAC-SHA256 (X-Novin-Signature header)
+    webhook_secret: Optional[str] = Field(None)
+
+    # Notification reliability
+    webhook_timeout_s: float = Field(10.0)  # httpx timeout for outbound webhook/Slack calls
+    webhook_max_retries: int = Field(3)      # max retry attempts (exponential backoff: 1s, 2s, 4s)
+    slack_rate_limit_s: float = Field(1.0)   # minimum seconds between Slack messages per site
 
     # CORS
     cors_origins: list[str] = Field(["http://localhost:8000"])

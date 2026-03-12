@@ -450,9 +450,10 @@ class StreamPipeline:
                 except asyncio.QueueFull:
                     # Log dropped frame but don't block
                     logger.warning(
-                        "Frame buffer full for stream %s - dropping frame %s", 
+                        "Frame buffer full for stream %s - dropping frame %s",
                         self._meta.stream_id, frame_id
                     )
+                    get_metrics().increment_frame_drop(self._meta.stream_id)
         except asyncio.CancelledError:
             pass
         except Exception as exc:

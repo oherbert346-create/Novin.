@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
@@ -93,7 +93,7 @@ async def test_shadow_mode_suppresses_external_delivery_without_shadow_sink():
 async def test_shadow_mode_delivers_to_shadow_sink_only():
     verdict = _make_verdict()
     post_mock = AsyncMock()
-    response = AsyncMock()
+    response = MagicMock()  # raise_for_status is synchronous; use MagicMock not AsyncMock
     response.raise_for_status.return_value = None
     post_mock.return_value = response
 

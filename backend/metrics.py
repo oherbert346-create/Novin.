@@ -21,6 +21,9 @@ class MetricsCollector:
     # Counters with timestamps for windowing
     _requests: Deque[tuple[float, str]] = field(default_factory=lambda: deque(maxlen=10000))  # (timestamp, action)
     _errors: Deque[tuple[float, str]] = field(default_factory=lambda: deque(maxlen=10000))  # (timestamp, error_type)
+
+    # Frame drop counter (keyed by stream_id)
+    _frame_drops: dict[str, int] = field(default_factory=dict)
     
     # Gauges (current values)
     _active_streams: int = 0
@@ -49,6 +52,16 @@ class MetricsCollector:
         with self._lock:
             self._errors.append((time.time(), error_type))
     
+    def increment_frame_drop(self, stream_id: str) -> None:
+        """Increment dropped-frame counter for a stream."""
+        with self._lock:
+            self._frame_drops[stream_id] = self._frame_drops.get(stream_id, 0) + 1
+
+    def frame_drop_counts(self) -> dict[str, int]:
+        """Return a snapshot of per-stream frame drop counts."""
+        with self._lock:
+            return dict(self._frame_drops)
+
     def set_gauge(self, gauge_name: str, value: int) -> None:
         """Set a gauge value."""
         with self._lock:

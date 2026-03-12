@@ -35,6 +35,9 @@ async def lifespan(app: FastAPI):
     from backend.database import AsyncSessionLocal
     pipeline_manager.init(db_factory=AsyncSessionLocal)
 
+    # Pre-flight: validate LLM provider API keys before accepting traffic
+    _preflight_check_providers()
+
     from backend.agent.reasoning.base import warmup_cerebras_reasoning
 
     await warmup_cerebras_reasoning()
@@ -64,10 +67,87 @@ async def lifespan(app: FastAPI):
         settings.reasoning_provider,
         active_reasoning_model(),
     )
+    _log_startup_config()
     yield
     # Shutdown
     logger.info("Shutting down — stopping all pipelines...")
     await pipeline_manager.stop_all()
+
+
+def _preflight_check_providers() -> None:
+    """Validate required LLM provider API keys on startup. Raises on misconfiguration."""
+    provider_key_map = {
+        "vision": {
+            "groq": settings.groq_api_key,
+            "together": settings.together_api_key,
+            "siliconflow": settings.siliconflow_api_key,
+        },
+        "reasoning": {
+            "groq": settings.groq_api_key,
+            "cerebras": settings.cerebras_api_key,
+            "together": settings.together_api_key,
+            "siliconflow": settings.siliconflow_api_key,
+        },
+    }
+    errors = []
+    vision_key = provider_key_map["vision"].get(settings.vision_provider)
+    if not vision_key:
+        errors.append(f"vision_provider={settings.vision_provider!r} requires an API key but none is set")
+    reasoning_key = provider_key_map["reasoning"].get(settings.reasoning_provider)
+    if not reasoning_key:
+        errors.append(f"reasoning_provider={settings.reasoning_provider!r} requires an API key but none is set")
+    if not (settings.ingest_api_key or settings.local_api_credential):
+        errors.append("No ingest credential configured — set INGEST_API_KEY or LOCAL_API_CREDENTIAL")
+    if errors:
+        for e in errors:
+            logger.critical("PREFLIGHT FAILURE: %s", e)
+        raise RuntimeError("Startup aborted due to missing configuration:\n" + "\n".join(f"  • {e}" for e in errors))
+    logger.info("Pre-flight check passed: vision=%s reasoning=%s credentials=ok", settings.vision_provider, settings.reasoning_provider)
+
+
+def _log_startup_config() -> None:
+    """Log a masked summary of the active configuration for operator visibility."""
+    def _mask(v: str | None) -> str:
+        if not v:
+            return "(not set)"
+        return v[:6] + "…" if len(v) > 8 else "(set)"
+
+    webhook_urls = {}
+    import os
+    for k, v in os.environ.items():
+        if k.startswith("WEBHOOK_URL_") and k != "WEBHOOK_URL":
+            home_id = k[len("WEBHOOK_URL_"):]
+            webhook_urls[home_id] = v[:30] + "…" if len(v) > 30 else v
+
+    logger.info(
+        "=== NOVIN HOME PILOT CONFIG ===\n"
+        "  shadow_mode        : %s  ← %s\n"
+        "  vision_provider    : %s  model=%s\n"
+        "  reasoning_provider : %s  model=%s\n"
+        "  webhook_url        : %s\n"
+        "  webhook_secret     : %s\n"
+        "  webhook_retries    : %d  timeout=%.1fs\n"
+        "  slack              : %s\n"
+        "  smtp               : %s\n"
+        "  per_home_webhooks  : %s\n"
+        "  db_url             : %s\n"
+        "  ingest_credential  : %s\n"
+        "  cors_origins       : %s\n"
+        "================================",
+        settings.shadow_mode,
+        "SAFE — notifications suppressed" if settings.shadow_mode else "LIVE — notifications active",
+        settings.vision_provider, active_vision_model(),
+        settings.reasoning_provider, active_reasoning_model(),
+        _mask(settings.webhook_url),
+        "(set)" if settings.webhook_secret else "(not set — payloads unsigned)",
+        settings.webhook_max_retries, settings.webhook_timeout_s,
+        _mask(settings.slack_webhook_url),
+        settings.smtp_host or "(not set)",
+        webhook_urls or "(none)",
+        settings.db_url.split("@")[-1] if "@" in settings.db_url else settings.db_url[:40],
+        "(set)" if (settings.ingest_api_key or settings.local_api_credential) else "(NOT SET — BLOCKING)",
+        settings.cors_origins,
+    )
 
 
 def create_app() -> FastAPI:
@@ -168,9 +248,11 @@ def create_app() -> FastAPI:
             "reasoning_provider": settings.reasoning_provider,
             "reasoning_model": reasoning_model,
             "memory_enabled": settings.enable_agent_memory,
+            "shadow_mode": settings.shadow_mode,
             "reasoning_live": readiness["checks"]["reasoning_live"],
             "reasoning_degraded": not readiness["checks"]["reasoning_live"],
             "async_ingest_failures": async_ingest_failure_count(),
+            "frame_drops_by_stream": get_metrics().frame_drop_counts(),
             "metrics_summary": {
                 "pipeline_p95_ms": metrics["latency"]["pipeline_p95_ms"],
                 "requests_1h": metrics["throughput"]["requests_1h"],

@@ -1,7 +1,11 @@
 from __future__ import annotations
 
+import asyncio
+import hashlib
+import hmac
 import logging
 import os
+import time
 
 import httpx
 
@@ -13,11 +17,48 @@ from backend.public import public_verdict
 
 logger = logging.getLogger(__name__)
 
+# Per-site last Slack send time (monotonic seconds) for rate limiting
+_slack_last_sent: dict[str, float] = {}
+
 
 def _webhook_url_for_home(home_id: str) -> str | None:
     """Resolve webhook URL: WEBHOOK_URL_{home_id} overrides WEBHOOK_URL."""
     key = f"WEBHOOK_URL_{home_id}".upper().replace("-", "_")
     return os.environ.get(key) or settings.webhook_url
+
+
+def _sign_payload(body: bytes) -> str | None:
+    """Return HMAC-SHA256 hex digest of body, or None if no WEBHOOK_SECRET configured."""
+    if not settings.webhook_secret:
+        return None
+    return hmac.new(settings.webhook_secret.encode(), body, hashlib.sha256).hexdigest()
+
+
+async def _post_with_retry(url: str, payload: dict, label: str) -> None:
+    """POST JSON to url with timeout and exponential-backoff retry."""
+    import json as _json
+    body = _json.dumps(payload).encode()
+    sig = _sign_payload(body)
+    headers = {"Content-Type": "application/json"}
+    if sig:
+        headers["X-Novin-Signature"] = sig
+
+    last_exc: Exception | None = None
+    for attempt in range(1, settings.webhook_max_retries + 1):
+        try:
+            async with httpx.AsyncClient(timeout=settings.webhook_timeout_s) as client:
+                resp = await client.post(url, content=body, headers=headers)
+                resp.raise_for_status()
+            logger.info("%s delivered (attempt %d): %s", label, attempt, url)
+            return
+        except Exception as exc:
+            last_exc = exc
+            if attempt < settings.webhook_max_retries:
+                backoff = 2 ** (attempt - 1)
+                logger.warning("%s failed (attempt %d/%d): %s — retrying in %ds", label, attempt, settings.webhook_max_retries, exc, backoff)
+                await asyncio.sleep(backoff)
+
+    logger.error("%s failed after %d attempts to %s: %s", label, settings.webhook_max_retries, url, last_exc)
 
 
 async def dispatch(verdict: Verdict) -> None:
@@ -38,7 +79,6 @@ async def dispatch(verdict: Verdict) -> None:
         elif intent.target_type == "operator_queue" and settings.smtp_host and settings.alert_email_to:
             tasks.append(_send_email(verdict))
 
-    import asyncio
     if tasks:
         results = await asyncio.gather(*tasks, return_exceptions=True)
         for r in results:
@@ -62,15 +102,7 @@ async def _dispatch_shadow(verdict: Verdict, intents) -> None:
     payload["home_id"] = verdict.site_id
     payload["event_id"] = verdict.event_id
     payload["cam_id"] = verdict.stream_id
-    async with httpx.AsyncClient(timeout=None) as client:
-        resp = await client.post(settings.shadow_webhook_url, json=payload)
-        resp.raise_for_status()
-    logger.info(
-        "Shadow webhook delivered: event=%s cam=%s → %s",
-        verdict.event_id,
-        verdict.stream_id,
-        settings.shadow_webhook_url,
-    )
+    await _post_with_retry(settings.shadow_webhook_url, payload, label=f"Shadow webhook event={verdict.event_id}")
 
 
 async def _send_webhook(verdict: Verdict, url: str) -> None:
@@ -78,13 +110,18 @@ async def _send_webhook(verdict: Verdict, url: str) -> None:
     payload["home_id"] = verdict.site_id
     payload["event_id"] = verdict.event_id
     payload["cam_id"] = verdict.stream_id
-    async with httpx.AsyncClient(timeout=None) as client:
-        resp = await client.post(url, json=payload)
-        resp.raise_for_status()
-    logger.info("Webhook delivered: event=%s cam=%s → %s", verdict.event_id, verdict.stream_id, url)
+    await _post_with_retry(url, payload, label=f"Webhook event={verdict.event_id} cam={verdict.stream_id}")
 
 
 async def _send_slack(verdict: Verdict) -> None:
+    now = time.monotonic()
+    site = verdict.site_id
+    last = _slack_last_sent.get(site, 0.0)
+    gap = now - last
+    if gap < settings.slack_rate_limit_s:
+        await asyncio.sleep(settings.slack_rate_limit_s - gap)
+    _slack_last_sent[site] = time.monotonic()
+
     severity_emoji = {
         "none": "✅",
         "low": "🟡",
@@ -100,7 +137,7 @@ async def _send_slack(verdict: Verdict) -> None:
             if not first_sentence.endswith("."):
                 first_sentence += "."
             condensed_narrative = f"\n*Operator summary:* {first_sentence}"
-    
+
     text = (
         f"{emoji} *HOME SECURITY ALERT* | cam:{verdict.stream_id} | event:{verdict.frame_id}\n"
         f"*Risk level:* {verdict.routing.risk_level.upper()}\n"
@@ -109,7 +146,7 @@ async def _send_slack(verdict: Verdict) -> None:
         f"*Time:* {verdict.timestamp.isoformat()}"
         f"{condensed_narrative}"
     )
-    async with httpx.AsyncClient(timeout=None) as client:
+    async with httpx.AsyncClient(timeout=settings.webhook_timeout_s) as client:
         resp = await client.post(settings.slack_webhook_url, json={"text": text})
         resp.raise_for_status()
     logger.info("Slack notification sent for frame %s", verdict.frame_id)
@@ -120,9 +157,8 @@ async def _send_email(verdict: Verdict) -> None:
         import aiosmtplib
         from email.mime.text import MIMEText
 
-        # Include narrative summary if available
         narrative_section = f"\n\nSECURITY NARRATIVE:\n{verdict.summary.narrative}\n" if verdict.summary.narrative else ""
-        
+
         decision_reasoning = strip_capability_claims(
             verdict.audit.liability_digest.decision_reasoning or ""
         )
