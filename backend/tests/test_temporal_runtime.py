@@ -116,15 +116,38 @@ async def test_persist_verdict_supports_legacy_uri_stream_identifier():
 
 
 @pytest.mark.asyncio
-async def test_persist_verdict_raises_for_unknown_stream_identifier():
+async def test_persist_verdict_auto_creates_stream_for_unknown_identifier():
     await init_db()
     event_id = f"event-{uuid.uuid4()}"
+    missing_stream_id = f"missing-stream-{uuid.uuid4()}"
     verdict = _make_verdict(
         event_id=event_id,
-        stream_id=f"missing-stream-{uuid.uuid4()}",
+        stream_id=missing_stream_id,
         cam_id="cam-missing",
+        zone="backyard",
     )
 
     async with AsyncSessionLocal() as db:
-        with pytest.raises(ValueError, match="Stream not found for URI"):
+        with patch("backend.agent.memory.update_memory", AsyncMock()), patch(
+            "backend.agent.schedule.ScheduleLearner.refresh_schedule_if_due",
+            AsyncMock(),
+        ):
             await _persist_verdict(db, verdict)
+
+    # Verify the stream was auto-created with correct fields
+    async with AsyncSessionLocal() as db:
+        from sqlalchemy import select
+
+        result = await db.execute(
+            select(Stream).where(Stream.uri == missing_stream_id)
+        )
+        stream = result.scalar_one_or_none()
+        assert stream is not None, "Stream should have been auto-created"
+        assert stream.site_id == "home"
+        assert stream.zone == "backyard"
+        assert stream.label == f"Auto-created: {missing_stream_id}"
+
+        # Verify the event was persisted referencing the auto-created stream
+        row = await db.get(Event, event_id)
+        assert row is not None
+        assert row.stream_id == stream.id
