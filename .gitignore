@@ -16,3 +16,11 @@ datasets/
 .qodo/
 .zencoder/
 .zenflow/
+# Secret/credentials files
+secrets/
+*.pem
+*.key
+*.p12
+*.pfx
+# Local config overrides
+*.local
