@@ -2,6 +2,7 @@
 """Test PostgreSQL connection and run basic schema migration."""
 
 import asyncio
+import os
 import sys
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import create_async_engine
@@ -53,8 +54,12 @@ async def main():
     if len(sys.argv) > 1:
         db_url = sys.argv[1]
     else:
-        # asyncpg doesn't use sslmode query param - it uses ssl=require or connect_args
-        db_url = "postgresql+asyncpg://neondb_owner:REDACTED_ROTATE_NOW@ep-wild-glade-abkt645s-pooler.eu-west-2.aws.neon.tech/neondb"
+        # Read DB_URL from environment or command line — never hardcode credentials
+        db_url = os.environ.get("DB_URL")
+        if not db_url:
+            print("ERROR: DB_URL environment variable not set. Example:")
+            print("  DB_URL=postgresql+asyncpg://user:pass@host/db python scripts/test_postgres_connection.py")
+            sys.exit(1)
     
     success = await test_connection(db_url)
     sys.exit(0 if success else 1)

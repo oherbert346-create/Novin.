@@ -39,11 +39,11 @@ Copy `.env.example` to `.env` and configure:
 
 ```bash
 # Database (PostgreSQL - Neon already configured)
-DB_URL=postgresql+asyncpg://neondb_owner:REDACTED_ROTATE_NOW@ep-wild-glade-abkt645s-pooler.eu-west-2.aws.neon.tech/neondb
+DB_URL=postgresql+asyncpg://neondb_owner:<DB_PASSWORD>@<NEON_HOST>/neondb
 
 # Auth - Basic HTTP Auth (use generated credentials above)
-BASIC_AUTH_USER=REDACTED_ROTATE_NOW
-BASIC_AUTH_PASS=REDACTED_ROTATE_NOW
+BASIC_AUTH_USER=<generated_username>
+BASIC_AUTH_PASS=<generated_password>
 
 # Ingest API key (use generated key above)
 INGEST_API_KEY=novin_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
