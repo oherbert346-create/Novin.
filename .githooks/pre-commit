@@ -5,17 +5,16 @@
 set -e
 
 # Patterns that indicate a real secret (not a placeholder)
-SECRET_PATTERNS="gsk_[A-Za-z0-9]{20,}|sk-[A-Za-z0-9]{20,}"
+SECRET_PATTERNS="gsk_[A-Za-z0-9_-]{10,}|sk-[A-Za-z0-9_-]{10,}"
 
 STAGED=$(git diff --cached --name-only)
 
 for file in $STAGED; do
-    # Skip deleted files and binary files
+    # Skip deleted files
     if ! git show ":$file" > /dev/null 2>&1; then
         continue
     fi
-    if git show ":$file" | grep -qP "$SECRET_PATTERNS" 2>/dev/null ||
-       git show ":$file" | grep -qE "$SECRET_PATTERNS" 2>/dev/null; then
+    if git show ":$file" | grep -qE "$SECRET_PATTERNS" 2>/dev/null; then
         echo "ERROR: Possible secret detected in staged file: $file"
         echo "Remove the secret before committing."
         echo "If this is a false positive, use: git commit --no-verify"
@@ -26,12 +25,13 @@ done
 # Block committing .env files that are not .env.example
 for file in $STAGED; do
     case "$file" in
+        .env.example)
+            # Safe to commit
+            ;;
         .env|.env.*)
-            if [ "$file" != ".env.example" ]; then
-                echo "ERROR: Attempted to commit $file — this file may contain secrets."
-                echo "Add it to .gitignore or use: git commit --no-verify"
-                exit 1
-            fi
+            echo "ERROR: Attempted to commit $file — this file may contain secrets."
+            echo "Add it to .gitignore or use: git commit --no-verify"
+            exit 1
             ;;
     esac
 done
