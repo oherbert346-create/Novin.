@@ -6,8 +6,8 @@ PROMPT_VERSION = "launch-accuracy-v1-qwen1"
 BLESSED_STACK = {
     "vision_provider": "siliconflow",
     "vision_model": "Qwen/Qwen2.5-VL-7B-Instruct",
-    "reasoning_provider": "cerebras",
-    "reasoning_model": "gpt-oss-120b",
+    "reasoning_provider": "groq",
+    "reasoning_model": "qwen/qwen3-32b",
 }
 
 IDENTITY_METADATA_KEYS = {
