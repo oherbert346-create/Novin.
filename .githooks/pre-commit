@@ -1,0 +1,39 @@
+#!/bin/sh
+# Pre-commit hook: block commits that may contain secrets.
+# Install by running: git config core.hooksPath .githooks
+
+set -e
+
+# Patterns that indicate a real secret (not a placeholder)
+SECRET_PATTERNS="gsk_[A-Za-z0-9_-]{10,}|sk-[A-Za-z0-9_-]{10,}"
+
+STAGED=$(git diff --cached --name-only)
+
+for file in $STAGED; do
+    # Skip deleted files
+    if ! git show ":$file" > /dev/null 2>&1; then
+        continue
+    fi
+    if git show ":$file" | grep -qE "$SECRET_PATTERNS" 2>/dev/null; then
+        echo "ERROR: Possible secret detected in staged file: $file"
+        echo "Remove the secret before committing."
+        echo "If this is a false positive, use: git commit --no-verify"
+        exit 1
+    fi
+done
+
+# Block committing .env files that are not .env.example
+for file in $STAGED; do
+    case "$file" in
+        .env.example)
+            # Safe to commit
+            ;;
+        .env|.env.*)
+            echo "ERROR: Attempted to commit $file — this file may contain secrets."
+            echo "Add it to .gitignore or use: git commit --no-verify"
+            exit 1
+            ;;
+    esac
+done
+
+exit 0
