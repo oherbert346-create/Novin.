@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hmac
 import logging
 from contextlib import asynccontextmanager
 
@@ -137,12 +138,12 @@ def create_app() -> FastAPI:
                         status_code=503,
                         content={"detail": "Ingest API key not configured. Set INGEST_API_KEY or LOCAL_API_CREDENTIAL."},
                     )
-                provided = request.headers.get("x-api-key") or request.headers.get("X-Api-Key")
-                if provided not in valid_keys:
+                provided = request.headers.get("x-api-key") or request.headers.get("X-Api-Key") or ""
+                if not any(hmac.compare_digest(provided, k) for k in valid_keys):
                     return JSONResponse(status_code=401, content={"detail": "Invalid or missing API key"})
             elif settings.local_api_credential and request.url.path.startswith("/api"):
-                provided = request.headers.get("x-api-key") or request.headers.get("X-Api-Key")
-                if provided != settings.local_api_credential:
+                provided = request.headers.get("x-api-key") or request.headers.get("X-Api-Key") or ""
+                if not hmac.compare_digest(provided, settings.local_api_credential):
                     return JSONResponse(status_code=401, content={"detail": "Invalid API credential"})
             return await call_next(request)
         finally:
